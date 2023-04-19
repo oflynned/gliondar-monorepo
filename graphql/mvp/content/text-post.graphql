@@ -1,0 +1,11 @@
+type TextPost {
+    id: ID!
+    createdAt: DateTime!
+    lastUpdatedAt: DateTime
+    poster: UserResult
+    content: String!
+    score: Int!
+    comments: [Comment]
+    location: Address
+    language: ContentLanguage
+}

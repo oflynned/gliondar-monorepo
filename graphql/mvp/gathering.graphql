@@ -1,0 +1,50 @@
+extend type Query {
+    getGatherings(page: Int): [GatheringResult!]
+    getGatheringById(id: ID!): GatheringResult!
+}
+
+extend type Mutation {
+    createGathering(title: String!, description: String!): GatheringResult!
+    deleteGathering(id: ID!): GatheringResult!
+}
+
+union GatheringResult = Gathering | GatheringNotFound | InvalidGathering | DeletedGathering
+
+type GatheringNotFound {
+    message: String!
+}
+
+type InvalidGathering {
+    message: String!
+}
+
+type DeletedGathering {
+    id: ID!
+    deletedAt: DateTime!
+}
+
+type Gathering {
+    id: ID!
+    createdAt: DateTime!
+    lastUpdatedAt: DateTime
+    title: String!
+    address: Address
+    coordinates: CoordinateSet
+    description: String
+    startsAt: DateTime
+    timezone: String
+    createdBy: UserResult
+    attendees: [Attendee!]
+}
+
+union Address = IrishAddress | AmbiguousAddress
+
+type IrishAddress {
+    eircode: String!
+    address: [String!]!
+}
+
+type AmbiguousAddress {
+    address: [String!]!
+    country: String!
+}

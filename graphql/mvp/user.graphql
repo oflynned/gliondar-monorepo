@@ -1,0 +1,68 @@
+extend type Query {
+    getUser: UserResult!
+    getUserById(id: ID!): UserResult!
+    getLocalUsers: [UserResult!]
+}
+
+extend type Mutation {
+    createUser(email: String!, password: String!): UserResult!
+#    blockUser(id: ID!): UserResult!
+#    unblockUser(id: ID!): UserResult!
+    deleteUser: UserResult!
+}
+
+union UserResult = User | InvalidUser | UserNotFound | DeletedUser | BlockedUser
+
+type BlockedUser {
+    id: ID!
+    blockedAt: DateTime!
+    blockedBy: UserResult
+    user: UserResult
+}
+
+type UserNotFound {
+    message: String!
+}
+
+type InvalidUser {
+    message: String!
+}
+
+type DeletedUser {
+    id: ID!
+    deletedAt: DateTime!
+}
+
+type User {
+    id: ID!
+    createdAt: DateTime!
+    lastOnlineAt: DateTime!
+    lastUpdatedAt: DateTime
+    email: String!
+    timezone: Timezone
+    posts: [Content]
+    interests: [Interest]
+    attendance: [Attendee]
+    profile: Profile!
+    location: UserLocation
+}
+
+type UserLocation {
+    # TODO determine the inclusion of city name, ga vs en localisation etc
+    coordinates: CoordinateSet
+}
+
+type Profile {
+    id: ID!
+    name: String!
+    fluency: Fluency!
+    preferredLanguage: PreferredLanguage!
+    user: UserResult
+}
+
+enum Fluency {
+    NATIVE,
+    ADVANCED,
+    INTERMEDIATE,
+    BEGINNER
+}

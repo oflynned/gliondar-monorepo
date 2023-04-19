@@ -1,0 +1,14 @@
+type CoordinateSet {
+    longitude: Float!
+    latitude: Float!
+}
+
+type Location {
+    city: City
+    coordinates: CoordinateSet
+}
+
+type City {
+    ga: String
+    en: String
+}

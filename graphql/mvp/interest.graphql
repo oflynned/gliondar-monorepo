@@ -1,0 +1,13 @@
+type Interest {
+    id: ID!
+    name: String!
+    category: InterestCategory!
+}
+
+enum InterestCategory {
+    ART,
+    SCIENCE,
+    SPORTS,
+    COOKING,
+    LANGUAGES
+}

@@ -1,0 +1,10 @@
+type Avatar {
+    id: ID!
+    url: String!
+    size: ImageSize
+}
+
+type ImageSize {
+    width: Int!
+    height: Int!
+}

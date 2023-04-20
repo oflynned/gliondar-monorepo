@@ -43,7 +43,7 @@ export const lightTheme = createTheme({
       lineHeight: '44px',
     },
     h3: {
-      fontFamily: ['Lato', 'sans-serif'].join(','),
+      fontFamily: ['Montserrat', 'sans-serif'].join(','),
       fontSize: '24px',
       fontWeight: 700,
       lineHeight: '32px',

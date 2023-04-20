@@ -1,69 +1,56 @@
 import {
-  Card,
   Flex,
+  Layout,
   NavBarPage,
   SideBarLayout,
   Stack,
 } from '../../design-system';
-import { Box, IconButton, styled, Typography, useTheme } from '@mui/material';
-import { mockEvents } from '../../mock-data/mock-events';
+import { Box, styled, Typography, useTheme } from '@mui/material';
+import { mockEventDiscovery } from '../../mock-data/mock-events';
 import { useRouter } from 'next/router';
-import { BookmarkAddOutlined } from '@mui/icons-material';
-import Image from 'next/image';
+import { EventCard } from '../../design-system/components/EventCard';
 
-const Container = styled(Box)({
+const StyledEventListContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
-  justifyContent: 'space-between',
-  width: '100%',
-});
-
-const EventImage = styled(Box)<{ imageUrl: string }>(({ imageUrl }) => ({
-  backgroundImage: `url(${imageUrl})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center center',
+  flex: 1,
+  flexDirection: 'column',
+  gap: theme.spacing(2),
 }));
 
-const CardActionContainer = styled(Box)({
+const StyledEventTimeframeContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
-  alignItems: 'flex-end',
-});
-
-const EventCard = styled(Card)({
-  ':hover': {
-    pointer: 'cursor',
-  },
-});
+  flexDirection: 'column',
+  marginTop: theme.spacing(4),
+}));
 
 const Index = () => {
-  const theme = useTheme();
   const router = useRouter();
 
   return (
     <SideBarLayout activePage={NavBarPage.EVENTS}>
-      <Box sx={{ padding: theme.spacing(3), maxWidth: '768px' }}>
+      <Layout>
         <Typography variant={'h2'}>Events</Typography>
-        <Stack>
-          {Object.values(mockEvents).map((gathering) => (
-            <EventCard onClick={() => router.push(`/events/${gathering.id}`)}>
-              <Container>
-                <Flex>
-                  <img src={gathering.imageUrl} height={128} />
-                  <Stack>
-                    <Typography variant={'h4'}>{gathering.title}</Typography>
-                    <Typography>{gathering.startsAt}</Typography>
-                    <Typography>{`${gathering.attendees.length} attending`}</Typography>
-                  </Stack>
-                </Flex>
-                <CardActionContainer>
-                  <IconButton>
-                    <BookmarkAddOutlined />
-                  </IconButton>
-                </CardActionContainer>
-              </Container>
-            </EventCard>
-          ))}
-        </Stack>
-      </Box>
+        <Flex>
+          <Box sx={{ flex: 1 }}>content</Box>
+          <StyledEventListContainer>
+            <Stack>
+              {mockEventDiscovery.map(({ timeframe, gatherings }) => (
+                <StyledEventTimeframeContainer>
+                  <Typography variant={'h4'}>{timeframe}</Typography>
+                  {gatherings.map((gathering) => (
+                    <EventCard
+                      gathering={gathering}
+                      onClick={(gathering) =>
+                        router.push(`/events/${gathering.id}`)
+                      }
+                    />
+                  ))}
+                </StyledEventTimeframeContainer>
+              ))}
+            </Stack>
+          </StyledEventListContainer>
+        </Flex>
+      </Layout>
     </SideBarLayout>
   );
 };

@@ -3,30 +3,37 @@ import { Gathering, Person } from './types';
 
 const attendees: Person[] = [
   {
+    id: '1',
     name: faker.name.fullName(),
     avatarUrl: faker.image.avatar(),
   },
   {
+    id: '2',
     name: faker.name.fullName(),
     avatarUrl: faker.image.avatar(),
   },
   {
+    id: '3',
     name: faker.name.fullName(),
     avatarUrl: faker.image.avatar(),
   },
   {
+    id: '4',
     name: faker.name.fullName(),
     avatarUrl: faker.image.avatar(),
   },
   {
+    id: '5',
     name: faker.name.fullName(),
     avatarUrl: faker.image.avatar(),
   },
   {
+    id: '6',
     name: faker.name.fullName(),
     avatarUrl: faker.image.avatar(),
   },
   {
+    id: '7',
     name: faker.name.fullName(),
     avatarUrl: faker.image.avatar(),
   },
@@ -89,3 +96,21 @@ export const mockEvents: Record<string, Gathering> = {
     },
   },
 };
+
+export const mockEventDiscovery: {
+  timeframe: string;
+  gatherings: Gathering[];
+}[] = [
+  {
+    timeframe: 'Today',
+    gatherings: [mockEvents['1']],
+  },
+  {
+    timeframe: 'Tomorrow',
+    gatherings: [mockEvents['2'], mockEvents['3']],
+  },
+  {
+    timeframe: 'Later',
+    gatherings: Object.values(mockEvents),
+  },
+];

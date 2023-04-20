@@ -1,9 +1,6 @@
 import { FunctionComponent } from 'react';
-import { Avatar } from '../Avatar';
 import { Box, styled, Typography } from '@mui/material';
-import { AddBox } from '@mui/icons-material';
-import { Stack } from '../Stack';
-import { Flex } from '../Flex';
+import { Avatar } from '../../atoms';
 
 type Props = {
   title: string;

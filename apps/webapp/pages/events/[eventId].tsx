@@ -33,9 +33,8 @@ const DetailsSection = styled(Box)(({ theme }) => ({
 const EventDetail = () => {
   const theme = useTheme();
   const router = useRouter();
-  const { id } = router.query;
-
-  const gathering = mockEvents[id as string];
+  const { eventId } = router.query;
+  const gathering = mockEvents[eventId as string];
 
   if (!gathering) {
     return null;
@@ -58,8 +57,8 @@ const EventDetail = () => {
             <Typography variant={'h4'}>Details</Typography>
             <Card>
               <Stack>
-                {gathering.description.map((paragraph) => (
-                  <Typography variant={'body1'}>{paragraph}</Typography>
+                {gathering.description.map((paragraph, index) => (
+                  <Typography key={index}>{paragraph}</Typography>
                 ))}
               </Stack>
             </Card>
@@ -70,7 +69,11 @@ const EventDetail = () => {
             <Card>
               <Flex gap={theme.spacing(1)}>
                 {gathering.attendees.map((attendee) => (
-                  <Avatar imageUrl={attendee.avatarUrl} label={attendee.name} />
+                  <Avatar
+                    imageUrl={attendee.avatarUrl}
+                    label={attendee.name}
+                    key={attendee.id}
+                  />
                 ))}
               </Flex>
             </Card>

@@ -80,6 +80,7 @@ export const SideNavBar: FunctionComponent<Props> = ({
     <Container>
       <StyledItemGroup>
         <StyledIcon
+          key={'hamburger-icon'}
           color={'inherit'}
           onClick={() => setOpen((prevState) => !prevState)}
         >
@@ -88,6 +89,7 @@ export const SideNavBar: FunctionComponent<Props> = ({
         <StyledItemGroup>
           {topItems.map((item) => (
             <NavBarItem
+              key={item.id}
               item={item}
               onNavigate={onNavigate}
               activePage={activePage}
@@ -99,6 +101,7 @@ export const SideNavBar: FunctionComponent<Props> = ({
       <StyledItemGroup>
         {bottomItems.map((item) => (
           <NavBarItem
+            key={item.id}
             item={item}
             onNavigate={onNavigate}
             activePage={activePage}

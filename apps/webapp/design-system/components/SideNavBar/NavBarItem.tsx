@@ -23,7 +23,9 @@ export const NavBarItem: FunctionComponent<Props> = ({
 }) => {
   return (
     <StyledNavItem>
-      <StyledIcon onClick={() => onNavigate(item.id)}>{item.icon}</StyledIcon>
+      <StyledIcon color={'inherit'} onClick={() => onNavigate(item.id)}>
+        {item.icon}
+      </StyledIcon>
       {open ? <Typography>{item.label}</Typography> : null}
     </StyledNavItem>
   );

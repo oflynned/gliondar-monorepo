@@ -79,7 +79,10 @@ export const SideNavBar: FunctionComponent<Props> = ({
   return (
     <Container>
       <StyledItemGroup>
-        <StyledIcon onClick={() => setOpen((prevState) => !prevState)}>
+        <StyledIcon
+          color={'inherit'}
+          onClick={() => setOpen((prevState) => !prevState)}
+        >
           <MenuOutlined />
         </StyledIcon>
         <StyledItemGroup>

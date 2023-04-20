@@ -35,21 +35,18 @@ export const lightTheme = createTheme({
       fontSize: '48px',
       fontWeight: 900,
       lineHeight: '56px',
-      letterSpacing: '-1.5px',
     },
     h2: {
       fontFamily: ['Montserrat', 'sans-serif'].join(','),
       fontSize: '36px',
       fontWeight: 900,
       lineHeight: '44px',
-      letterSpacing: '-0.5px',
     },
     h3: {
       fontFamily: ['Lato', 'sans-serif'].join(','),
       fontSize: '24px',
       fontWeight: 700,
       lineHeight: '32px',
-      letterSpacing: '0px',
     },
     h4: {
       fontFamily: ['Lato', 'sans-serif'].join(','),

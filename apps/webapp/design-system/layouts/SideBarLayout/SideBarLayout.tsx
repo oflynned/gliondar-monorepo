@@ -8,9 +8,10 @@ const StyledContainer = styled(Box)({
   display: 'flex',
 });
 
-const StyledContentContainer = styled(Paper)({
+const StyledContentContainer = styled(Box)(({ theme }) => ({
   flex: 1,
-});
+  background: theme.palette.background.paper,
+}));
 
 type Props = {
   activePage: NavBarPage;

@@ -1,15 +1,16 @@
 import {
   Avatar,
-  DescribedAvatar,
-  Hero,
   Button,
   Card,
-  SideBarLayout,
-  StickyBottomContainer,
-  Stack,
+  DescribedAvatar,
   Flex,
-} from '../design-system';
-import { Box, IconButton, Paper, styled, Typography } from '@mui/material';
+  Hero,
+  NavBarPage,
+  SideBarLayout,
+  Stack,
+  StickyBottomContainer,
+} from '../../design-system';
+import { Box, IconButton, styled, Typography, useTheme } from '@mui/material';
 import { BookmarkAddOutlined, LocationOnOutlined } from '@mui/icons-material';
 
 const StyledOutlineContainer = styled(Box)(({ theme }) => ({
@@ -26,9 +27,11 @@ const DetailsSection = styled(Box)(({ theme }) => ({
   maxWidth: '768px',
 }));
 
-const Index = () => {
+const EventDetail = () => {
+  const theme = useTheme();
+
   return (
-    <SideBarLayout>
+    <SideBarLayout activePage={NavBarPage.EVENTS}>
       <Stack>
         <Hero
           title={'Pop Up Gaeltacht'}
@@ -64,7 +67,7 @@ const Index = () => {
           <Stack>
             <Typography variant={'h4'}>Attendees</Typography>
             <Card>
-              <Flex gap={'8px'}>
+              <Flex gap={theme.spacing(1)}>
                 <Avatar />
                 <Avatar />
                 <Avatar />
@@ -79,7 +82,7 @@ const Index = () => {
             <Typography variant={'h4'}>Comments (31)</Typography>
             <Card>
               <Avatar />
-              <Box sx={{ marginLeft: '8px' }}>
+              <Box sx={{ marginLeft: theme.spacing(1) }}>
                 <Typography variant={'h5'}>Aisling Ní Mhurchú</Typography>
                 <Typography>7:31pm, October 21 2023</Typography>
                 <Typography>Are tickets available at the door?</Typography>
@@ -107,11 +110,11 @@ const Index = () => {
                 </Typography>
               </Box>
             </Box>
-            <Box sx={{ display: 'flex', gap: '16px' }}>
+            <Box sx={{ display: 'flex', gap: theme.spacing(2) }}>
               <IconButton sx={{ width: 'fit-content' }} color={'inherit'}>
                 <BookmarkAddOutlined />
               </IconButton>
-              <Button label={'Attending'} />
+              <Button label={'Attend'} colour={'primary'} />
               <Button label={'Share'} colour={'secondary'} />
             </Box>
           </Box>
@@ -121,4 +124,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default EventDetail;

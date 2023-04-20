@@ -1,14 +1,16 @@
-import { Box, IconButton, styled } from '@mui/material';
-import React, { FunctionComponent, ReactElement } from 'react';
+import { Box, styled } from '@mui/material';
+import React, { FunctionComponent, ReactElement, useState } from 'react';
 import {
   ChatBubbleOutlineOutlined,
   Event,
   HomeOutlined,
-  Menu,
+  MenuOutlined,
   NotificationsOutlined,
   PersonOutlined,
   Settings,
 } from '@mui/icons-material';
+import { NavBarItem } from './NavBarItem';
+import { StyledIcon } from './NavBarIcon';
 
 const Container = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -17,51 +19,90 @@ const Container = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   borderRight: `1px solid ${theme.palette.divider}`,
   background: theme.palette.background.default,
-  padding: '16px',
-  width: 'fit-content',
+  padding: theme.spacing(3),
   height: '100vh',
   justifyContent: 'space-between',
 }));
 
-const StyledIconGroup = styled(Box)({
+const StyledItemGroup = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
-});
+  gap: theme.spacing(2),
+}));
 
-const StyledNavItem = styled(IconButton)({});
+export enum NavBarPage {
+  FEED,
+  CONNECTIONS,
+  EVENTS,
+  NOTIFICATIONS,
+  SETTINGS,
+  PROFILE,
+}
 
-type NavItem = {
+export type NavItem = {
+  id: NavBarPage;
   label: string;
   icon: ReactElement;
 };
 
 const topItems: NavItem[] = [
-  { label: 'Hamburger Toggle', icon: <Menu /> },
-  { label: 'Home', icon: <HomeOutlined /> },
-  { label: 'Connections', icon: <ChatBubbleOutlineOutlined /> },
-  { label: 'Events', icon: <Event /> },
+  { id: NavBarPage.FEED, label: 'Feed', icon: <HomeOutlined /> },
+  {
+    id: NavBarPage.CONNECTIONS,
+    label: 'Connections',
+    icon: <ChatBubbleOutlineOutlined />,
+  },
+  { id: NavBarPage.EVENTS, label: 'Events', icon: <Event /> },
 ];
 
 const bottomItems: NavItem[] = [
-  { label: 'Settings', icon: <Settings /> },
-  { label: 'Notifications', icon: <NotificationsOutlined /> },
-  { label: 'Profile', icon: <PersonOutlined /> },
+  { id: NavBarPage.SETTINGS, label: 'Settings', icon: <Settings /> },
+  {
+    id: NavBarPage.NOTIFICATIONS,
+    label: 'Notifications',
+    icon: <NotificationsOutlined />,
+  },
+  { id: NavBarPage.PROFILE, label: 'Profile', icon: <PersonOutlined /> },
 ];
 
-export const SideNavBar: FunctionComponent = () => {
+type Props = {
+  activePage: NavBarPage;
+  onNavigate: (newPage: NavBarPage) => void;
+};
+
+export const SideNavBar: FunctionComponent<Props> = ({
+  activePage,
+  onNavigate,
+}) => {
+  const [open, setOpen] = useState(false);
+
   return (
     <Container>
-      <StyledIconGroup>
-        {topItems.map((item) => (
-          <StyledNavItem>{item.icon}</StyledNavItem>
-        ))}
-      </StyledIconGroup>
-      <StyledIconGroup>
+      <StyledItemGroup>
+        <StyledIcon onClick={() => setOpen((prevState) => !prevState)}>
+          <MenuOutlined />
+        </StyledIcon>
+        <StyledItemGroup>
+          {topItems.map((item) => (
+            <NavBarItem
+              item={item}
+              onNavigate={onNavigate}
+              activePage={activePage}
+              open={open}
+            />
+          ))}
+        </StyledItemGroup>
+      </StyledItemGroup>
+      <StyledItemGroup>
         {bottomItems.map((item) => (
-          <StyledNavItem>{item.icon}</StyledNavItem>
+          <NavBarItem
+            item={item}
+            onNavigate={onNavigate}
+            activePage={activePage}
+            open={open}
+          />
         ))}
-      </StyledIconGroup>
+      </StyledItemGroup>
     </Container>
   );
 };

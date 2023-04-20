@@ -1,6 +1,8 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import { SideNavBar } from '../../components';
+import { NavBarPage, SideNavBar } from '../../components';
 import { Box, Paper, styled } from '@mui/material';
+import { navigate } from '../../../router/router';
+import { useRouter } from 'next/router';
 
 const StyledContainer = styled(Box)({
   display: 'flex',
@@ -10,12 +12,23 @@ const StyledContentContainer = styled(Paper)({
   flex: 1,
 });
 
-export const SideBarLayout: FunctionComponent<PropsWithChildren> = ({
+type Props = {
+  activePage: NavBarPage;
+  onNavigate?: (page: NavBarPage) => void;
+};
+
+export const SideBarLayout: FunctionComponent<PropsWithChildren<Props>> = ({
   children,
+  activePage,
 }) => {
+  const router = useRouter();
+
   return (
     <StyledContainer>
-      <SideNavBar />
+      <SideNavBar
+        activePage={activePage}
+        onNavigate={(page) => navigate(router, page)}
+      />
       <StyledContentContainer>{children}</StyledContentContainer>
     </StyledContainer>
   );

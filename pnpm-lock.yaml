@@ -7,6 +7,7 @@ specifiers:
   '@emotion/react': 11.10.6
   '@emotion/server': 11.10.0
   '@emotion/styled': 11.10.6
+  '@faker-js/faker': 7.6.0
   '@fontsource/lato': 4.5.10
   '@fontsource/montserrat': 4.5.10
   '@mui/icons-material': 5.11.16
@@ -68,6 +69,7 @@ devDependencies:
   '@babel/core': 7.21.4
   '@babel/preset-react': 7.14.5_@babel+core@7.21.4
   '@emotion/babel-plugin': 11.10.6
+  '@faker-js/faker': 7.6.0
   '@nrwl/cypress': 15.9.2_hyhn3bvsqkofrq3u5gogkw7aoy
   '@nrwl/eslint-plugin-nx': 15.9.2_v3lsliimbkl5zpwh5tpoezjq3m
   '@nrwl/jest': 15.9.2_vm45c3mixmwu6sz3d2lmtxlvu4
@@ -1538,6 +1540,11 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+
+  /@faker-js/faker/7.6.0:
+    resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: true
 
   /@fontsource/lato/4.5.10:
     resolution: {integrity: sha512-2hYR6r661Cq9B8zugtu6yxuOKqrVhAgfOSaPSq8XoxbC4ebsl0KOTy/vPoP+9U7JuQVLfrmikirW4a9Z0nDUug==}

@@ -14,7 +14,7 @@ const StyledHero = styled(Box, {
 }));
 
 const GradientOverlay = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(180deg, transparent, black 100%)',
+  background: 'linear-gradient(180deg, transparent, black 125%)',
   height: '100%',
   display: 'flex',
   alignItems: 'flex-end',

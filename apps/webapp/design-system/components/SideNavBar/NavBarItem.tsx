@@ -21,15 +21,9 @@ export const NavBarItem: FunctionComponent<Props> = ({
   activePage,
   onNavigate,
 }) => {
-  const navigate = (page: NavBarPage) => {
-    if (activePage !== page) {
-      onNavigate(page);
-    }
-  };
-
   return (
     <StyledNavItem>
-      <StyledIcon onClick={() => navigate(item.id)}>{item.icon}</StyledIcon>
+      <StyledIcon onClick={() => onNavigate(item.id)}>{item.icon}</StyledIcon>
       {open ? <Typography>{item.label}</Typography> : null}
     </StyledNavItem>
   );

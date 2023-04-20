@@ -29,7 +29,7 @@ export const DescribedAvatar: FunctionComponent<Props> = ({
 }) => {
   return (
     <Container>
-      <Avatar imageUrl={imageUrl} />
+      <Avatar imageUrl={imageUrl} label={subtitle} />
       <TextContainer>
         <Typography variant={'h6'}>{title}</Typography>
         <Typography variant={'h5'} fontWeight={700}>

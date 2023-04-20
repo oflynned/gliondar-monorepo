@@ -9,6 +9,13 @@ const StyledCard = styled(Box)({
   background: 'white',
 });
 
-export const Card: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  return <StyledCard>{children}</StyledCard>;
+type Props = {
+  onClick?: () => void;
+};
+
+export const Card: FunctionComponent<PropsWithChildren<Props>> = ({
+  children,
+  onClick = () => {},
+}) => {
+  return <StyledCard onClick={onClick}>{children}</StyledCard>;
 };

@@ -43,7 +43,7 @@ const EventDetail = () => {
 
   return (
     <SideBarLayout activePage={NavBarPage.EVENTS}>
-      <Stack>
+      <Stack width={'100%'}>
         <Hero
           title={gathering.title}
           imageUrl={gathering.imageUrl}

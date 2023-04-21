@@ -1,14 +1,11 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { NavBarPage, SideNavBar } from '../../components';
-import { Box, Paper, styled } from '@mui/material';
+import { styled } from '@mui/material';
 import { navigate } from '../../../router/router';
 import { useRouter } from 'next/router';
+import { Flex } from '../../atoms';
 
-const StyledContainer = styled(Box)({
-  display: 'flex',
-});
-
-const StyledContentContainer = styled(Box)(({ theme }) => ({
+const StyledContentContainer = styled(Flex)(({ theme }) => ({
   flex: 1,
   background: theme.palette.background.paper,
 }));
@@ -25,12 +22,12 @@ export const SideBarLayout: FunctionComponent<PropsWithChildren<Props>> = ({
   const router = useRouter();
 
   return (
-    <StyledContainer>
+    <Flex>
       <SideNavBar
         activePage={activePage}
         onNavigate={(page) => navigate(router, page)}
       />
       <StyledContentContainer>{children}</StyledContentContainer>
-    </StyledContainer>
+    </Flex>
   );
 };

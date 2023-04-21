@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { IconButton } from '@mui/material';
-import { Avatar } from '../Avatar';
+import { Avatar } from '../../atoms';
 
 type Props = {
   imageUrl: string;

@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
-import { Avatar } from '../Avatar';
+import { Stack, Avatar } from '../../atoms';
 import { Box, styled, Typography } from '@mui/material';
-import { Stack } from '../Stack';
 import { Person } from '../../../mock-data/types';
 
 type Props = { poster: Person; postedAt: string; comment: string };

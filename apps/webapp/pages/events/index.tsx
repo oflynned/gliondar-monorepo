@@ -87,10 +87,8 @@ const Index = () => {
                   <Flex marginTop={2} gap={1} flexWrap={'wrap'}>
                     {new Array(16).fill(0).map(() => (
                       <Chip
-                        color={'primary'}
-                        label={
-                          <Typography variant={'body1'}>Interest</Typography>
-                        }
+                        clickable
+                        label={<Typography>Interest</Typography>}
                       />
                     ))}
                   </Flex>
@@ -122,22 +120,16 @@ const Index = () => {
         </Flex>
       </TitledLayout>
 
-      <Flex height={'100%'} flex={1}>
+      <Flex height={'100vh'} flex={1} top={0} position={'sticky'}>
         {isLoaded ? (
-          <>
-            <GoogleMap
-              mapContainerStyle={{ width: '100%', height: '100%' }}
-              center={defaultCoordinates}
-              zoom={14}
-              onLoad={onLoad}
-              onUnmount={onUnmount}
-            >
-              <></>
-            </GoogleMap>
-          </>
-        ) : (
-          <></>
-        )}
+          <GoogleMap
+            mapContainerStyle={{ width: '100%', height: '100%' }}
+            center={defaultCoordinates}
+            zoom={14}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+          />
+        ) : null}
       </Flex>
     </SideBarLayout>
   );

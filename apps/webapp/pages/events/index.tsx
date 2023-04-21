@@ -9,10 +9,11 @@ import {
   TitledLayout,
 } from '../../design-system';
 import { Box, Chip, styled, Typography } from '@mui/material';
-import { mockEventDiscovery } from '../../mock-data/mock-events';
+import { mockEventDiscovery } from '../../mock-data/mock-gatherings';
 import { useRouter } from 'next/router';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
+import { getRandomInterests } from '../../mock-data/mock-interests';
 
 type Map = google.maps.Map;
 type CoordinateSet = { lat: number; lng: number };
@@ -59,19 +60,10 @@ const Index = () => {
                   justifyContent={'space-between'}
                   width={'100%'}
                   padding={2}
-                >
-                  <Typography variant={'h4'}>Upcoming events</Typography>
-                  <Typography>You have no upcoming events.</Typography>
-                </Stack>
-              </Card>
-              <Card>
-                <Stack
-                  justifyContent={'space-between'}
-                  width={'100%'}
-                  padding={2}
+                  gap={1}
                 >
                   <Typography variant={'h4'}>Your events</Typography>
-                  <Typography>You have not created any events.</Typography>
+                  <Typography>You have not created any events yet.</Typography>
                   <Box alignSelf={'flex-end'} marginTop={2}>
                     <Button
                       label={'New event'}
@@ -85,10 +77,10 @@ const Index = () => {
                 <Stack justifyContent={'space-between'} padding={2}>
                   <Typography variant={'h4'}>Your interests</Typography>
                   <Flex marginTop={2} gap={1} flexWrap={'wrap'}>
-                    {new Array(16).fill(0).map(() => (
+                    {getRandomInterests(25).map((interest) => (
                       <Chip
                         clickable
-                        label={<Typography>Interest</Typography>}
+                        label={<Typography>{interest.title}</Typography>}
                       />
                     ))}
                   </Flex>

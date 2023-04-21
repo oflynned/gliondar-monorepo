@@ -14,7 +14,7 @@ import {
 import { Box, IconButton, styled, Typography, useTheme } from '@mui/material';
 import { BookmarkAddOutlined, LocationOnOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import { mockEvents } from '../../mock-data/mock-events';
+import { mockGatherings } from '../../mock-data/mock-gatherings';
 
 const StyledOutlineContainer = styled(Flex)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
@@ -35,7 +35,7 @@ const EventDetail = () => {
   const theme = useTheme();
   const router = useRouter();
   const { eventId } = router.query;
-  const gathering = mockEvents[eventId as string];
+  const gathering = mockGatherings[eventId as string];
 
   if (!gathering) {
     return null;
@@ -74,7 +74,7 @@ const EventDetail = () => {
               </Card>
               <Typography variant={'h4'}>Attendees</Typography>
               <Card>
-                <Flex gap={2} padding={2}>
+                <Flex gap={2} padding={2} flexWrap={'wrap'}>
                   {gathering.attendees.map((attendee) => (
                     <Avatar
                       imageUrl={attendee.avatarUrl}

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Box, styled, Typography } from '@mui/material';
-import { Avatar } from '../../atoms';
+import { Avatar, AvatarSize } from '../../atoms';
 
 type Props = {
   title: string;
@@ -26,7 +26,7 @@ export const DescribedAvatar: FunctionComponent<Props> = ({
 }) => {
   return (
     <Container>
-      <Avatar imageUrl={imageUrl} label={subtitle} />
+      <Avatar imageUrl={imageUrl} label={subtitle} size={AvatarSize.LARGE} />
       <TextContainer>
         <Typography variant={'h6'}>{title}</Typography>
         <Typography variant={'h5'} fontWeight={700}>

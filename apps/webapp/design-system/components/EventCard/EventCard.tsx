@@ -26,14 +26,24 @@ const StyledCardActionContainer = styled(Box)({
   alignItems: 'flex-end',
 });
 
+const RoundedImageContainer = styled(Box, {
+  shouldForwardProp: (prop: string): boolean => {
+    return !['imageUrl'].includes(prop);
+  },
+})<{ imageUrl: string }>(({ theme, imageUrl }) => ({
+  width: 192,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center center',
+  backgroundImage: `url(${imageUrl})`,
+  borderRadius: theme.spacing(1),
+}));
+
 type Props = {
   gathering: Gathering;
   onClick: (gathering: Gathering) => void;
 };
 
 export const EventCard: FunctionComponent<Props> = ({ gathering, onClick }) => {
-  const theme = useTheme();
-
   return (
     <Card>
       <StyledCardContainer
@@ -42,15 +52,7 @@ export const EventCard: FunctionComponent<Props> = ({ gathering, onClick }) => {
         key={gathering.id}
       >
         <Flex>
-          <Box
-            sx={{
-              width: 192,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center center',
-              backgroundImage: `url(${gathering.imageUrl})`,
-              borderRadius: theme.spacing(1),
-            }}
-          />
+          <RoundedImageContainer imageUrl={gathering.imageUrl} />
           <GatheringDetailsContainer>
             <Box>
               <Typography variant={'h5'}>{gathering.title}</Typography>

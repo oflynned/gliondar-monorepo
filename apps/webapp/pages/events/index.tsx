@@ -14,15 +14,6 @@ import { useRouter } from 'next/router';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
 
-const StyledEventListContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  flex: 1,
-  width: '768px',
-  maxWidth: '768px',
-  gap: theme.spacing(4),
-}));
-
 type Map = google.maps.Map;
 type CoordinateSet = { lat: number; lng: number };
 
@@ -48,10 +39,10 @@ const Index = () => {
 
   return (
     <SideBarLayout activePage={NavBarPage.EVENTS}>
-      <TitledLayout pageTitle={'Events'} gap={4}>
+      <TitledLayout pageTitle={'Events'} gap={4} flex={2}>
         <Flex>
           <Flex flex={1} gap={4}>
-            <Stack gap={2} maxWidth={'400px'}>
+            <Stack gap={2} maxWidth={330}>
               <Card>
                 <Box
                   height={256}
@@ -106,7 +97,7 @@ const Index = () => {
                 </Stack>
               </Card>
             </Stack>
-            <StyledEventListContainer>
+            <Stack gap={4} flex={1} maxWidth={768}>
               <Flex gap={1}>
                 <Button label={'This week'} variant={'outlined'} />
                 <Button label={'This weekend'} variant={'outlined'} />
@@ -126,7 +117,7 @@ const Index = () => {
                   ))}
                 </Stack>
               ))}
-            </StyledEventListContainer>
+            </Stack>
           </Flex>
         </Flex>
       </TitledLayout>

@@ -1,17 +1,18 @@
 import { FunctionComponent } from 'react';
-import { Card, Flex, Stack } from '../../atoms';
-import { Box, IconButton, styled, Typography, useTheme } from '@mui/material';
+import { Flex, Card } from '../../atoms';
+import { Box, IconButton, styled, Typography } from '@mui/material';
 import { BookmarkAddOutlined } from '@mui/icons-material';
 import { Gathering } from '../../../mock-data/types';
 
-const StyledCardContainer = styled(Box)({
+const StyledCardContainer = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
   display: 'flex',
   justifyContent: 'space-between',
   width: '100%',
   '&:hover': {
-    pointer: 'cursor',
+    cursor: 'pointer',
   },
-});
+}));
 
 const GatheringDetailsContainer = styled(Box)(({ theme }) => ({
   marginLeft: theme.spacing(2),
@@ -40,16 +41,20 @@ const RoundedImageContainer = styled(Box, {
 
 type Props = {
   gathering: Gathering;
-  onClick: (gathering: Gathering) => void;
+  onClick?: (gathering: Gathering) => void;
+  onBookmark?: (gathering: Gathering) => void;
 };
 
-export const EventCard: FunctionComponent<Props> = ({ gathering, onClick }) => {
+export const EventCard: FunctionComponent<Props> = ({
+  gathering,
+  onClick = () => {},
+  onBookmark = () => {},
+}) => {
   return (
-    <Card>
+    <Card canHover>
       <StyledCardContainer
-        onClick={() => onClick(gathering)}
-        // onClick={() => {}}
         key={gathering.id}
+        onClick={() => onClick(gathering)}
       >
         <Flex>
           <RoundedImageContainer imageUrl={gathering.imageUrl} />
@@ -64,7 +69,12 @@ export const EventCard: FunctionComponent<Props> = ({ gathering, onClick }) => {
           </GatheringDetailsContainer>
         </Flex>
         <StyledCardActionContainer>
-          <IconButton color={'inherit'}>
+          <IconButton
+            color={'inherit'}
+            onClick={() => {
+              onBookmark(gathering);
+            }}
+          >
             <BookmarkAddOutlined />
           </IconButton>
         </StyledCardActionContainer>

@@ -1,8 +1,12 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import { Box, styled } from '@mui/material';
+import { BoxProps, styled, Typography } from '@mui/material';
+import { Stack } from '../../atoms';
 
-const Container = styled(Box)(({ theme }) => ({ padding: theme.spacing(3) }));
+const Container = styled(Stack)(({ theme }) => ({ padding: theme.spacing(3) }));
 
-export const Layout: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  return <Container>{children}</Container>;
+export const Layout: FunctionComponent<PropsWithChildren<BoxProps>> = ({
+  children,
+  ...props
+}) => {
+  return <Container {...props}>{children}</Container>;
 };

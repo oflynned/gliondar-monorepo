@@ -8,10 +8,10 @@ export const lightTheme = createTheme({
       main: turquoise[500],
       contrastText: '#FFFFFF',
     },
-    secondary: {
-      main: '#FFFFFF',
-      contrastText: '#2C404A',
-    },
+    // secondary: {
+    //   main: '#FFFFFF',
+    //   contrastText: '#2C404A',
+    // },
     text: {
       primary: '#2C404A',
       secondary: '#646464',

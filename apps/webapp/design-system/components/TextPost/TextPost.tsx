@@ -17,10 +17,6 @@ export const TextPost: FunctionComponent<Props> = ({ post }) => {
           <Stack justifyContent={'center'}>
             <Flex gap={1} alignItems={'center'}>
               <Typography variant={'h5'}>{post.poster.name}</Typography>
-              {/*<Chip*/}
-              {/*  variant={'outlined'}*/}
-              {/*  label={<Typography>{getRandomFluencyLevel().en}</Typography>}*/}
-              {/*/>*/}
             </Flex>
             <Typography>{post.postedAt.toISOString()}</Typography>
           </Stack>
@@ -28,11 +24,6 @@ export const TextPost: FunctionComponent<Props> = ({ post }) => {
         <Box>
           <Typography>{post.text}</Typography>
         </Box>
-        {/*<Box>*/}
-        {/*  <IconButton>*/}
-        {/*    <ShareOutlined />*/}
-        {/*  </IconButton>*/}
-        {/*</Box>*/}
       </Stack>
       <Flex alignItems={'center'}>
         <Stack alignItems={'center'}>

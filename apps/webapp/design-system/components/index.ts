@@ -5,3 +5,4 @@ export * from './DescribedAvatar';
 export * from './Comment';
 export * from './EventCard';
 export * from './Content';
+export * from './Map';

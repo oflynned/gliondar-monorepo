@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import { Box, IconButton, styled, Typography } from '@mui/material';
-import { ArrowBack, ArrowBackIos } from '@mui/icons-material';
+import { ArrowBack } from '@mui/icons-material';
 import { GradientOverlay } from '../../atoms';
 
 const Container = styled(Box)(({ theme }) => ({
-  height: '350px',
   display: 'flex',
+  height: '100%',
   justifyContent: 'space-between',
   flexDirection: 'column',
   alignItems: 'start',
@@ -21,14 +21,18 @@ type Props = {
 export const Hero: FunctionComponent<Props> = ({
   title,
   imageUrl,
-  onBackPress = () => {},
+  onBackPress,
 }) => {
   return (
-    <GradientOverlay imageUrl={imageUrl}>
+    <GradientOverlay imageUrl={imageUrl} height={350}>
       <Container>
-        <IconButton sx={{ color: 'white' }} onClick={() => onBackPress()}>
-          <ArrowBack fontSize={'large'} />
-        </IconButton>
+        {onBackPress ? (
+          <IconButton sx={{ color: 'white' }} onClick={() => onBackPress()}>
+            <ArrowBack fontSize={'large'} />
+          </IconButton>
+        ) : (
+          <Box />
+        )}
         <Typography variant={'h2'} color={'white'}>
           {title}
         </Typography>

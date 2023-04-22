@@ -35,6 +35,7 @@ const DetailsSection = styled(Box)(({ theme }) => ({
 const EventDetail = () => {
   const router = useRouter();
   const { eventId } = router.query;
+
   const gathering: Gathering = mockGatherings.find(
     (gathering) => gathering.id === eventId
   );
@@ -56,6 +57,7 @@ const EventDetail = () => {
             title={'Hosted by'}
             subtitle={gathering.organiser.name}
             imageUrl={gathering.organiser.avatarUrl}
+            onClick={() => router.push(`/users/${gathering.organiser.id}`)}
           />
           <Stack alignItems={'end'}>
             <Typography variant={'h6'}>96 places remaining</Typography>

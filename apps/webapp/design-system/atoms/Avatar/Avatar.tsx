@@ -1,11 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Box, IconButton, styled, Tooltip } from '@mui/material';
+import { Box, BoxProps, IconButton, styled, Tooltip } from '@mui/material';
 import Image from 'next/image';
 
-const RoundedAvatar = styled('img')({
+// TODO use Image component here when you have a CDN endpoint
+const RoundedAvatar = styled('img')(({ theme }) => ({
   borderRadius: '50%',
-  border: '1px solid #ECECEC',
-});
+  border: `1px solid ${theme.palette.divider}`,
+}));
 
 export enum AvatarSize {
   SMALL = 32,
@@ -25,8 +26,6 @@ export const Avatar: FunctionComponent<Props> = ({
   size = AvatarSize.MEDIUM,
 }) => {
   return (
-    <Box>
-      <RoundedAvatar width={size} height={size} src={imageUrl} alt={label} />
-    </Box>
+    <RoundedAvatar width={size} height={size} src={imageUrl} alt={label} />
   );
 };

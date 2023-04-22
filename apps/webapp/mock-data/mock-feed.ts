@@ -1,4 +1,4 @@
-import { Content, GatheringPost, TextPost } from './types';
+import { UserGeneratedContent, GatheringPost, TextPost } from './types';
 import { getRandomPerson } from './mock-people';
 import { faker } from '@faker-js/faker/locale/en';
 import { getRandomItem, getRandomItems } from './helper';
@@ -28,7 +28,7 @@ const mockGatheringPosts = new Array(100).fill(0).map(
   })
 );
 
-const content = faker.helpers.shuffle<Content>([
+const content = faker.helpers.shuffle<UserGeneratedContent>([
   ...mockTextPosts,
   ...mockGatheringPosts,
 ]);

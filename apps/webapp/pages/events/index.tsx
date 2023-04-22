@@ -88,14 +88,14 @@ const Index = () => {
                 </Stack>
               </Card>
             </Stack>
-            <Stack gap={4} flex={1} maxWidth={768}>
+            <Stack gap={2} flex={1} maxWidth={768}>
               <Flex gap={1}>
                 <Button label={'This week'} variant={'outlined'} />
                 <Button label={'This weekend'} variant={'outlined'} />
                 <Button label={'Next week'} variant={'outlined'} />
               </Flex>
 
-              <Stack>
+              <Stack gap={2}>
                 <Stack gap={2}>
                   <Typography variant={'h4'}>Today</Typography>
                   {getRandomGatherings(3).map((gathering) => (

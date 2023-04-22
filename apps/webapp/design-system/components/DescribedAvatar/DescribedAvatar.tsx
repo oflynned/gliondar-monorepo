@@ -1,11 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Box, styled, Typography } from '@mui/material';
+import { Box, IconButton, styled, Typography } from '@mui/material';
 import { Avatar, AvatarSize } from '../../atoms';
 
 type Props = {
   title: string;
   subtitle: string;
   imageUrl?: string;
+  onClick?: () => void;
 };
 
 const Container = styled(Box)(({ theme }) => ({
@@ -23,10 +24,13 @@ export const DescribedAvatar: FunctionComponent<Props> = ({
   imageUrl,
   title,
   subtitle,
+  onClick = () => {},
 }) => {
   return (
     <Container>
-      <Avatar imageUrl={imageUrl} label={subtitle} size={AvatarSize.LARGE} />
+      <IconButton onClick={onClick}>
+        <Avatar imageUrl={imageUrl} label={subtitle} />
+      </IconButton>
       <TextContainer>
         <Typography variant={'h6'}>{title}</Typography>
         <Typography variant={'h5'} fontWeight={700}>

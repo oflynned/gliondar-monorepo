@@ -19,6 +19,7 @@ export const curatedEvents: Record<string, Gathering> = {
     startsAt: new Date(2023, 9, 17, 21),
     address: '9 College St, Dublin 2, D02 WN62, Ireland',
     organiser: {
+      id: '1',
       name: 'Seán Mac Cárthaigh',
       avatarUrl:
         'https://this-person-does-not-exist.com/img/avatar-genaa2fbc91b0b85e0d6d4596c63f9fa103.jpg',
@@ -40,6 +41,7 @@ export const curatedEvents: Record<string, Gathering> = {
     address:
       "St. Brendan's Terrace, Carhan Lower, Cahersiveen, Co. Kerry, V23 TP08, Ireland",
     organiser: {
+      id: '2',
       name: 'Aisling De Búrca',
       avatarUrl:
         'https://this-person-does-not-exist.com/img/avatar-gen2ed72f4297d31dad5694116faafa43bf.jpg',
@@ -60,6 +62,7 @@ export const curatedEvents: Record<string, Gathering> = {
     startsAt: new Date(2023, 9, 13, 19),
     address: 'Croke Park, Jones Road, Dublin 3, D03 P6K7, Ireland',
     organiser: {
+      id: '3',
       name: 'Gaelic Athletic Association',
       avatarUrl: '/gaa.jpeg',
     },

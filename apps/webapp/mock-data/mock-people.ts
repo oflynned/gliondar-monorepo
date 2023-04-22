@@ -2,7 +2,7 @@ import { Person } from './types';
 import { faker } from '@faker-js/faker/locale/en';
 import { getRandomItem, getRandomItems } from './helper';
 
-export const mockPeople: Person[] = new Array(100).fill(0).map(
+export const mockPeople = new Array(100).fill(0).map(
   (): Person => ({
     id: faker.datatype.uuid(),
     name: faker.name.fullName(),

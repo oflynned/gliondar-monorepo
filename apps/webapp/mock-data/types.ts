@@ -13,12 +13,13 @@ export type Organiser = Person | Business;
 
 export type Gathering = {
   id: string;
+  postedAt: Date;
   title: string;
   description: string[];
   imageUrl: string | null;
   organiser: Organiser;
   attendees: Person[];
-  startsAt: string;
+  startsAt: Date;
   address: string;
 };
 

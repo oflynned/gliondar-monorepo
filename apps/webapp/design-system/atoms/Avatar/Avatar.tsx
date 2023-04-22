@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Box, IconButton, styled, Tooltip } from '@mui/material';
+import { Box, BoxProps, IconButton, styled, Tooltip } from '@mui/material';
 import Image from 'next/image';
 
 const RoundedAvatar = styled('img')({
@@ -25,8 +25,6 @@ export const Avatar: FunctionComponent<Props> = ({
   size = AvatarSize.MEDIUM,
 }) => {
   return (
-    <Box>
-      <RoundedAvatar width={size} height={size} src={imageUrl} alt={label} />
-    </Box>
+    <RoundedAvatar width={size} height={size} src={imageUrl} alt={label} />
   );
 };

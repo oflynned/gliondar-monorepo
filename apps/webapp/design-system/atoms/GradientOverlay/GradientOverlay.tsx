@@ -1,17 +1,20 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { Box, BoxProps, styled } from '@mui/material';
+import Image from 'next/image';
 
 type Props = BoxProps & {
   imageUrl?: string;
 };
 
 const Container = styled(Box)(({ theme }) => ({
-  width: '100%',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center center',
+  display: 'flex',
+  position: 'relative',
+  overflow: 'hidden',
 }));
 
 const Gradient = styled(Box)(({ theme }) => ({
+  top: 0,
+  position: 'absolute',
   background: 'linear-gradient(180deg, transparent, black 125%)',
   height: '100%',
   width: '100%',
@@ -24,7 +27,19 @@ export const GradientOverlay: FunctionComponent<PropsWithChildren<Props>> = ({
   ...props
 }) => {
   return (
-    <Container sx={{ backgroundImage: `url(${imageUrl})` }} {...props}>
+    <Container {...props}>
+      <Image
+        style={{
+          borderRadius: 'inherit',
+          objectFit: 'cover',
+          objectPosition: 'center',
+          overflow: 'hidden',
+          transition: '0.3s all ease-in-out',
+        }}
+        src={imageUrl}
+        alt={'image'}
+        fill
+      />
       <Gradient>{children}</Gradient>
     </Container>
   );

@@ -1,22 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Box, IconButton, styled, Typography } from '@mui/material';
 import { ArrowBack, ArrowBackIos } from '@mui/icons-material';
+import { GradientOverlay } from '../../atoms';
 
-const StyledHero = styled(Box, {
-  shouldForwardProp(prop) {
-    return prop !== 'imageUrl';
-  },
-})<{ imageUrl?: string }>(({ imageUrl }) => ({ theme }) => ({
-  backgroundImage: imageUrl ? `url(${imageUrl})` : null,
-  background: imageUrl ? null : theme.palette.background.paper,
+const Container = styled(Box)(({ theme }) => ({
   height: '350px',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center center',
-}));
-
-const GradientOverlay = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(180deg, transparent, black 125%)',
-  height: '100%',
   display: 'flex',
   justifyContent: 'space-between',
   flexDirection: 'column',
@@ -36,15 +24,15 @@ export const Hero: FunctionComponent<Props> = ({
   onBackPress = () => {},
 }) => {
   return (
-    <StyledHero imageUrl={imageUrl}>
-      <GradientOverlay>
+    <GradientOverlay imageUrl={imageUrl}>
+      <Container>
         <IconButton sx={{ color: 'white' }} onClick={() => onBackPress()}>
           <ArrowBack fontSize={'large'} />
         </IconButton>
         <Typography variant={'h2'} color={'white'}>
           {title}
         </Typography>
-      </GradientOverlay>
-    </StyledHero>
+      </Container>
+    </GradientOverlay>
   );
 };

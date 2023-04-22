@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Box, IconButton, styled, Typography } from '@mui/material';
-import { Avatar, AvatarSize } from '../../atoms';
+import { Avatar, AvatarSize, Flex, Stack } from '../../atoms';
 
 type Props = {
   title: string;
@@ -9,17 +9,6 @@ type Props = {
   onClick?: () => void;
 };
 
-const Container = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(1),
-}));
-
-const TextContainer = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-});
-
 export const DescribedAvatar: FunctionComponent<Props> = ({
   imageUrl,
   title,
@@ -27,16 +16,16 @@ export const DescribedAvatar: FunctionComponent<Props> = ({
   onClick = () => {},
 }) => {
   return (
-    <Container>
+    <Flex gap={1}>
       <IconButton onClick={onClick}>
         <Avatar imageUrl={imageUrl} label={subtitle} />
       </IconButton>
-      <TextContainer>
+      <Stack justifyContent={'center'}>
         <Typography variant={'h6'}>{title}</Typography>
         <Typography variant={'h5'} fontWeight={700}>
           {subtitle}
         </Typography>
-      </TextContainer>
-    </Container>
+      </Stack>
+    </Flex>
   );
 };

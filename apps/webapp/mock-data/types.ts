@@ -4,20 +4,13 @@ export type Person = {
   avatarUrl: string;
 };
 
-export type Business = {
-  name: string;
-  avatarUrl: string;
-};
-
-export type Organiser = Person | Business;
-
 export type Gathering = {
   id: string;
   postedAt: Date;
   title: string;
   description: string[];
   imageUrl: string | null;
-  organiser: Organiser;
+  organiser: Person;
   attendees: Person[];
   startsAt: Date;
   address: string;

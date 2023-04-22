@@ -21,14 +21,18 @@ type Props = {
 export const Hero: FunctionComponent<Props> = ({
   title,
   imageUrl,
-  onBackPress = () => {},
+  onBackPress,
 }) => {
   return (
     <GradientOverlay imageUrl={imageUrl}>
       <Container>
-        <IconButton sx={{ color: 'white' }} onClick={() => onBackPress()}>
-          <ArrowBack fontSize={'large'} />
-        </IconButton>
+        {onBackPress ? (
+          <IconButton sx={{ color: 'white' }} onClick={() => onBackPress()}>
+            <ArrowBack fontSize={'large'} />
+          </IconButton>
+        ) : (
+          <Box />
+        )}
         <Typography variant={'h2'} color={'white'}>
           {title}
         </Typography>

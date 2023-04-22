@@ -9,11 +9,12 @@ import {
   TitledLayout,
 } from '../../design-system';
 import { Box, Chip, styled, Typography } from '@mui/material';
-import { mockEventDiscovery } from '../../mock-data/mock-gatherings';
 import { useRouter } from 'next/router';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useState } from 'react';
 import { getRandomInterests } from '../../mock-data/mock-interests';
+import { curatedEventDiscovery } from '../../mock-data/curated-events';
+import { getRandomGatherings } from '../../mock-data/mock-gatherings';
 
 type Map = google.maps.Map;
 type CoordinateSet = { lat: number; lng: number };
@@ -94,10 +95,10 @@ const Index = () => {
                 <Button label={'Next week'} variant={'outlined'} />
               </Flex>
 
-              {mockEventDiscovery.map(({ timeframe, gatherings }) => (
+              <Stack>
                 <Stack gap={2}>
-                  <Typography variant={'h4'}>{timeframe}</Typography>
-                  {gatherings.map((gathering) => (
+                  <Typography variant={'h4'}>Today</Typography>
+                  {getRandomGatherings(3).map((gathering) => (
                     <EventCard
                       gathering={gathering}
                       onClick={(gathering) =>
@@ -106,7 +107,29 @@ const Index = () => {
                     />
                   ))}
                 </Stack>
-              ))}
+                <Stack gap={2}>
+                  <Typography variant={'h4'}>Tomorrow</Typography>
+                  {getRandomGatherings(3).map((gathering) => (
+                    <EventCard
+                      gathering={gathering}
+                      onClick={(gathering) =>
+                        router.push(`/events/${gathering.id}`)
+                      }
+                    />
+                  ))}
+                </Stack>
+                <Stack gap={2}>
+                  <Typography variant={'h4'}>Later</Typography>
+                  {getRandomGatherings(7).map((gathering) => (
+                    <EventCard
+                      gathering={gathering}
+                      onClick={(gathering) =>
+                        router.push(`/events/${gathering.id}`)
+                      }
+                    />
+                  ))}
+                </Stack>
+              </Stack>
             </Stack>
           </Flex>
         </Flex>

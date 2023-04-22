@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Stack, Avatar } from '../../atoms';
 import { Box, styled, Typography } from '@mui/material';
-import { Person } from '../../../mock-data/types';
+import { Person } from '../../../mock-data';
 
-type Props = { poster: Person; postedAt: string; comment: string };
+type Props = { poster: Person; postedAt: Date; comment: string };
 
 const Container = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -20,7 +20,7 @@ export const Comment: FunctionComponent<Props> = ({
       <Avatar imageUrl={poster.avatarUrl} label={poster.name} />
       <Stack>
         <Typography variant={'h5'}>{poster.name}</Typography>
-        <Typography>{postedAt}</Typography>
+        <Typography>{postedAt.toISOString()}</Typography>
         <Typography>{comment}</Typography>
       </Stack>
     </Container>

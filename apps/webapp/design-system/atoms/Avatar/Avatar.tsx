@@ -7,17 +7,26 @@ const RoundedAvatar = styled('img')({
   border: '1px solid #ECECEC',
 });
 
+export enum AvatarSize {
+  SMALL = 32,
+  MEDIUM = 48,
+  LARGE = 64,
+}
+
 type Props = {
   imageUrl: string;
   label: string;
+  size?: AvatarSize;
 };
 
-export const Avatar: FunctionComponent<Props> = ({ imageUrl, label }) => {
+export const Avatar: FunctionComponent<Props> = ({
+  imageUrl,
+  label,
+  size = AvatarSize.MEDIUM,
+}) => {
   return (
-    <Tooltip title={label}>
-      <Box>
-        <RoundedAvatar width={64} height={64} src={imageUrl} alt={label} />
-      </Box>
-    </Tooltip>
+    <Box>
+      <RoundedAvatar width={size} height={size} src={imageUrl} alt={label} />
+    </Box>
   );
 };

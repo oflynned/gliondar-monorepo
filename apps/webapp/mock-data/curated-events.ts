@@ -1,45 +1,7 @@
-import { faker } from '@faker-js/faker/locale/en_IE';
-import { Gathering, Person } from './types';
+import { Gathering } from './types';
+import { getRandomPeople } from './mock-people';
 
-const attendees: Person[] = [
-  {
-    id: '1',
-    name: faker.name.fullName(),
-    avatarUrl: faker.image.avatar(),
-  },
-  {
-    id: '2',
-    name: faker.name.fullName(),
-    avatarUrl: faker.image.avatar(),
-  },
-  {
-    id: '3',
-    name: faker.name.fullName(),
-    avatarUrl: faker.image.avatar(),
-  },
-  {
-    id: '4',
-    name: faker.name.fullName(),
-    avatarUrl: faker.image.avatar(),
-  },
-  {
-    id: '5',
-    name: faker.name.fullName(),
-    avatarUrl: faker.image.avatar(),
-  },
-  {
-    id: '6',
-    name: faker.name.fullName(),
-    avatarUrl: faker.image.avatar(),
-  },
-  {
-    id: '7',
-    name: faker.name.fullName(),
-    avatarUrl: faker.image.avatar(),
-  },
-];
-
-export const mockEvents: Record<string, Gathering> = {
+export const curatedEvents: Record<string, Gathering> = {
   '1': {
     id: '1',
     title: 'Pop Up Gaeltacht',
@@ -52,8 +14,9 @@ export const mockEvents: Record<string, Gathering> = {
     ],
     imageUrl:
       'https://geneticliteracyproject.org/wp-content/uploads/2020/02/people-are-drinking-alcohol-at-a-party-but-it-could-lead-to-liver-cancer.jpg',
-    attendees,
-    startsAt: '7pm, Friday October 31st, 2023',
+    attendees: getRandomPeople(),
+    postedAt: new Date(),
+    startsAt: new Date(2023, 9, 17, 21),
     address: '9 College St, Dublin 2, D02 WN62, Ireland',
     organiser: {
       name: 'Seán Mac Cárthaigh',
@@ -71,8 +34,9 @@ export const mockEvents: Record<string, Gathering> = {
     ],
     imageUrl:
       'https://assets-eu-01.kc-usercontent.com/aa24ba70-9a12-01ae-259b-7ef588a0b2ef/c71f5c1d-a9f8-4d7f-ae02-2a30a8cc9438/carrickfinn-beach-gweedore-bay-donegal.jpg?h=1080&q=66&fm=jpg',
-    attendees,
-    startsAt: '2pm, Saturday June 4th, 2023',
+    attendees: getRandomPeople(),
+    postedAt: new Date(),
+    startsAt: new Date(2023, 9, 10, 13),
     address:
       "St. Brendan's Terrace, Carhan Lower, Cahersiveen, Co. Kerry, V23 TP08, Ireland",
     organiser: {
@@ -91,8 +55,9 @@ export const mockEvents: Record<string, Gathering> = {
     ],
     imageUrl:
       'https://e0.365dm.com/22/06/768x432/skysports-clare-wexford-gaa_5808571.jpg?20220618163731',
-    attendees,
-    startsAt: '12pm, Sunday September 13th 2023',
+    attendees: getRandomPeople(),
+    postedAt: new Date(),
+    startsAt: new Date(2023, 9, 13, 19),
     address: 'Croke Park, Jones Road, Dublin 3, D03 P6K7, Ireland',
     organiser: {
       name: 'Gaelic Athletic Association',
@@ -101,20 +66,20 @@ export const mockEvents: Record<string, Gathering> = {
   },
 };
 
-export const mockEventDiscovery: {
+export const curatedEventDiscovery: {
   timeframe: string;
   gatherings: Gathering[];
 }[] = [
   {
     timeframe: 'Today',
-    gatherings: [mockEvents['1']],
+    gatherings: [curatedEvents['1']],
   },
   {
     timeframe: 'Tomorrow',
-    gatherings: [mockEvents['2'], mockEvents['3']],
+    gatherings: [curatedEvents['2'], curatedEvents['3']],
   },
   {
     timeframe: 'Later',
-    gatherings: Object.values(mockEvents),
+    gatherings: Object.values(curatedEvents),
   },
 ];

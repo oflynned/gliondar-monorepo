@@ -14,7 +14,8 @@ import {
 import { Box, IconButton, styled, Typography, useTheme } from '@mui/material';
 import { BookmarkAddOutlined, LocationOnOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import { mockEvents } from '../../mock-data/mock-events';
+import { mockGatherings } from '../../mock-data/mock-gatherings';
+import { Gathering } from '../../mock-data';
 
 const StyledOutlineContainer = styled(Flex)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
@@ -32,10 +33,11 @@ const DetailsSection = styled(Box)(({ theme }) => ({
 }));
 
 const EventDetail = () => {
-  const theme = useTheme();
   const router = useRouter();
   const { eventId } = router.query;
-  const gathering = mockEvents[eventId as string];
+  const gathering: Gathering = mockGatherings.find(
+    (gathering) => gathering.id === eventId
+  );
 
   if (!gathering) {
     return null;
@@ -74,7 +76,7 @@ const EventDetail = () => {
               </Card>
               <Typography variant={'h4'}>Attendees</Typography>
               <Card>
-                <Flex gap={2} padding={2}>
+                <Flex gap={2} padding={2} flexWrap={'wrap'}>
                   {gathering.attendees.map((attendee) => (
                     <Avatar
                       imageUrl={attendee.avatarUrl}
@@ -92,8 +94,9 @@ const EventDetail = () => {
                 <Stack gap={2} padding={2}>
                   {gathering.attendees.map((person) => (
                     <Comment
+                      key={person.id}
                       poster={person}
-                      postedAt={gathering.startsAt}
+                      postedAt={gathering.postedAt}
                       comment={'Responded with attending'}
                     />
                   ))}
@@ -143,7 +146,7 @@ const EventDetail = () => {
                 <LocationOnOutlined />
               </IconButton>
               <Box>
-                <Typography>{gathering.startsAt}</Typography>
+                <Typography>{gathering.startsAt.toISOString()}</Typography>
                 <Typography variant={'h5'}>{gathering.address}</Typography>
               </Box>
             </Flex>

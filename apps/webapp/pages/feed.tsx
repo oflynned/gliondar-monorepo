@@ -1,14 +1,36 @@
-import { NavBarPage, SideBarLayout } from '../design-system';
-import { Box, Typography, useTheme } from '@mui/material';
+import {
+  GatheringPost,
+  NavBarPage,
+  SideBarLayout,
+  Stack,
+  TextPost,
+  TitledLayout,
+} from '../design-system';
+import { getRandomPosts } from '../mock-data/mock-feed';
+import { useState } from 'react';
+
+const content = getRandomPosts(10);
 
 const Feed = () => {
-  const theme = useTheme();
+  const [posts] = useState(content);
 
   return (
     <SideBarLayout activePage={NavBarPage.FEED}>
-      <Box sx={{ padding: theme.spacing(3) }}>
-        <Typography variant={'h2'}>Feed</Typography>
-      </Box>
+      <TitledLayout pageTitle={'Feed'} gap={4} flex={2}>
+        <Stack gap={2} maxWidth={512}>
+          {posts.map((post) => {
+            if (post.__typename === 'TextPost') {
+              return <TextPost post={post} key={post.id} />;
+            }
+
+            if (post.__typename === 'GatheringPost') {
+              return <GatheringPost post={post} key={post.id} />;
+            }
+
+            return null;
+          })}
+        </Stack>
+      </TitledLayout>
     </SideBarLayout>
   );
 };

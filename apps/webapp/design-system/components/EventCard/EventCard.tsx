@@ -2,7 +2,8 @@ import { FunctionComponent } from 'react';
 import { Flex, Card } from '../../atoms';
 import { Box, IconButton, styled, Typography } from '@mui/material';
 import { BookmarkAddOutlined } from '@mui/icons-material';
-import { Gathering } from '../../../mock-data/types';
+import { Gathering } from '../../../mock-data';
+import Image from 'next/image';
 
 const StyledCardContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -27,16 +28,12 @@ const StyledCardActionContainer = styled(Box)({
   alignItems: 'flex-end',
 });
 
-const RoundedImageContainer = styled(Box, {
-  shouldForwardProp: (prop: string): boolean => {
-    return !['imageUrl'].includes(prop);
-  },
-})<{ imageUrl: string }>(({ theme, imageUrl }) => ({
+const RoundedImageContainer = styled(Box)(({ theme }) => ({
   width: 192,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center center',
-  backgroundImage: `url(${imageUrl})`,
   borderRadius: theme.spacing(1),
+  display: 'flex',
+  position: 'relative',
+  overflow: 'hidden',
 }));
 
 type Props = {
@@ -57,7 +54,18 @@ export const EventCard: FunctionComponent<Props> = ({
         onClick={() => onClick(gathering)}
       >
         <Flex>
-          <RoundedImageContainer imageUrl={gathering.imageUrl} />
+          <RoundedImageContainer>
+            <Image
+              style={{
+                borderRadius: 'inherit',
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+              src={gathering.imageUrl}
+              alt={'image'}
+              fill
+            />
+          </RoundedImageContainer>
           <GatheringDetailsContainer>
             <Box>
               <Typography variant={'h5'}>{gathering.title}</Typography>

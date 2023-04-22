@@ -27,6 +27,7 @@ export const GatheringPost: FunctionComponent<Props> = ({ post }) => {
           </Stack>
         </Flex>
         <GradientOverlay
+          height={192}
           imageUrl={post.gathering.imageUrl}
           borderRadius={theme.spacing(2)}
           onClick={() => router.push(`/events/${post.id}`)}

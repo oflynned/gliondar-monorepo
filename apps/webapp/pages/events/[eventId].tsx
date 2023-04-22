@@ -6,13 +6,18 @@ import {
   DescribedAvatar,
   Flex,
   Hero,
+  Map,
   NavBarPage,
   SideBarLayout,
   Stack,
   StickyBottomContainer,
 } from '../../design-system';
 import { Box, IconButton, styled, Typography, useTheme } from '@mui/material';
-import { BookmarkAddOutlined, LocationOnOutlined } from '@mui/icons-material';
+import {
+  AccessTimeOutlined,
+  BookmarkAddOutlined,
+  LocationOnOutlined,
+} from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import { mockGatherings } from '../../mock-data/mock-gatherings';
 import { Gathering } from '../../mock-data';
@@ -59,10 +64,12 @@ const EventDetail = () => {
             imageUrl={gathering.organiser.avatarUrl}
             onClick={() => router.push(`/users/${gathering.organiser.id}`)}
           />
-          <Stack alignItems={'end'}>
-            <Typography variant={'h6'}>96 places remaining</Typography>
-            <Typography variant={'h5'}>Free entry</Typography>
-          </Stack>
+          {/*<Stack alignItems={'end'}>*/}
+          {/*  <Typography variant={'h6'}>*/}
+          {/*    {100 - gathering.attendees.length} places remaining*/}
+          {/*  </Typography>*/}
+          {/*  <Typography variant={'h5'}>Free entry</Typography>*/}
+          {/*</Stack>*/}
         </StyledOutlineContainer>
 
         <DetailsSection>
@@ -94,7 +101,7 @@ const EventDetail = () => {
               >{`Comments (${gathering.attendees.length})`}</Typography>
               <Card>
                 <Stack gap={2} padding={2}>
-                  {gathering.attendees.map((person) => (
+                  {gathering.attendees.splice(0, 10).map((person) => (
                     <Comment
                       key={person.id}
                       poster={person}
@@ -105,37 +112,70 @@ const EventDetail = () => {
                 </Stack>
               </Card>
             </Stack>
-            <Flex justifyContent={'end'} width={512}>
+            <Flex justifyContent={'end'} maxWidth={512}>
               <Stack gap={2}>
+                <Card padding={2}>
+                  <Flex>
+                    <Card>
+                      <Stack gap={2}>
+                        <Flex gap={1}>
+                          <AccessTimeOutlined />
+                          <Typography>
+                            {gathering.startsAt.toLocaleString()}
+                          </Typography>
+                        </Flex>
+                        <Flex gap={1}>
+                          <LocationOnOutlined />
+                          <Typography>{gathering.address}</Typography>
+                        </Flex>
+                      </Stack>
+                    </Card>
+                  </Flex>
+                </Card>
                 <Card height={256}>
                   <Flex
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() => window.open('https://google.com/maps')}
+                    borderRadius={1}
                     justifyContent={'center'}
                     alignItems={'center'}
                     width={'100%'}
                   >
-                    <Typography>Map</Typography>
+                    <Map />
                   </Flex>
+                </Card>
+                <Card>
+                  <Stack padding={2} width={'100%'} gap={2}>
+                    <Stack gap={1}>
+                      <Typography variant={'h4'}>Event chat</Typography>
+                      <Typography>
+                        {`${gathering.attendees.length} other users are chatting right now`}
+                      </Typography>
+                    </Stack>
+                    <Box alignSelf={'flex-end'}>
+                      <Button label={'Join chat'} />
+                    </Box>
+                  </Stack>
                 </Card>
                 <Card>
                   <Stack padding={2} width={350} gap={2}>
                     <Box>
-                      <Typography variant={'h4'}>Event chat</Typography>
-                      <Typography>
-                        {`${gathering.attendees.length} chatting now`}
-                      </Typography>
+                      <Typography variant={'h4'}>Safety</Typography>
                     </Box>
-                    <Box alignSelf={'flex-end'}>
-                      <Button label={'Attend'} />
-                    </Box>
+                    <Flex gap={1}>
+                      <Button
+                        label={'Report'}
+                        color={'error'}
+                        variant={'outlined'}
+                      />
+                      <Button
+                        label={'Block'}
+                        color={'error'}
+                        variant={'outlined'}
+                      />
+                    </Flex>
                   </Stack>
                 </Card>
-                <Box alignSelf={'flex-end'}>
-                  <Button
-                    label={'Report'}
-                    color={'error'}
-                    variant={'outlined'}
-                  />
-                </Box>
               </Stack>
             </Flex>
           </Flex>
@@ -144,12 +184,9 @@ const EventDetail = () => {
         <StickyBottomContainer>
           <Flex justifyContent={'space-between'} width={'100%'}>
             <Flex alignItems={'flex-end'}>
-              <IconButton color={'inherit'}>
-                <LocationOnOutlined />
-              </IconButton>
               <Box>
-                <Typography>{gathering.startsAt.toISOString()}</Typography>
-                <Typography variant={'h5'}>{gathering.address}</Typography>
+                <Typography>{gathering.startsAt.toLocaleString()}</Typography>
+                <Typography variant={'h5'}>{gathering.title}</Typography>
               </Box>
             </Flex>
             <Flex gap={2}>

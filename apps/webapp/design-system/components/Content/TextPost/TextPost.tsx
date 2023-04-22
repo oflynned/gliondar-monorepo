@@ -1,18 +1,24 @@
 import { FunctionComponent, useState } from 'react';
 import { TextPost as Post } from '../../../../mock-data';
 import { Avatar, Card, Flex, Stack } from '../../../atoms';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography, useTheme } from '@mui/material';
 import { ArrowDownwardRounded, ArrowUpwardRounded } from '@mui/icons-material';
 
 type Props = {
   post: Post;
 };
 
+enum ScoreDirection {
+  UPVOTE,
+  DOWNVOTE,
+}
+
 export const TextPost: FunctionComponent<Props> = ({ post }) => {
   const [score, setScore] = useState(post.score);
+  const [scored, setScored] = useState<ScoreDirection | null>(null);
 
   return (
-    <Card>
+    <Card canHover>
       <Stack padding={2} gap={1}>
         <Flex gap={1}>
           <Avatar imageUrl={post.poster.avatarUrl} label={post.poster.name} />
@@ -29,12 +35,40 @@ export const TextPost: FunctionComponent<Props> = ({ post }) => {
       </Stack>
       <Flex alignItems={'center'}>
         <Stack alignItems={'center'}>
-          <IconButton onClick={() => setScore(post.score + 1)}>
-            <ArrowUpwardRounded />
+          <IconButton
+            onClick={() => {
+              if (scored === ScoreDirection.UPVOTE) {
+                setScored(null);
+                setScore(post.score);
+              } else {
+                setScored(ScoreDirection.UPVOTE);
+                setScore(post.score + 1);
+              }
+            }}
+          >
+            {scored === ScoreDirection.UPVOTE ? (
+              <ArrowUpwardRounded color={'primary'} />
+            ) : (
+              <ArrowUpwardRounded />
+            )}
           </IconButton>
           <Typography>{score}</Typography>
-          <IconButton onClick={() => setScore(post.score - 1)}>
-            <ArrowDownwardRounded />
+          <IconButton
+            onClick={() => {
+              if (scored === ScoreDirection.DOWNVOTE) {
+                setScored(null);
+                setScore(post.score);
+              } else {
+                setScored(ScoreDirection.DOWNVOTE);
+                setScore(post.score - 1);
+              }
+            }}
+          >
+            {scored === ScoreDirection.DOWNVOTE ? (
+              <ArrowDownwardRounded color={'primary'} />
+            ) : (
+              <ArrowDownwardRounded />
+            )}
           </IconButton>
         </Stack>
       </Flex>

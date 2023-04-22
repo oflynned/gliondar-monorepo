@@ -29,7 +29,7 @@ export const GatheringPost: FunctionComponent<Props> = ({ post }) => {
           borderRadius={theme.spacing(2)}
         >
           <Stack height={192} justifyContent={'end'} padding={2}>
-            <Typography color={'white'} variant={'h3'}>
+            <Typography color={'white'} variant={'h4'}>
               {post.gathering.title}
             </Typography>
             <Typography color={'white'}>

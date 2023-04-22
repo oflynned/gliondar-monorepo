@@ -30,7 +30,7 @@ const getEircode = (): string => {
   ].join('');
 };
 
-export const getMockGatherings = () =>
+const getMockGatherings = () =>
   new Array(100).fill(0).map(
     (_item, index): Gathering => ({
       id: `event-${index}`,

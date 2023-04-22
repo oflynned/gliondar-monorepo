@@ -43,7 +43,7 @@ export type GatheringPost = {
   gathering: Gathering;
 };
 
-export type Content = TextPost | GatheringPost;
+export type UserGeneratedContent = TextPost | GatheringPost;
 
 export type Interest = {
   id: string;

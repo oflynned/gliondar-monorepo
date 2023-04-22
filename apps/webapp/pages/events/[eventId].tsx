@@ -35,6 +35,7 @@ const DetailsSection = styled(Box)(({ theme }) => ({
 const EventDetail = () => {
   const router = useRouter();
   const { eventId } = router.query;
+
   const gathering: Gathering = mockGatherings.find(
     (gathering) => gathering.id === eventId
   );

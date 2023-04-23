@@ -63,6 +63,7 @@ export const EventCard: FunctionComponent<Props> = ({
               }}
               src={gathering.imageUrl}
               alt={'image'}
+              // placeholder={'blur'}
               fill
             />
           </RoundedImageContainer>

@@ -9,7 +9,7 @@ const StyledCard = styled(Box, {
   display: 'flex',
   borderRadius: theme.shape.borderRadius,
   background: theme.palette.common.white,
-  transition: '0.3s all ease-in-out',
+  transition: 'all 0.3s ease',
   '&:hover': canHover
     ? {
         cursor: 'pointer',

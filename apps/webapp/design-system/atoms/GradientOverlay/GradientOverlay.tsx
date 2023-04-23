@@ -34,7 +34,7 @@ export const GradientOverlay: FunctionComponent<PropsWithChildren<Props>> = ({
           objectFit: 'cover',
           objectPosition: 'center',
           overflow: 'hidden',
-          transition: '0.3s all ease-in-out',
+          transition: 'all 0.3s ease',
         }}
         src={imageUrl}
         alt={'image'}

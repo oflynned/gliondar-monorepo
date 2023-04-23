@@ -4,6 +4,7 @@ import {
   NavBarPage,
   SideBarLayout,
   Stack,
+  ChatMessageContainer,
 } from '../design-system';
 import { Box, Input, styled, Typography, useTheme } from '@mui/material';
 import { useState } from 'react';
@@ -11,7 +12,6 @@ import { getRandomPeople } from '../mock-data/mock-people';
 import { Person } from '../mock-data';
 import { faker } from '@faker-js/faker/locale/en_IE';
 import { mockChatMessages } from '../mock-data/mock-chat-message';
-import { ChatMessageContainer } from '../design-system/components/ChatMessageContainer';
 
 const ChatContainer = styled(Box)(({ theme }) => ({
   display: 'flex',

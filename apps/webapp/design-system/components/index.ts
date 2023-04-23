@@ -6,3 +6,5 @@ export * from './Comment';
 export * from './EventCard';
 export * from './Content';
 export * from './Map';
+export * from './ChatMessage';
+export * from './ChatMessageContainer';

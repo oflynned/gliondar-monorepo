@@ -42,3 +42,11 @@ export type Interest = {
   id: string;
   title: string;
 };
+
+export type Message = {
+  id: string;
+  message: string;
+  sentAt: Date;
+  sentBy: Person;
+  // sentTo: Person;
+};

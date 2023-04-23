@@ -11,7 +11,7 @@ type Props = BoxProps & {
 const Container = styled(Box)(({ theme }) => ({
   width: 'fit-content',
   alignSelf: 'center',
-  maxWidth: '50%',
+  maxWidth: 'min(768px, 50%)',
   height: 'fit-content',
   background: theme.palette.primary.light,
   padding: theme.spacing(2),

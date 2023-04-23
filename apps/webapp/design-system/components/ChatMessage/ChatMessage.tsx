@@ -16,7 +16,7 @@ const Container = styled(Box)(({ theme }) => ({
   background: theme.palette.primary.light,
   padding: theme.spacing(2),
   borderRadius: theme.shape.borderRadius,
-  transition: '0.3s all ease-in-out',
+  transition: 'all 0.3s ease',
   '&:hover': {
     background: theme.palette.primary.main,
     cursor: 'pointer',

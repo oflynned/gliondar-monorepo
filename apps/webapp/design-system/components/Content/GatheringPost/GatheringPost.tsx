@@ -31,6 +31,7 @@ export const GatheringPost: FunctionComponent<Props> = ({ post }) => {
           imageUrl={post.gathering.imageUrl}
           borderRadius={theme.spacing(2)}
           onClick={() => router.push(`/events/${post.id}`)}
+          hoverZoomEffect
         >
           <Stack height={192} justifyContent={'end'} padding={2}>
             <Typography color={'white'} variant={'h4'}>

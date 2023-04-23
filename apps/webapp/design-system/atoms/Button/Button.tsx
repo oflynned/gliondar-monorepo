@@ -16,7 +16,7 @@ type Props = ButtonProps & { label: string };
 
 export const Button: FunctionComponent<Props> = ({ label, ...props }) => (
   <StyledButton
-    variant={props.variant ?? 'contained'}
+    variant={props.variant ?? 'outlined'}
     disableElevation
     {...props}
   >

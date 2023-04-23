@@ -3,7 +3,7 @@ import { Box, BoxProps, IconButton, styled, Tooltip } from '@mui/material';
 import Image from 'next/image';
 
 // TODO use Image component here when you have a CDN endpoint
-const RoundedAvatar = styled('img')(({ theme }) => ({
+const RoundedAvatar = styled(Image)(({ theme }) => ({
   borderRadius: '50%',
   border: `1px solid ${theme.palette.divider}`,
 }));
@@ -26,6 +26,12 @@ export const Avatar: FunctionComponent<Props> = ({
   size = AvatarSize.MEDIUM,
 }) => {
   return (
-    <RoundedAvatar width={size} height={size} src={imageUrl} alt={label} />
+    <RoundedAvatar
+      width={size}
+      height={size}
+      src={imageUrl}
+      alt={label}
+      // placeholder={'blur'}
+    />
   );
 };

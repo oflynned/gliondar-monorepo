@@ -30,7 +30,7 @@ const StyledCardActionContainer = styled(Box)({
 
 const RoundedImageContainer = styled(Box)(({ theme }) => ({
   width: 192,
-  borderRadius: theme.spacing(1),
+  borderRadius: theme.shape.borderRadius,
   display: 'flex',
   position: 'relative',
   overflow: 'hidden',
@@ -63,6 +63,7 @@ export const EventCard: FunctionComponent<Props> = ({
               }}
               src={gathering.imageUrl}
               alt={'image'}
+              // placeholder={'blur'}
               fill
             />
           </RoundedImageContainer>

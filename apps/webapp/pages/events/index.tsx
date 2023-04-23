@@ -7,37 +7,15 @@ import {
   SideBarLayout,
   Stack,
   TitledLayout,
+  Map,
 } from '../../design-system';
-import { Box, Chip, styled, Typography } from '@mui/material';
+import { Box, Chip, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-import { useCallback, useState } from 'react';
 import { getRandomInterests } from '../../mock-data/mock-interests';
-import { curatedEventDiscovery } from '../../mock-data/curated-events';
 import { getRandomGatherings } from '../../mock-data/mock-gatherings';
-
-type Map = google.maps.Map;
-type CoordinateSet = { lat: number; lng: number };
-
-const defaultCoordinates: CoordinateSet = { lat: 53.343337, lng: -6.260073 };
 
 const Index = () => {
   const router = useRouter();
-
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-  });
-
-  const [map, setMap] = useState<Map | null>(null);
-
-  const onLoad = useCallback((map: Map) => {
-    setMap(map);
-  }, []);
-
-  const onUnmount = useCallback(() => {
-    setMap(null);
-  }, []);
 
   return (
     <SideBarLayout activePage={NavBarPage.EVENTS}>
@@ -45,17 +23,6 @@ const Index = () => {
         <Flex>
           <Flex flex={1} gap={4}>
             <Stack gap={2} maxWidth={330}>
-              <Card>
-                <Box
-                  height={256}
-                  width={384}
-                  display={'flex'}
-                  justifyContent={'center'}
-                  alignItems={'center'}
-                >
-                  <Typography variant={'h6'}>Calendar</Typography>
-                </Box>
-              </Card>
               <Card>
                 <Stack
                   justifyContent={'space-between'}
@@ -136,15 +103,7 @@ const Index = () => {
       </TitledLayout>
 
       <Flex height={'100vh'} flex={1} top={0} position={'sticky'}>
-        {isLoaded ? (
-          <GoogleMap
-            mapContainerStyle={{ width: '100%', height: '100%' }}
-            center={defaultCoordinates}
-            zoom={14}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-          />
-        ) : null}
+        <Map />
       </Flex>
     </SideBarLayout>
   );

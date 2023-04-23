@@ -2,10 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { Box, IconButton, styled, Typography } from '@mui/material';
 import { NavBarPage, NavItem } from './SideNavBar';
 import { StyledIcon } from './NavBarIcon';
+import { Button } from '../../atoms';
 
-const StyledNavItem = styled(Box)({
+const StyledNavItem = styled(Box)<{ open?: boolean }>({
   display: 'flex',
+  height: 32,
   alignItems: 'center',
+  transition: 'all 0.3s ease',
 });
 
 type Props = {
@@ -21,6 +24,21 @@ export const NavBarItem: FunctionComponent<Props> = ({
   activePage,
   onNavigate,
 }) => {
+  if (open) {
+    return (
+      <StyledNavItem onClick={() => onNavigate(item.id)}>
+        <Button
+          sx={{ width: '100%' }}
+          size={'large'}
+          color={activePage === item.id ? 'primary' : 'inherit'}
+          label={item.label}
+          startIcon={item.icon}
+          variant={'contained'}
+        />
+      </StyledNavItem>
+    );
+  }
+
   return (
     <StyledNavItem>
       <StyledIcon
@@ -29,7 +47,6 @@ export const NavBarItem: FunctionComponent<Props> = ({
       >
         {item.icon}
       </StyledIcon>
-      {open ? <Typography>{item.label}</Typography> : null}
     </StyledNavItem>
   );
 };

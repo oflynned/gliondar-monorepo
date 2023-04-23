@@ -46,6 +46,7 @@ export const GradientOverlay: FunctionComponent<PropsWithChildren<Props>> = ({
         }}
         src={imageUrl}
         alt={'image'}
+        unoptimized
         fill
       />
       <Gradient>{children}</Gradient>

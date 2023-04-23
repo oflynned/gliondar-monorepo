@@ -32,6 +32,7 @@ export const Avatar: FunctionComponent<Props> = ({
       src={imageUrl}
       alt={label}
       // placeholder={'blur'}
+      unoptimized
     />
   );
 };

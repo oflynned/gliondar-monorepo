@@ -53,6 +53,7 @@ const getMockGatherings = () =>
         'Ireland',
       ].join(', '),
       organiser: getRandomPerson(),
+      bookmarked: false,
     })
   );
 

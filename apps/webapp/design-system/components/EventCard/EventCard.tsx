@@ -70,7 +70,7 @@ export const EventCard: FunctionComponent<Props> = ({
           <GatheringDetailsContainer>
             <Box>
               <Typography variant={'h5'}>{gathering.title}</Typography>
-              <Typography>{gathering.startsAt.toISOString()}</Typography>
+              <Typography>{gathering.startsAt.toLocaleDateString()}</Typography>
             </Box>
             <Box>
               <Typography>{`${gathering.attendees.length} attending`}</Typography>

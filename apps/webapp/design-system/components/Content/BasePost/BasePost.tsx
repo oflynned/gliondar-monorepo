@@ -51,7 +51,7 @@ export const BasePost: FunctionComponent<PropsWithChildren<Props>> = ({
           </Stack>
         </Flex>
         {children}
-        <Flex gap={2} justifyContent={'space-between'}>
+        <Flex marginTop={1} gap={2} justifyContent={'space-between'}>
           <Flex alignItems={'center'}>
             <IconButton
               color={scored === ScoreDirection.DOWNVOTE ? 'primary' : 'inherit'}

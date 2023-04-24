@@ -16,6 +16,7 @@ import { Box, IconButton, styled, Typography, useTheme } from '@mui/material';
 import {
   AccessTimeOutlined,
   BookmarkAddOutlined,
+  EventRepeatOutlined,
   LocationOnOutlined,
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
@@ -118,6 +119,10 @@ const EventDetail = () => {
                   <Flex>
                     <Card>
                       <Stack gap={2}>
+                        <Flex gap={1}>
+                          <EventRepeatOutlined />
+                          <Typography>{'Weekly'}</Typography>
+                        </Flex>
                         <Flex gap={1}>
                           <AccessTimeOutlined />
                           <Typography>

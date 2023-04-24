@@ -21,7 +21,7 @@ const Index = () => {
     <>
       <TitledLayout pageTitle={'Events'} gap={4} flex={2}>
         <Flex>
-          <Flex flex={1} gap={4}>
+          <Flex flex={1} gap={3}>
             <Stack gap={2} maxWidth={330}>
               <Card>
                 <Stack

@@ -14,6 +14,7 @@ export type Gathering = {
   attendees: Person[];
   startsAt: Date;
   address: string;
+  bookmarked: boolean;
 };
 
 export type TextPost = {

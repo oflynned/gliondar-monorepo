@@ -41,8 +41,8 @@ export const GradientOverlay: FunctionComponent<PropsWithChildren<Props>> = ({
           objectFit: 'cover',
           objectPosition: 'center',
           overflow: 'hidden',
-          transition: 'all 0.3s ease',
-          transform: hoverZoomEffect ? `scale(${isHover ? 1.1 : 1})` : null,
+          transition: 'all 0.3s ease-in-out',
+          transform: hoverZoomEffect ? `scale(${isHover ? 1.05 : 1})` : null,
         }}
         src={imageUrl}
         alt={'image'}

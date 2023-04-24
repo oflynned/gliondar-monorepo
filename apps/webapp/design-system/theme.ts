@@ -78,7 +78,7 @@ export const lightTheme = createTheme({
     },
   },
   shape: {
-    borderRadius: 12,
+    borderRadius: 8,
   },
   spacing: 8,
   // TODO add default overrides for buttons

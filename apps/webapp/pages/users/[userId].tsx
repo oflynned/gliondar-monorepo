@@ -8,13 +8,11 @@ const Profile = () => {
   const user = mockPeople.find((user) => user.id === userId);
 
   return (
-    <SideBarLayout activePage={NavBarPage.PROFILE}>
-      <TitledLayout
-        pageTitle={user ? user.name : 'no user!'}
-        gap={4}
-        flex={2}
-      ></TitledLayout>
-    </SideBarLayout>
+    <TitledLayout
+      pageTitle={user ? user.name : 'no user!'}
+      gap={4}
+      flex={2}
+    ></TitledLayout>
   );
 };
 

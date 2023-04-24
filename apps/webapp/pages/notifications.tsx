@@ -1,5 +1,7 @@
+import { TitledLayout } from '../design-system';
+
 const Notifications = () => {
-  return <>Notifications</>;
+  return <TitledLayout pageTitle={'Notifications'}></TitledLayout>;
 };
 
 export default Notifications;

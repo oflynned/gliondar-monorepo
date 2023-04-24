@@ -8,11 +8,13 @@ import {
 } from '../design-system';
 import { getRandomPosts } from '../mock-data/mock-feed';
 import { useState } from 'react';
+import { useTheme } from '@mui/material';
 
 const content = getRandomPosts(10);
 
 const Feed = () => {
   const [posts] = useState(content);
+  const theme = useTheme();
 
   return (
     <>
@@ -32,7 +34,13 @@ const Feed = () => {
         </Stack>
       </TitledLayout>
 
-      <Flex height={'100vh'} flex={1} top={0} position={'sticky'}>
+      <Flex
+        height={'100vh'}
+        flex={1}
+        top={0}
+        position={'sticky'}
+        borderLeft={`1px solid ${theme.palette.divider}`}
+      >
         <Map />
       </Flex>
     </>

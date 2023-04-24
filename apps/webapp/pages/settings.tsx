@@ -1,7 +1,7 @@
-import { NavBarPage, SideBarLayout } from '../design-system';
+import { NavBarPage, SideBarLayout, TitledLayout } from '../design-system';
 
 const Settings = () => {
-  return <>Settings</>;
+  return <TitledLayout pageTitle={'Settings'}></TitledLayout>;
 };
 
 export default Settings;

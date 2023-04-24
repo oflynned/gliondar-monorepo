@@ -66,7 +66,7 @@ const bottomItems: NavItem[] = [
 ];
 
 type Props = {
-  activePage: NavBarPage;
+  activePage: NavBarPage | null;
   onNavigate: (newPage: NavBarPage) => void;
 };
 

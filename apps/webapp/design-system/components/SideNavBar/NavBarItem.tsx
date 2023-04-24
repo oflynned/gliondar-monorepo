@@ -14,7 +14,7 @@ const StyledNavItem = styled(Box)<{ open?: boolean }>({
 type Props = {
   open: boolean;
   item: NavItem;
-  activePage: NavBarPage;
+  activePage: NavBarPage | null;
   onNavigate: (page: NavBarPage) => void;
 };
 

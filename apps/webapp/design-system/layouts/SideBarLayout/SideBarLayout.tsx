@@ -11,7 +11,7 @@ const StyledContentContainer = styled(Flex)(({ theme }) => ({
 }));
 
 type Props = {
-  activePage: NavBarPage;
+  activePage: NavBarPage | null;
   onNavigate?: (page: NavBarPage) => void;
   visible?: boolean;
 };

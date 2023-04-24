@@ -24,6 +24,7 @@ export const curatedEvents: Record<string, Gathering> = {
       avatarUrl:
         'https://this-person-does-not-exist.com/img/avatar-genaa2fbc91b0b85e0d6d4596c63f9fa103.jpg',
     },
+    bookmarked: false,
   },
   '2': {
     id: '2',
@@ -46,6 +47,7 @@ export const curatedEvents: Record<string, Gathering> = {
       avatarUrl:
         'https://this-person-does-not-exist.com/img/avatar-gen2ed72f4297d31dad5694116faafa43bf.jpg',
     },
+    bookmarked: false,
   },
   '3': {
     id: '3',
@@ -66,6 +68,7 @@ export const curatedEvents: Record<string, Gathering> = {
       name: 'Gaelic Athletic Association',
       avatarUrl: '/gaa.jpeg',
     },
+    bookmarked: false,
   },
 };
 

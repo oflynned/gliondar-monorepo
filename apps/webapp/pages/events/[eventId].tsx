@@ -117,24 +117,22 @@ const EventDetail = () => {
               <Stack gap={2}>
                 <Card padding={2}>
                   <Flex>
-                    <Card>
-                      <Stack gap={2}>
-                        <Flex gap={1}>
-                          <EventRepeatOutlined />
-                          <Typography>{'Weekly'}</Typography>
-                        </Flex>
-                        <Flex gap={1}>
-                          <AccessTimeOutlined />
-                          <Typography>
-                            {gathering.startsAt.toLocaleString()}
-                          </Typography>
-                        </Flex>
-                        <Flex gap={1}>
-                          <LocationOnOutlined />
-                          <Typography>{gathering.address}</Typography>
-                        </Flex>
-                      </Stack>
-                    </Card>
+                    <Stack gap={2}>
+                      <Flex gap={1}>
+                        <EventRepeatOutlined />
+                        <Typography>{'Weekly'}</Typography>
+                      </Flex>
+                      <Flex gap={1}>
+                        <AccessTimeOutlined />
+                        <Typography>
+                          {gathering.startsAt.toLocaleString()}
+                        </Typography>
+                      </Flex>
+                      <Flex gap={1}>
+                        <LocationOnOutlined />
+                        <Typography>{gathering.address}</Typography>
+                      </Flex>
+                    </Stack>
                   </Flex>
                 </Card>
                 <Card height={256}>

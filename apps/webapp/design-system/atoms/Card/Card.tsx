@@ -8,6 +8,7 @@ const StyledCard = styled(Box, {
 })<{ canHover: boolean }>(({ theme, canHover }) => ({
   display: 'flex',
   borderRadius: theme.shape.borderRadius,
+  border: `1px solid ${theme.palette.divider}`,
   background: theme.palette.common.white,
   transition: 'all 0.3s ease',
   '&:hover': canHover

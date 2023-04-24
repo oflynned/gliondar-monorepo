@@ -2,14 +2,12 @@ import {
   Flex,
   GatheringPost,
   Map,
-  NavBarPage,
-  SideBarLayout,
   Stack,
   TextPost,
   TitledLayout,
 } from '../design-system';
 import { getRandomPosts } from '../mock-data/mock-feed';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 const content = getRandomPosts(10);
 
@@ -17,7 +15,7 @@ const Feed = () => {
   const [posts] = useState(content);
 
   return (
-    <SideBarLayout activePage={NavBarPage.FEED}>
+    <>
       <TitledLayout pageTitle={'Feed'} gap={4} flex={1}>
         <Stack gap={2} maxWidth={768}>
           {posts.map((post) => {
@@ -37,7 +35,7 @@ const Feed = () => {
       <Flex height={'100vh'} flex={1} top={0} position={'sticky'}>
         <Map />
       </Flex>
-    </SideBarLayout>
+    </>
   );
 };
 

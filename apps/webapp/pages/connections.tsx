@@ -50,7 +50,7 @@ const Connections = () => {
   );
 
   return (
-    <SideBarLayout activePage={NavBarPage.CONNECTIONS}>
+    <>
       <ChatContainer width={350}>
         <Typography
           variant={'h3'}
@@ -122,7 +122,7 @@ const Connections = () => {
           </Stack>
         ) : null}
       </Box>
-    </SideBarLayout>
+    </>
   );
 };
 

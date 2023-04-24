@@ -1,11 +1,5 @@
-import { NavBarPage, SideBarLayout } from '../design-system';
-
 const Notifications = () => {
-  return (
-    <SideBarLayout activePage={NavBarPage.NOTIFICATIONS}>
-      Notifications
-    </SideBarLayout>
-  );
+  return <>Notifications</>;
 };
 
 export default Notifications;

@@ -18,7 +18,7 @@ const Index = () => {
   const router = useRouter();
 
   return (
-    <SideBarLayout activePage={NavBarPage.EVENTS}>
+    <>
       <TitledLayout pageTitle={'Events'} gap={4} flex={2}>
         <Flex>
           <Flex flex={1} gap={4}>
@@ -105,7 +105,7 @@ const Index = () => {
       <Flex height={'100vh'} flex={1} top={0} position={'sticky'}>
         <Map />
       </Flex>
-    </SideBarLayout>
+    </>
   );
 };
 

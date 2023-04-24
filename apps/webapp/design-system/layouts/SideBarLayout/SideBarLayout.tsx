@@ -13,16 +13,18 @@ const StyledContentContainer = styled(Flex)(({ theme }) => ({
 type Props = {
   activePage: NavBarPage;
   onNavigate?: (page: NavBarPage) => void;
+  visible?: boolean;
 };
 
 export const SideBarLayout: FunctionComponent<PropsWithChildren<Props>> = ({
   children,
   activePage,
+  visible = true,
 }) => {
   const router = useRouter();
 
   return (
-    <Flex>
+    <Flex sx={{ visible: visible ? 'visible' : 'gone' }}>
       <SideNavBar
         activePage={activePage}
         onNavigate={(page) => navigate(router, page)}

@@ -1,7 +1,7 @@
 import { UserGeneratedContent, GatheringPost, TextPost } from '../types';
-import { getRandomPerson } from './mock-people';
+import { getRandomPerson } from './mock-users';
 import { faker } from '@faker-js/faker/locale/en';
-import { getRandomItem, getRandomItems } from './helper';
+import { getRandomItem, getRandomItems } from '../helper';
 import { getRandomGathering } from './mock-gatherings';
 
 const mockTextPosts = new Array(100).fill(0).map(

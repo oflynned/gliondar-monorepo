@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker/locale/en_IE';
-import { getRandomItem, getRandomItems } from './helper';
+import { getRandomItem, getRandomItems } from '../helper';
 import { Interest } from '../types';
 export const mockInterests = new Array(100).fill(0).map(
   (): Interest => ({

@@ -1,4 +1,4 @@
-import { getRandomItem } from './helper';
+import { getRandomItem } from '../helper';
 
 type LocalisedText = {
   ga: string;

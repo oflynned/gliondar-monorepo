@@ -1,5 +1,5 @@
 import { AttendanceStatus, Gathering } from '../types';
-import { curatedPeople } from './curated-people';
+import { curatedUsers } from './curated-users';
 
 export const curatedEvents: Gathering[] = [
   {
@@ -18,13 +18,13 @@ export const curatedEvents: Gathering[] = [
       {
         id: 'attendee-0',
         attendance: AttendanceStatus.ATTENDING,
-        user: curatedPeople[1],
+        user: curatedUsers[1],
       },
     ],
     createdAt: new Date(),
     startsAt: new Date(2023, 9, 17, 21),
     address: '9 College St, Dublin 2, D02 WN62, Ireland',
-    createdBy: curatedPeople[0],
+    createdBy: curatedUsers[0],
     bookmarked: false,
   },
   {
@@ -41,14 +41,14 @@ export const curatedEvents: Gathering[] = [
       {
         id: 'attendee-1',
         attendance: AttendanceStatus.ATTENDING,
-        user: curatedPeople[2],
+        user: curatedUsers[2],
       },
     ],
     createdAt: new Date(),
     startsAt: new Date(2023, 9, 10, 13),
     address:
       "St. Brendan's Terrace, Carhan Lower, Cahersiveen, Co. Kerry, V23 TP08, Ireland",
-    createdBy: curatedPeople[1],
+    createdBy: curatedUsers[1],
     bookmarked: false,
   },
   {
@@ -65,13 +65,13 @@ export const curatedEvents: Gathering[] = [
       {
         id: 'attendee-2',
         attendance: AttendanceStatus.ATTENDING,
-        user: curatedPeople[0],
+        user: curatedUsers[0],
       },
     ],
     createdAt: new Date(),
     startsAt: new Date(2023, 9, 13, 19),
     address: 'Croke Park, Jones Road, Dublin 3, D03 P6K7, Ireland',
-    createdBy: curatedPeople[2],
+    createdBy: curatedUsers[2],
     bookmarked: false,
   },
 ];

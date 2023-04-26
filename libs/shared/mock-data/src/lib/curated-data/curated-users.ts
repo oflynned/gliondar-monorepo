@@ -1,6 +1,6 @@
-import { Fluency, PreferredLanguage, User } from '../types';
+import { Fluency, PreferredLanguage, User } from '@gliondar/shared/types';
 
-export const curatedPeople: User[] = [
+export const curatedUsers: User[] = [
   {
     id: 'user-0',
     createdAt: new Date(),

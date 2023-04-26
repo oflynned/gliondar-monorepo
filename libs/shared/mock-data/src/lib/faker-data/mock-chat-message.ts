@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { getRandomPerson } from './mock-people';
-import { getRandomItem, getRandomItems } from './helper';
-import { ChatMessage, ContentLanguage } from '../types';
+import { getRandomPerson } from './mock-users';
+import { getRandomItem, getRandomItems } from '../helper';
+import { ChatMessage, ContentLanguage } from '@gliondar/shared/types';
 
 const getChatMessage = (): ChatMessage => ({
   id: faker.datatype.uuid(),

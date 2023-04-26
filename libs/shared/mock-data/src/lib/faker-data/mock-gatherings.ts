@@ -1,7 +1,7 @@
 import { AttendanceStatus, Gathering } from '../types';
-import { getRandomPeople, getRandomPerson } from './mock-people';
+import { getRandomPeople, getRandomPerson } from './mock-users';
 import { faker } from '@faker-js/faker/locale/en_IE';
-import { capitalise, getRandomItem, getRandomItems } from './helper';
+import { capitalise, getRandomItem, getRandomItems } from '../helper';
 
 const getLetter = (): string => {
   const letters = new Array(26)

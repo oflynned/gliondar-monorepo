@@ -1,6 +1,6 @@
 import { Box, BoxProps, styled, Tooltip, Typography } from '@mui/material';
 import { FunctionComponent } from 'react';
-import { Message } from '../../../mock-data';
+import { ChatMessage as Message } from '@gliondar/shared/types';
 import { Flex } from '../../atoms';
 
 type Props = BoxProps & {
@@ -30,11 +30,11 @@ export const ChatMessage: FunctionComponent<Props> = ({
   return (
     <Flex gap={1} justifyContent={sentByMe ? 'flex-end' : 'flex-start'}>
       <Tooltip
-        title={message.sentAt.toLocaleString()}
+        title={message.createdAt.toLocaleString()}
         placement={sentByMe ? 'left' : 'right'}
       >
         <Container>
-          <Typography>{message.message}</Typography>
+          <Typography>{message.text}</Typography>
         </Container>
       </Tooltip>
     </Flex>

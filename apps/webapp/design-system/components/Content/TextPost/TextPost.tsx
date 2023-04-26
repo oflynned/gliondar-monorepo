@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
-import { TextPost as TextPostContent } from '../../../../mock-data';
+import { TextPost as Post } from '@gliondar/shared/types';
 import { Box, Typography } from '@mui/material';
 import { BasePost } from '../BasePost';
 
 type Props = {
-  post: TextPostContent;
+  post: Post;
 };
 
 export const TextPost: FunctionComponent<Props> = ({ post }) => {

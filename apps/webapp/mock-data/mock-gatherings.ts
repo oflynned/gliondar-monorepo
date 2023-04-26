@@ -1,4 +1,4 @@
-import { Gathering } from './types';
+import { AttendanceStatus, Gathering } from '@gliondar/shared/types';
 import { getRandomPeople, getRandomPerson } from './mock-people';
 import { faker } from '@faker-js/faker/locale/en_IE';
 import { capitalise, getRandomItem, getRandomItems } from './helper';
@@ -42,8 +42,12 @@ const getMockGatherings = () =>
         faker.lorem.paragraph(),
       ],
       imageUrl: faker.image.imageUrl(undefined, undefined, undefined, true),
-      attendees: getRandomPeople(),
-      postedAt: new Date(),
+      attendees: getRandomPeople().map((person) => ({
+        id: person.id,
+        attendance: AttendanceStatus.ATTENDING,
+        user: person,
+      })),
+      createdAt: new Date(),
       startsAt: faker.date.future(),
       address: [
         faker.address.streetAddress(),
@@ -52,7 +56,7 @@ const getMockGatherings = () =>
         getEircode(),
         'Ireland',
       ].join(', '),
-      organiser: getRandomPerson(),
+      createdBy: getRandomPerson(),
       bookmarked: false,
     })
   );

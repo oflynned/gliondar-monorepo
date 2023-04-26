@@ -1,5 +1,0 @@
-extend type Query {
-    getFeed(page: Int): [Content!]
-}
-
-union Content = TextPost | GatheringPost

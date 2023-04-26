@@ -1,19 +1,19 @@
 import { faker } from '@faker-js/faker';
-import { Message } from './types';
 import { getRandomPerson } from './mock-people';
 import { getRandomItem, getRandomItems } from './helper';
+import { ChatMessage } from '@gliondar/shared/types';
 
-const getChatMessage = (): Message => ({
+const getChatMessage = (): ChatMessage => ({
   id: faker.datatype.uuid(),
-  message: faker.lorem.text(),
-  sentAt: new Date(),
+  createdAt: new Date(),
   sentBy: getRandomPerson(),
+  text: faker.lorem.text(),
 });
 
 export const mockChatMessages = new Array(100).fill(0).map((_value, index) => {
   const message = getChatMessage();
 
-  message.message = `${index} - ${message.message}`;
+  message.text = `${index} - ${message.text}`;
 
   return message;
 });

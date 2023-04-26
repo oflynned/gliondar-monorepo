@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Box, IconButton, styled, Typography } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import { NavBarPage, NavItem } from './SideNavBar';
 import { StyledIcon } from './NavBarIcon';
 import { Button } from '../../atoms';

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Message } from '../../../mock-data';
+import { ChatMessage as Message } from '@gliondar/shared/types';
 import { ChatMessage } from '../ChatMessage';
 import { Box } from '@mui/material';
 
@@ -22,6 +22,7 @@ export const ChatMessageContainer: FunctionComponent<Props> = ({
       {messages.map((message, index) => {
         return (
           <ChatMessage
+            key={message.id}
             sentByMe={index % 3 === 0}
             message={message}
             display={'flex'}

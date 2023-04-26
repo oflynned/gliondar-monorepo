@@ -2,7 +2,7 @@ import { FunctionComponent, PropsWithChildren, useState } from 'react';
 import { Avatar, Card, Flex, Stack } from '../../../atoms';
 import { IconButton, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { UserGeneratedContent } from '../../../../mock-data';
+import { UserGeneratedContent } from '@gliondar/shared/types';
 import {
   ArrowDownwardRounded,
   ArrowUpwardRounded,
@@ -40,11 +40,14 @@ export const BasePost: FunctionComponent<PropsWithChildren<Props>> = ({
       <Stack padding={2} gap={1} width={'100%'}>
         <Flex gap={1}>
           <IconButton onClick={() => router.push(`/users/${post.poster.id}`)}>
-            <Avatar imageUrl={post.poster.avatarUrl} label={post.poster.name} />
+            <Avatar
+              imageUrl={post.poster.avatar.url}
+              label={post.poster.profile.name}
+            />
           </IconButton>
           <Stack justifyContent={'center'}>
             <Flex gap={1} alignItems={'center'}>
-              <Typography variant={'h5'}>{post.poster.name}</Typography>
+              <Typography variant={'h5'}>{post.poster.profile.name}</Typography>
             </Flex>
             {/*<Typography>{post.postedAt.toLocaleDateString()}</Typography>*/}
             <Typography>{`${minsSincePosting} mins ago`}</Typography>

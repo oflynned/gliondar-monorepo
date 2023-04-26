@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
-import { Box, IconButton, styled, Typography } from '@mui/material';
-import { Avatar, AvatarSize, Flex, Stack } from '../../atoms';
+import { IconButton, Typography } from '@mui/material';
+import { Avatar, Flex, Stack } from '../../atoms';
 
 type Props = {
   title: string;
@@ -13,11 +13,11 @@ export const DescribedAvatar: FunctionComponent<Props> = ({
   imageUrl,
   title,
   subtitle,
-  onClick = () => {},
+  onClick,
 }) => {
   return (
     <Flex gap={1}>
-      <IconButton onClick={onClick}>
+      <IconButton onClick={() => onClick?.()}>
         <Avatar imageUrl={imageUrl} label={subtitle} />
       </IconButton>
       <Stack justifyContent={'center'}>

@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react';
 import { Flex, Card } from '../../atoms';
 import { Box, IconButton, styled, Typography } from '@mui/material';
 import { Bookmark, BookmarkAddOutlined } from '@mui/icons-material';
-import { Gathering } from '../../../mock-data';
+import { Gathering } from '@gliondar/shared/types';
 import Image from 'next/image';
 
 const StyledCardContainer = styled(Box)(({ theme }) => ({
@@ -44,8 +44,8 @@ type Props = {
 
 export const EventCard: FunctionComponent<Props> = ({
   gathering,
-  onClick = () => {},
-  onBookmark = () => {},
+  onClick,
+  onBookmark,
 }) => {
   const [bookmarked, setBookmarked] = useState(gathering.bookmarked);
 
@@ -53,7 +53,7 @@ export const EventCard: FunctionComponent<Props> = ({
     <Card canHover>
       <StyledCardContainer key={gathering.id}>
         <Flex>
-          <RoundedImageContainer onClick={() => onClick(gathering)}>
+          <RoundedImageContainer onClick={() => onClick?.(gathering)}>
             <Image
               style={{
                 borderRadius: 'inherit',
@@ -82,7 +82,7 @@ export const EventCard: FunctionComponent<Props> = ({
             color={bookmarked ? 'primary' : 'inherit'}
             onClick={() => {
               setBookmarked((prevState) => !prevState);
-              onBookmark(gathering);
+              onBookmark?.(gathering);
             }}
           >
             {bookmarked ? <Bookmark /> : <BookmarkAddOutlined />}

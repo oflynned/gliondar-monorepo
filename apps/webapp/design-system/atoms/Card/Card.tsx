@@ -27,12 +27,12 @@ type Props = BoxProps & {
 
 export const Card: FunctionComponent<PropsWithChildren<Props>> = ({
   children,
-  onClick = () => {},
+  onClick,
   canHover = false,
   ...props
 }) => {
   return (
-    <StyledCard canHover={canHover} onClick={onClick} {...props}>
+    <StyledCard canHover={canHover} onClick={() => onClick?.()} {...props}>
       {children}
     </StyledCard>
   );

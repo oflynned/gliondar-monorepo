@@ -7,12 +7,10 @@ import {
   Flex,
   Hero,
   Map,
-  NavBarPage,
-  SideBarLayout,
   Stack,
   StickyBottomContainer,
 } from '../../design-system';
-import { Box, IconButton, styled, Typography, useTheme } from '@mui/material';
+import { Box, IconButton, styled, Typography } from '@mui/material';
 import {
   AccessTimeOutlined,
   BookmarkAddOutlined,
@@ -21,7 +19,7 @@ import {
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import { mockGatherings } from '../../mock-data/mock-gatherings';
-import { Gathering } from '../../mock-data';
+import { Gathering } from '@gliondar/shared/types';
 
 const StyledOutlineContainer = styled(Flex)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
@@ -61,9 +59,9 @@ const EventDetail = () => {
         <StyledOutlineContainer>
           <DescribedAvatar
             title={'Hosted by'}
-            subtitle={gathering.organiser.name}
-            imageUrl={gathering.organiser.avatarUrl}
-            onClick={() => router.push(`/users/${gathering.organiser.id}`)}
+            subtitle={gathering.createdBy.profile.name}
+            imageUrl={gathering.createdBy.avatar.url}
+            onClick={() => router.push(`/users/${gathering.createdBy.id}`)}
           />
           {/*<Stack alignItems={'end'}>*/}
           {/*  <Typography variant={'h6'}>*/}
@@ -89,8 +87,8 @@ const EventDetail = () => {
                 <Flex gap={2} padding={2} flexWrap={'wrap'}>
                   {gathering.attendees.map((attendee) => (
                     <Avatar
-                      imageUrl={attendee.avatarUrl}
-                      label={attendee.name}
+                      imageUrl={attendee.user.avatar.url}
+                      label={attendee.user.profile.name}
                       key={attendee.id}
                     />
                   ))}
@@ -106,7 +104,7 @@ const EventDetail = () => {
                     <Comment
                       key={person.id}
                       poster={person}
-                      postedAt={gathering.postedAt}
+                      postedAt={gathering.createdAt}
                       comment={'Responded with attending'}
                     />
                   ))}

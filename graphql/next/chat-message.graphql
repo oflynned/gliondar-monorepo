@@ -1,7 +1,0 @@
-type ChatMessage {
-    id: ID!
-    createdAt: DateTime!
-    sentBy: UserResult
-    sentTo: UserResult
-    language: ContentLanguage
-}

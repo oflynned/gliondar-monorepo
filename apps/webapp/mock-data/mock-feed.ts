@@ -1,8 +1,12 @@
-import { UserGeneratedContent, GatheringPost, TextPost } from './types';
+import {
+  UserGeneratedContent,
+  GatheringPost,
+  TextPost,
+} from '@gliondar/shared/types';
 import { getRandomPerson } from './mock-people';
 import { faker } from '@faker-js/faker/locale/en';
 import { getRandomItem, getRandomItems } from './helper';
-import { getRandomGathering, mockGatherings } from './mock-gatherings';
+import { getRandomGathering } from './mock-gatherings';
 
 const mockTextPosts = new Array(100).fill(0).map(
   (_item, index): TextPost => ({
@@ -11,7 +15,7 @@ const mockTextPosts = new Array(100).fill(0).map(
     text: faker.lorem.paragraph(),
     score: faker.datatype.number({ min: -20, max: 200 }),
     poster: getRandomPerson(),
-    postedAt: new Date(),
+    createdAt: new Date(),
     comments: [],
   })
 );
@@ -23,7 +27,7 @@ const mockGatheringPosts = new Array(100).fill(0).map(
     gathering: getRandomGathering(),
     score: faker.datatype.number({ min: -20, max: 200 }),
     poster: getRandomPerson(),
-    postedAt: new Date(),
+    createdAt: new Date(),
     comments: [],
   })
 );

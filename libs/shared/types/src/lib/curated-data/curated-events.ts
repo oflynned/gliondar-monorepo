@@ -1,4 +1,4 @@
-import { AttendanceStatus, Gathering } from './types';
+import { AttendanceStatus, Gathering } from '../types';
 import { curatedPeople } from './curated-people';
 
 export const curatedEvents: Gathering[] = [

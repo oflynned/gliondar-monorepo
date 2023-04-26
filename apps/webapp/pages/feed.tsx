@@ -6,7 +6,7 @@ import {
   TextPost,
   TitledLayout,
 } from '../design-system';
-import { getRandomPosts } from '../mock-data/mock-feed';
+import { getRandomPosts } from '@gliondar/shared/types';
 import { useState } from 'react';
 import { useTheme } from '@mui/material';
 

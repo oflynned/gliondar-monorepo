@@ -1,6 +1,6 @@
 import { TitledLayout } from '../../design-system';
 import { useRouter } from 'next/router';
-import { mockPeople } from '../../mock-data/mock-people';
+import { mockPeople } from '@gliondar/shared/types';
 
 const Profile = () => {
   const router = useRouter();

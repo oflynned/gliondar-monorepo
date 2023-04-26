@@ -9,8 +9,10 @@ import {
 } from '../../design-system';
 import { Box, Chip, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { getRandomInterests } from '../../mock-data/mock-interests';
-import { getRandomGatherings } from '../../mock-data/mock-gatherings';
+import {
+  getRandomInterests,
+  getRandomGatherings,
+} from '@gliondar/shared/types';
 
 const Index = () => {
   const router = useRouter();

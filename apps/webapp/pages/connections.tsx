@@ -1,10 +1,9 @@
 import { Avatar, Flex, Stack, ChatMessageContainer } from '../design-system';
 import { Box, Input, styled, Typography, useTheme } from '@mui/material';
 import { useState } from 'react';
-import { getRandomPeople } from '../mock-data/mock-people';
+import { getRandomPeople, mockChatMessages } from '@gliondar/shared/types';
 import { User } from '@gliondar/shared/types';
 import { faker } from '@faker-js/faker/locale/en_IE';
-import { mockChatMessages } from '../mock-data/mock-chat-message';
 
 const ChatContainer = styled(Box)(({ theme }) => ({
   display: 'flex',

@@ -1,4 +1,4 @@
-import { Fluency, PreferredLanguage, User } from './types';
+import { Fluency, PreferredLanguage, User } from '../types';
 
 export const curatedPeople: User[] = [
   {

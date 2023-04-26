@@ -18,7 +18,7 @@ import {
   LocationOnOutlined,
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import { mockGatherings } from '../../mock-data/mock-gatherings';
+import { mockGatherings } from '@gliondar/shared/types';
 import { Gathering } from '@gliondar/shared/types';
 
 const StyledOutlineContainer = styled(Flex)(({ theme }) => ({

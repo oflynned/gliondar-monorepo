@@ -1,4 +1,4 @@
-import { Interest } from './types';
+import { Interest } from '../types';
 
 const interests = [
   'Internet',

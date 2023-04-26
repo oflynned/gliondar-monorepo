@@ -12,7 +12,9 @@ const Profile = () => {
   }
 
   return (
-    <TitledLayout pageTitle={user.profile.name} gap={4} flex={2}></TitledLayout>
+    <TitledLayout pageTitle={user.profile.name} gap={4} flex={2}>
+      Hello world!
+    </TitledLayout>
   );
 };
 

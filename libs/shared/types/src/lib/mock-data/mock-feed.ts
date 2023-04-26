@@ -1,8 +1,4 @@
-import {
-  UserGeneratedContent,
-  GatheringPost,
-  TextPost,
-} from '@gliondar/shared/types';
+import { UserGeneratedContent, GatheringPost, TextPost } from '../types';
 import { getRandomPerson } from './mock-people';
 import { faker } from '@faker-js/faker/locale/en';
 import { getRandomItem, getRandomItems } from './helper';

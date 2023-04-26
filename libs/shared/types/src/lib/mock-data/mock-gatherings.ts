@@ -1,4 +1,4 @@
-import { AttendanceStatus, Gathering } from '@gliondar/shared/types';
+import { AttendanceStatus, Gathering } from '../types';
 import { getRandomPeople, getRandomPerson } from './mock-people';
 import { faker } from '@faker-js/faker/locale/en_IE';
 import { capitalise, getRandomItem, getRandomItems } from './helper';

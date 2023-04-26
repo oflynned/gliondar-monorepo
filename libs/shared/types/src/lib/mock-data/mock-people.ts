@@ -1,4 +1,4 @@
-import { Fluency, PreferredLanguage, User } from '@gliondar/shared/types';
+import { Fluency, PreferredLanguage, User } from '../types';
 import { faker } from '@faker-js/faker/locale/en';
 import { getRandomItem, getRandomItems } from './helper';
 

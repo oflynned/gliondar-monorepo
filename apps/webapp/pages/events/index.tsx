@@ -6,13 +6,13 @@ import {
   Stack,
   TitledLayout,
   Map,
-} from '../../design-system';
-import { Box, Chip, Typography } from '@mui/material';
+} from '@gliondar/fe/design-system';
+import { Box, Chip, Typography } from '@gliondar/fe/mui';
 import { useRouter } from 'next/router';
 import {
   getRandomInterests,
   getRandomGatherings,
-} from '@gliondar/shared/types';
+} from '@gliondar/shared/mock-data';
 
 const Index = () => {
   const router = useRouter();

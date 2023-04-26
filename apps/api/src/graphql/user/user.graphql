@@ -9,29 +9,6 @@ extend type Mutation {
     deleteUser: User
 }
 
-# TODO swap this out later when we want more useful states
-#union UserResult = User | InvalidUser | UserNotFound | DeletedUser | BlockedUser
-#
-#type BlockedUser {
-#    id: ID!
-#    blockedAt: DateTime!
-#    blockedBy: UserResult
-#    user: UserResult
-#}
-#
-#type UserNotFound {
-#    message: String!
-#}
-#
-#type InvalidUser {
-#    message: String!
-#}
-#
-#type DeletedUser {
-#    id: ID!
-#    deletedAt: DateTime!
-#}
-
 type User {
     id: ID!
     createdAt: DateTime!

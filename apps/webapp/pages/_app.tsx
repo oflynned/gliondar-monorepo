@@ -2,8 +2,12 @@ import '@fontsource/lato';
 import '@fontsource/montserrat';
 
 import { AppProps } from 'next/app';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { lightTheme, NavBarPage, SideBarLayout } from '../design-system';
+import { CssBaseline, ThemeProvider } from '@gliondar/fe/mui';
+import {
+  lightTheme,
+  NavBarPage,
+  SideBarLayout,
+} from '@gliondar/fe/design-system';
 import { useRouter } from 'next/router';
 
 const getActivePageFromUrl = (url: string): NavBarPage | null => {

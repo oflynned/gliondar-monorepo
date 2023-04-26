@@ -5,10 +5,10 @@ import {
   Stack,
   TextPost,
   TitledLayout,
-} from '../design-system';
-import { getRandomPosts } from '@gliondar/shared/types';
+} from '@gliondar/fe/design-system';
+import { getRandomPosts } from '@gliondar/shared/mock-data';
 import { useState } from 'react';
-import { useTheme } from '@mui/material';
+import { useTheme } from '@gliondar/fe/mui';
 
 const content = getRandomPosts(10);
 

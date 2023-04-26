@@ -9,8 +9,8 @@ import {
   Map,
   Stack,
   StickyBottomContainer,
-} from '../../design-system';
-import { Box, IconButton, styled, Typography } from '@mui/material';
+} from '@gliondar/fe/design-system';
+import { Box, IconButton, styled, Typography } from '@gliondar/fe/mui';
 import {
   AccessTimeOutlined,
   BookmarkAddOutlined,
@@ -18,7 +18,7 @@ import {
   LocationOnOutlined,
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import { mockGatherings } from '@gliondar/shared/types';
+import { mockGatherings } from '@gliondar/shared/mock-data';
 import { Gathering } from '@gliondar/shared/types';
 
 const StyledOutlineContainer = styled(Flex)(({ theme }) => ({

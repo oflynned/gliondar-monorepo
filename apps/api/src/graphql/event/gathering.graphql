@@ -8,21 +8,6 @@ extend type Mutation {
     deleteGathering(id: ID!): Gathering
 }
 
-#union GatheringResult = Gathering | GatheringNotFound | InvalidGathering | DeletedGathering
-
-#type GatheringNotFound {
-#    message: String!
-#}
-#
-#type InvalidGathering {
-#    message: String!
-#}
-#
-#type DeletedGathering {
-#    id: ID!
-#    deletedAt: DateTime!
-#}
-
 type Gathering {
     id: ID!
     createdAt: DateTime!

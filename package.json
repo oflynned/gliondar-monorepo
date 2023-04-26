@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint ./{apps,libs}/**/*.{ts,tsx}",
-    "lint:fix": "eslint ./apps/**/*.{ts,tsx} --fix"
+    "lint:fix": "eslint ./apps/**/*.{ts,tsx} --fix",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@apollo/server": "4.7.0",
@@ -50,6 +51,8 @@
     "@nrwl/react": "15.9.2",
     "@nrwl/webpack": "15.9.2",
     "@nrwl/workspace": "15.9.2",
+    "@swc/core": "1.2.173",
+    "@swc/jest": "0.2.20",
     "@testing-library/react": "14.0.0",
     "@types/jest": "29.5.1",
     "@types/node": "18.16.0",

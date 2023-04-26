@@ -100,10 +100,10 @@ const EventDetail = () => {
               >{`Comments (${gathering.attendees.length})`}</Typography>
               <Card>
                 <Stack gap={2} padding={2}>
-                  {gathering.attendees.splice(0, 10).map((person) => (
+                  {gathering.attendees.splice(0, 10).map((attendee) => (
                     <Comment
-                      key={person.id}
-                      poster={person}
+                      key={attendee.id}
+                      poster={attendee.user}
                       postedAt={gathering.createdAt}
                       comment={'Responded with attending'}
                     />

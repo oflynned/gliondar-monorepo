@@ -1,12 +1,13 @@
 import { faker } from '@faker-js/faker';
 import { getRandomPerson } from './mock-people';
 import { getRandomItem, getRandomItems } from './helper';
-import { ChatMessage } from '@gliondar/shared/types';
+import { ChatMessage, ContentLanguage } from '@gliondar/shared/types';
 
 const getChatMessage = (): ChatMessage => ({
   id: faker.datatype.uuid(),
   createdAt: new Date(),
   sentBy: getRandomPerson(),
+  language: ContentLanguage.UNKNOWN,
   text: faker.lorem.text(),
 });
 

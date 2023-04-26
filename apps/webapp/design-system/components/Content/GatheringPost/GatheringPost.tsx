@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { GatheringPost as Post } from '../../../../mock-data';
+import { GatheringPost as Post } from '@gliondar/shared/types';
 import { GradientOverlay, Stack } from '../../../atoms';
 import { Typography, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';

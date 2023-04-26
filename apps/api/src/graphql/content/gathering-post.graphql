@@ -1,0 +1,10 @@
+type GatheringPost {
+    id: ID!
+    createdAt: DateTime!
+    lastUpdatedAt: DateTime
+    poster: User
+    gathering: Gathering
+    score: Int!
+    comments: [Comment]
+    location: Address
+}

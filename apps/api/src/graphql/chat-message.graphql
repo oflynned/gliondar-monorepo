@@ -1,0 +1,8 @@
+type ChatMessage {
+    id: ID!
+    createdAt: DateTime!
+    text: String!
+    sentBy: User
+    sentTo: User
+    language: ContentLanguage!
+}

@@ -1,0 +1,5 @@
+extend type Query {
+    getFeed(page: Int): [UserGeneratedContent!]
+}
+
+union UserGeneratedContent = TextPost | GatheringPost

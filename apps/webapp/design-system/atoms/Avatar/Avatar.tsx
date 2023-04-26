@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Box, BoxProps, IconButton, styled, Tooltip } from '@mui/material';
+import { styled } from '@mui/material';
 import Image from 'next/image';
 
-// TODO use Image component here when you have a CDN endpoint
 const RoundedAvatar = styled(Image)(({ theme }) => ({
   borderRadius: '50%',
   border: `1px solid ${theme.palette.divider}`,

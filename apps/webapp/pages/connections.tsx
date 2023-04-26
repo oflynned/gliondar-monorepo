@@ -1,17 +1,9 @@
-import {
-  Avatar,
-  Flex,
-  NavBarPage,
-  SideBarLayout,
-  Stack,
-  ChatMessageContainer,
-} from '../design-system';
+import { Avatar, Flex, Stack, ChatMessageContainer } from '../design-system';
 import { Box, Input, styled, Typography, useTheme } from '@mui/material';
 import { useState } from 'react';
-import { getRandomPeople } from '../mock-data/mock-people';
-import { Person } from '../mock-data';
+import { getRandomPeople, mockChatMessages } from '@gliondar/shared/types';
+import { User } from '@gliondar/shared/types';
 import { faker } from '@faker-js/faker/locale/en_IE';
-import { mockChatMessages } from '../mock-data/mock-chat-message';
 
 const ChatContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -45,7 +37,7 @@ const Connections = () => {
   const theme = useTheme();
   const [messages] = useState(mockChatMessages);
   const [connections] = useState(getRandomPeople(25));
-  const [selectedConnection, setSelectedConnection] = useState<Person | null>(
+  const [selectedConnection, setSelectedConnection] = useState<User | null>(
     null
   );
 
@@ -65,12 +57,18 @@ const Connections = () => {
         {/*</Box>*/}
         {connections.map((connection) => (
           <ConnectionContainer
+            key={connection.id}
             onClick={() => setSelectedConnection(connection)}
           >
-            <Avatar imageUrl={connection.avatarUrl} label={connection.name} />
+            <Avatar
+              imageUrl={connection.avatar.url}
+              label={connection.profile.name}
+            />
 
             <Stack justifyContent={'center'} width={'100%'}>
-              <Typography fontWeight={700}>{connection.name}</Typography>
+              <Typography fontWeight={700}>
+                {connection.profile.name}
+              </Typography>
               <Flex justifyContent={'space-between'}>
                 <Typography
                   overflow={'hidden'}
@@ -91,12 +89,12 @@ const Connections = () => {
             <SelectedConnectionContainer>
               <Flex gap={1}>
                 <Avatar
-                  imageUrl={selectedConnection.avatarUrl}
-                  label={selectedConnection.name}
+                  imageUrl={selectedConnection.avatar.url}
+                  label={selectedConnection.profile.name}
                 />
                 <Stack justifyContent={'center'}>
                   <Typography fontWeight={700}>
-                    {selectedConnection.name}
+                    {selectedConnection.profile.name}
                   </Typography>
                   <Typography>{faker.address.city()}</Typography>
                 </Stack>

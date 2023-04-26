@@ -15,7 +15,7 @@ export const Map: FunctionComponent<PropsWithChildren> = ({ children }) => {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
   });
 
-  const [map, setMap] = useState<Map | null>(null);
+  const [, setMap] = useState<Map | null>(null);
 
   const onLoad = useCallback((map: Map) => {
     map.setOptions({

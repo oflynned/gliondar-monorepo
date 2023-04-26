@@ -1,0 +1,8 @@
+type Comment {
+    id: ID!
+    createdAt: DateTime!
+    lastUpdatedAt: DateTime
+    postedBy: User
+    text: String!
+    parent: UserGeneratedContent
+}

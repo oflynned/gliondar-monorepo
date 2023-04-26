@@ -1,8 +1,0 @@
-type Comment {
-    id: ID!
-    createdAt: DateTime!
-    lastUpdatedAt: DateTime
-    poster: UserResult
-    text: String!
-    parent: Content
-}

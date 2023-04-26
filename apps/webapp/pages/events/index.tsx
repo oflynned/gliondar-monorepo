@@ -3,16 +3,16 @@ import {
   Card,
   EventCard,
   Flex,
-  NavBarPage,
-  SideBarLayout,
   Stack,
   TitledLayout,
   Map,
 } from '../../design-system';
 import { Box, Chip, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { getRandomInterests } from '../../mock-data/mock-interests';
-import { getRandomGatherings } from '../../mock-data/mock-gatherings';
+import {
+  getRandomInterests,
+  getRandomGatherings,
+} from '@gliondar/shared/types';
 
 const Index = () => {
   const router = useRouter();
@@ -47,6 +47,7 @@ const Index = () => {
                   <Flex marginTop={2} gap={1} flexWrap={'wrap'}>
                     {getRandomInterests(25).map((interest) => (
                       <Chip
+                        key={interest.id}
                         clickable
                         label={<Typography>{interest.title}</Typography>}
                       />
@@ -67,6 +68,7 @@ const Index = () => {
                   <Typography variant={'h4'}>Today</Typography>
                   {getRandomGatherings(3).map((gathering) => (
                     <EventCard
+                      key={gathering.id}
                       gathering={gathering}
                       onClick={(gathering) =>
                         router.push(`/events/${gathering.id}`)
@@ -78,6 +80,7 @@ const Index = () => {
                   <Typography variant={'h4'}>Tomorrow</Typography>
                   {getRandomGatherings(3).map((gathering) => (
                     <EventCard
+                      key={gathering.id}
                       gathering={gathering}
                       onClick={(gathering) =>
                         router.push(`/events/${gathering.id}`)
@@ -89,6 +92,7 @@ const Index = () => {
                   <Typography variant={'h4'}>Later</Typography>
                   {getRandomGatherings(7).map((gathering) => (
                     <EventCard
+                      key={gathering.id}
                       gathering={gathering}
                       onClick={(gathering) =>
                         router.push(`/events/${gathering.id}`)

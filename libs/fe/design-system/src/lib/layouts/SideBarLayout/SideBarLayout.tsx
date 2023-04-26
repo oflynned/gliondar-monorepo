@@ -1,8 +1,6 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { NavBarPage, SideNavBar } from '../../components';
 import { styled } from '@gliondar/fe/mui';
-import { navigate } from '../../../router/router';
-import { useRouter } from 'next/router';
 import { Flex } from '../../atoms';
 
 const StyledContentContainer = styled(Flex)(({ theme }) => ({
@@ -19,15 +17,14 @@ type Props = {
 export const SideBarLayout: FunctionComponent<PropsWithChildren<Props>> = ({
   children,
   activePage,
+  onNavigate,
   visible = true,
 }) => {
-  const router = useRouter();
-
   return (
     <Flex sx={{ visible: visible ? 'visible' : 'gone' }}>
       <SideNavBar
         activePage={activePage}
-        onNavigate={(page) => navigate(router, page)}
+        onNavigate={(page) => onNavigate?.(page)}
       />
       <StyledContentContainer>{children}</StyledContentContainer>
     </Flex>

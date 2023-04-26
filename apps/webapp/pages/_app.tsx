@@ -8,7 +8,7 @@ import {
   NavBarPage,
   SideBarLayout,
 } from '@gliondar/fe/design-system';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 
 const getActivePageFromUrl = (url: string): NavBarPage | null => {
   switch (url) {
@@ -30,6 +30,30 @@ const getActivePageFromUrl = (url: string): NavBarPage | null => {
   }
 };
 
+const navigate = (router: NextRouter, page: NavBarPage): void => {
+  switch (page) {
+    default:
+    case NavBarPage.FEED:
+      router.push('/feed');
+      break;
+    case NavBarPage.CONNECTIONS:
+      router.push('/connections');
+      break;
+    case NavBarPage.EVENTS:
+      router.push('/events');
+      break;
+    case NavBarPage.NOTIFICATIONS:
+      router.push('/notifications');
+      break;
+    case NavBarPage.SETTINGS:
+      router.push('/settings');
+      break;
+    case NavBarPage.PROFILE:
+      router.push('/profile');
+      break;
+  }
+};
+
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const activePage = getActivePageFromUrl(router.pathname);
@@ -37,7 +61,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={lightTheme}>
       <CssBaseline />
-      <SideBarLayout activePage={activePage}>
+      <SideBarLayout
+        activePage={activePage}
+        onNavigate={(page) => navigate(router, page)}
+      >
         <Component {...pageProps} />
       </SideBarLayout>
     </ThemeProvider>

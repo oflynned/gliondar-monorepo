@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import {
   getRandomInterests,
   getRandomGatherings,
-} from '@gliondar/shared/mock-data';
+} from '@gliondar/be/mock-data';
 
 const Index = () => {
   const router = useRouter();

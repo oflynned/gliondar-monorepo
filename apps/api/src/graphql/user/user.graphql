@@ -1,45 +1,30 @@
 extend type Query {
-    getUser: User
-    getUserById(id: ID!): User
-    getLocalUsers: [User!]
+  getUser: User
+  getUserById(id: ID!): User
+  getLocalUsers: [User!]
 }
 
 extend type Mutation {
-    createUser(email: String!, password: String!): User
-    deleteUser: User
+  createUser(email: String!, password: String!): User
+  deleteUser: User
 }
 
 type User {
-    id: ID!
-    createdAt: DateTime!
-    lastOnlineAt: DateTime!
-    lastUpdatedAt: DateTime
-    email: String!
-    timezone: Timezone
-    posts: [UserGeneratedContent!]
-    interests: [Interest]
-    attendance: [Attendee]
-    profile: Profile!
-    location: UserLocation
-    avatar: Avatar
+  id: ID!
+  createdAt: DateTime!
+  lastOnlineAt: DateTime!
+  lastUpdatedAt: DateTime
+  email: String!
+  timezone: Timezone
+  posts: [UserGeneratedContent!]
+  interests: [Interest]
+  attendance: [Attendee]
+  profile: Profile!
+  location: UserLocation
+  avatar: Image
 }
 
 type UserLocation {
-    # TODO determine the inclusion of city name, ga vs en localisation etc
-    coordinates: CoordinateSet
-}
-
-type Profile {
-    id: ID!
-    name: String!
-    fluency: Fluency!
-    preferredLanguage: PreferredLanguage!
-    user: User
-}
-
-enum Fluency {
-    NATIVE,
-    ADVANCED,
-    INTERMEDIATE,
-    BEGINNER
+  # TODO determine the inclusion of city name, ga vs en localisation etc
+  coordinates: CoordinateSet
 }

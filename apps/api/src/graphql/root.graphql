@@ -1,0 +1,20 @@
+type Query {
+    getTime: DateTime!
+}
+
+type Mutation {
+    setTime: DateTime!
+}
+
+scalar DateTime
+
+enum PreferredLanguage {
+    ENGLISH
+    IRISH
+}
+
+enum ContentLanguage {
+    IRISH
+    ENGLISH
+    UNKNOWN
+}

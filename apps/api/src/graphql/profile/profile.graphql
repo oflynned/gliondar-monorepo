@@ -1,0 +1,14 @@
+type Profile {
+  id: ID!
+  name: String!
+  fluency: Fluency!
+  preferredLanguage: PreferredLanguage!
+  user: User
+}
+
+enum Fluency {
+  NATIVE,
+  ADVANCED,
+  INTERMEDIATE,
+  BEGINNER
+}

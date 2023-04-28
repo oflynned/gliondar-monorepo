@@ -11,8 +11,9 @@ type Map = google.maps.Map;
 export const Map: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    // TODO move this to some config service
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    // TODO move this to some config service or config hook
+    //      eg useConfig() which returns some result type helper
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
   });
 
   const [, setMap] = useState<Map | null>(null);

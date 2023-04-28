@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { styled } from '@gliondar/fe/mui';
 import Image from 'next/image';
+import { Typography } from '@mui/material';
 
 const RoundedAvatar = styled(Image)(({ theme }) => ({
   borderRadius: '50%',
@@ -14,8 +15,8 @@ export enum AvatarSize {
 }
 
 type Props = {
-  imageUrl: string;
   label: string;
+  imageUrl?: string;
   size?: AvatarSize;
 };
 
@@ -24,14 +25,19 @@ export const Avatar: FunctionComponent<Props> = ({
   label,
   size = AvatarSize.MEDIUM,
 }) => {
-  return (
-    <RoundedAvatar
-      width={size}
-      height={size}
-      src={imageUrl}
-      alt={label}
-      // placeholder={'blur'}
-      unoptimized
-    />
-  );
+  if (imageUrl) {
+    return (
+      <RoundedAvatar
+        width={size}
+        height={size}
+        src={imageUrl}
+        alt={label}
+        // placeholder={'blur'}
+        unoptimized
+      />
+    );
+  }
+
+  // TODO wrap this with a colour and make into a rounded circle
+  return <Typography>{label}</Typography>;
 };

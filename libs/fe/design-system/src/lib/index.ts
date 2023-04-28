@@ -1,3 +1,4 @@
+export * from './formatters';
 export * from './components';
 export * from './atoms';
 export * from './layouts';

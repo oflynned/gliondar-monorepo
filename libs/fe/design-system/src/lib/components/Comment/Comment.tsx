@@ -17,7 +17,9 @@ export const Comment: FunctionComponent<Props> = ({
 }) => {
   return (
     <Container>
-      <Avatar imageUrl={poster.avatar.url} label={poster.profile.name} />
+      {poster.avatar ? (
+        <Avatar imageUrl={poster.avatar.url} label={poster.profile.name} />
+      ) : null}
       <Stack>
         <Typography variant={'h5'}>{poster.profile.name}</Typography>
         <Typography>{postedAt.toISOString()}</Typography>

@@ -53,7 +53,7 @@ const EventDetail = () => {
       <Stack width={'100%'}>
         <Hero
           title={gathering.title}
-          imageUrl={gathering.imageUrl}
+          imageUrl={gathering.image.url}
           onBackPress={() => router.back()}
         />
         <StyledOutlineContainer>

@@ -11,6 +11,7 @@ import {
   ShareOutlined,
 } from '@mui/icons-material';
 import { faker } from '@faker-js/faker';
+import { formatTimeElapsed } from '@gliondar/fe/design-system';
 
 enum ScoreDirection {
   UPVOTE,
@@ -28,29 +29,34 @@ export const BasePost: FunctionComponent<PropsWithChildren<Props>> = ({
   const router = useRouter();
   const [score, setScore] = useState(post.score);
   const [scored, setScored] = useState<ScoreDirection | null>(null);
-  const [minsSincePosting] = useState(
-    faker.datatype.number({
-      min: 1,
-      max: 30,
-    })
-  );
+
+  if (!post.postedBy) {
+    return null;
+  }
 
   return (
     <Card canHover>
       <Stack padding={2} gap={1} width={'100%'}>
         <Flex gap={1}>
-          <IconButton onClick={() => router.push(`/users/${post.poster.id}`)}>
+          {/* TODO why is id nullish? */}
+          <IconButton
+            onClick={() => router.push(`/users/${post.postedBy?.id}`)}
+          >
             <Avatar
-              imageUrl={post.poster.avatar.url}
-              label={post.poster.profile.name}
+              imageUrl={post.postedBy?.avatar?.url}
+              label={post.postedBy.profile.name}
             />
           </IconButton>
           <Stack justifyContent={'center'}>
             <Flex gap={1} alignItems={'center'}>
-              <Typography variant={'h5'}>{post.poster.profile.name}</Typography>
+              <Typography variant={'h5'}>
+                {post.postedBy.profile.name}
+              </Typography>
             </Flex>
             {/*<Typography>{post.postedAt.toLocaleDateString()}</Typography>*/}
-            <Typography>{`${minsSincePosting} mins ago`}</Typography>
+            <Typography>
+              {formatTimeElapsed(new Date(post.createdAt))}
+            </Typography>
           </Stack>
         </Flex>
         {children}

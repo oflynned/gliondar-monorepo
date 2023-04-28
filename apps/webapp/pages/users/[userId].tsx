@@ -1,11 +1,11 @@
-import { TitledLayout } from '../../design-system';
+import { TitledLayout } from '@gliondar/fe/design-system';
 import { useRouter } from 'next/router';
-import { mockUsers } from '@gliondar/shared/types';
+import { curatedUsers } from '@gliondar/be/mock-data';
 
 const Profile = () => {
   const router = useRouter();
   const { userId } = router.query;
-  const user = mockUsers.find((user) => user.id === userId);
+  const user = curatedUsers.find((user) => user.id === userId);
 
   if (!user) {
     return null;

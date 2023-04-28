@@ -9,6 +9,15 @@ import {
   SideBarLayout,
 } from '@gliondar/fe/design-system';
 import { NextRouter, useRouter } from 'next/router';
+import { useState } from 'react';
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+} from '@apollo/client';
+import * as process from 'process';
 
 const getActivePageFromUrl = (url: string): NavBarPage | null => {
   switch (url) {
@@ -55,18 +64,34 @@ const navigate = (router: NextRouter, page: NavBarPage): void => {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [graphqlClient] = useState(
+    () =>
+      new ApolloClient({
+        uri: process.env.NEXT_PUBLIC_API_ENDPOINT,
+        cache: new InMemoryCache(),
+        defaultOptions: {
+          query: {
+            fetchPolicy: 'no-cache',
+          },
+        },
+      })
+  );
+
+  const [theme] = useState(() => lightTheme);
   const router = useRouter();
   const activePage = getActivePageFromUrl(router.pathname);
 
   return (
-    <ThemeProvider theme={lightTheme}>
-      <CssBaseline />
-      <SideBarLayout
-        activePage={activePage}
-        onNavigate={(page) => navigate(router, page)}
-      >
-        <Component {...pageProps} />
-      </SideBarLayout>
-    </ThemeProvider>
+    <ApolloProvider client={graphqlClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SideBarLayout
+          activePage={activePage}
+          onNavigate={(page) => navigate(router, page)}
+        >
+          <Component {...pageProps} />
+        </SideBarLayout>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }

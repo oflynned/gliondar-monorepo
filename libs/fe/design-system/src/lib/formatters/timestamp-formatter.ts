@@ -1,7 +1,13 @@
 import { DateTime } from 'luxon';
 
 // TODO should account for locale here
-export const formatTimestampToDateTime = (timestamp: Date): string => {
+export const formatTimestampToDateTime = (
+  timestamp?: Date | null
+): string | null => {
+  if (!timestamp) {
+    return null;
+  }
+
   // Wednesday, 10 May 2023
   return DateTime.fromJSDate(timestamp).toLocaleString({
     ...DateTime.DATE_FULL,
@@ -15,8 +21,6 @@ export const formatTimestampToDate = (timestamp: Date): string => {
 };
 
 export const formatTimeElapsed = (timestamp: Date): string => {
-  console.log({ timestamp });
-
   const referenceTime = DateTime.fromJSDate(timestamp);
   const now = DateTime.now();
 

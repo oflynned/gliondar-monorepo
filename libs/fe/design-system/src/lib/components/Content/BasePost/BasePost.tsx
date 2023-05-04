@@ -54,9 +54,7 @@ export const BasePost: FunctionComponent<PropsWithChildren<Props>> = ({
               </Typography>
             </Flex>
             {/*<Typography>{post.postedAt.toLocaleDateString()}</Typography>*/}
-            <Typography>
-              {formatTimeElapsed(new Date(post.createdAt))}
-            </Typography>
+            <Typography>{formatTimeElapsed(post.createdAt)}</Typography>
           </Stack>
         </Flex>
         {children}

@@ -30,7 +30,7 @@ export const GatheringPost: FunctionComponent<Props> = ({ post }) => {
             {post.gathering?.title}
           </Typography>
           <Typography color={theme.palette.common.white}>
-            {startsAt ? formatTimestampToDateTime(new Date(startsAt)) : null}
+            {formatTimestampToDateTime(startsAt)}
           </Typography>
         </Stack>
       </GradientOverlay>

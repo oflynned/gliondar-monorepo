@@ -31,5 +31,9 @@ export const popUpGaeltacht = new Gathering(
     faker.datatype.uuid(),
     'https://geneticliteracyproject.org/wp-content/uploads/2020/02/people-are-drinking-alcohol-at-a-party-but-it-could-lead-to-liver-cancer.jpg'
   ),
-  Recurrence.MONTHLY
+  Recurrence.MONTHLY,
+  {
+    latitude: 53.345691,
+    longitude: -6.257454,
+  }
 );

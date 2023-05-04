@@ -29,5 +29,9 @@ export const conversationCircle = new Gathering(
     faker.datatype.uuid(),
     'https://assets-eu-01.kc-usercontent.com/aa24ba70-9a12-01ae-259b-7ef588a0b2ef/c71f5c1d-a9f8-4d7f-ae02-2a30a8cc9438/carrickfinn-beach-gweedore-bay-donegal.jpg?h=1080&q=66&fm=jpg'
   ),
-  Recurrence.WEEKLY
+  Recurrence.WEEKLY,
+  {
+    latitude: 51.949404,
+    longitude: -10.224393,
+  }
 );

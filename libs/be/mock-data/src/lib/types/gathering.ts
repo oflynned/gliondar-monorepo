@@ -16,6 +16,7 @@ export class Gathering {
     readonly attendees: Attendee[],
     readonly bookmarked: boolean,
     readonly headerImage: Image,
-    readonly recurrence: Recurrence
+    readonly recurrence: Recurrence,
+    readonly coordinates?: { latitude: number; longitude: number }
   ) {}
 }

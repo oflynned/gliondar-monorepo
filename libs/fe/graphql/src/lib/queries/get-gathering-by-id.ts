@@ -17,6 +17,10 @@ export const GET_GATHERING_BY_ID = gql`
       startsAt
       recurrence
       address
+      coordinates {
+        latitude
+        longitude
+      }
       attendees {
         id
         attendance

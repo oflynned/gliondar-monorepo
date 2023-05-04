@@ -8,7 +8,16 @@ import {
 
 type Map = google.maps.Map;
 
-export const Map: FunctionComponent<PropsWithChildren> = ({ children }) => {
+type Props = {
+  latitude?: number;
+  longitude?: number;
+};
+
+export const Map: FunctionComponent<PropsWithChildren<Props>> = ({
+  latitude,
+  longitude,
+  children,
+}) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     // TODO move this to some config service or config hook
@@ -47,7 +56,7 @@ export const Map: FunctionComponent<PropsWithChildren> = ({ children }) => {
         height: '100%',
         borderRadius: 'inherit',
       }}
-      center={{ lat: 53.343337, lng: -6.260073 }}
+      center={{ lat: latitude ?? 53.343337, lng: longitude ?? -6.260073 }}
       zoom={14}
       onLoad={onLoad}
       onUnmount={onUnmount}

@@ -82,7 +82,10 @@ const EventDetail = () => {
                     alignItems={'center'}
                     width={'100%'}
                   >
-                    <Map />
+                    <Map
+                      latitude={gathering.coordinates.latitude}
+                      longitude={gathering.coordinates.longitude}
+                    />
                   </Flex>
                 </Card>
                 <GatheringSafety />

@@ -29,5 +29,9 @@ export const sportsMatch = new Gathering(
     faker.datatype.uuid(),
     'https://e0.365dm.com/22/06/768x432/skysports-clare-wexford-gaa_5808571.jpg?20220618163731'
   ),
-  Recurrence.NONE
+  Recurrence.NONE,
+  {
+    latitude: 53.361387,
+    longitude: -6.252967,
+  }
 );

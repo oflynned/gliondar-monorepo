@@ -9,15 +9,9 @@ import {
   SideBarLayout,
 } from '@gliondar/fe/design-system';
 import { NextRouter, useRouter } from 'next/router';
-import { useState } from 'react';
-import {
-  ApolloClient,
-  ApolloLink,
-  ApolloProvider,
-  HttpLink,
-  InMemoryCache,
-} from '@apollo/client';
-import * as process from 'process';
+import { useEffect, useState } from 'react';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { link } from '../graphql';
 
 const getActivePageFromUrl = (url: string): NavBarPage | null => {
   switch (url) {
@@ -67,7 +61,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [graphqlClient] = useState(
     () =>
       new ApolloClient({
-        uri: process.env.NEXT_PUBLIC_API_ENDPOINT,
+        link,
         cache: new InMemoryCache(),
         defaultOptions: {
           query: {

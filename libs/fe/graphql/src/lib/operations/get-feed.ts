@@ -1,30 +1,14 @@
 import { gql } from '@apollo/client';
+import {
+  GATHERING_FRAGMENT,
+  IMAGE_FRAGMENT,
+  USER_FRAGMENT,
+} from '../fragments';
 
 export const GET_FEED = gql`
-  fragment ImageFragment on Image {
-    id
-    url
-  }
-
-  fragment GatheringFragment on Gathering {
-    id
-    title
-    startsAt
-    image {
-      ...ImageFragment
-    }
-  }
-
-  fragment PosterFragment on User {
-    id
-    profile {
-      id
-      name
-    }
-    avatar {
-      ...ImageFragment
-    }
-  }
+  ${GATHERING_FRAGMENT}
+  ${IMAGE_FRAGMENT}
+  ${USER_FRAGMENT}
 
   query getFeed($page: Int!) {
     getFeed(page: $page) {
@@ -36,7 +20,7 @@ export const GET_FEED = gql`
           ...GatheringFragment
         }
         postedBy {
-          ...PosterFragment
+          ...UserFragment
         }
       }
       ... on TextPost {
@@ -45,7 +29,7 @@ export const GET_FEED = gql`
         score
         text
         postedBy {
-          ...PosterFragment
+          ...UserFragment
         }
       }
     }

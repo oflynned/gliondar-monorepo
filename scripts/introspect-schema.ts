@@ -7,6 +7,7 @@ import { writeFile } from 'fs/promises';
   const endpoint = new URL('http://localhost:3000/graphql');
   const response = await fetch(endpoint, {
     method: 'POST',
+    timeout: 30_000,
     headers: {
       'content-type': 'application/json',
     },

@@ -8,6 +8,22 @@ export const formatTimestampToDateTime = (
     return null;
   }
 
+  const time = DateTime.fromJSDate(timestamp).toLocaleString({
+    ...DateTime.TIME_SIMPLE,
+  });
+  const date = formatTimestampToDateWithDay(timestamp);
+
+  // 8:00pn on Mon, 15 May 2023
+  return `${time} on ${date}`;
+};
+
+export const formatTimestampToDateWithDay = (
+  timestamp?: Date | null
+): string | null => {
+  if (!timestamp) {
+    return null;
+  }
+
   // Wednesday, 10 May 2023
   return DateTime.fromJSDate(timestamp).toLocaleString({
     ...DateTime.DATE_FULL,
@@ -15,12 +31,22 @@ export const formatTimestampToDateTime = (
   });
 };
 
-export const formatTimestampToDate = (timestamp: Date): string => {
+export const formatTimestampToDate = (
+  timestamp?: Date | null
+): string | null => {
+  if (!timestamp) {
+    return null;
+  }
+
   // 19 April 2023
   return DateTime.fromJSDate(timestamp).toLocaleString(DateTime.DATE_FULL);
 };
 
-export const formatTimeElapsed = (timestamp: Date): string => {
+export const formatTimeElapsed = (timestamp?: Date | null): string | null => {
+  if (!timestamp) {
+    return null;
+  }
+
   const referenceTime = DateTime.fromJSDate(timestamp);
   const now = DateTime.now();
 

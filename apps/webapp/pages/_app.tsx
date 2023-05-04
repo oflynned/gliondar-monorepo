@@ -58,25 +58,22 @@ const navigate = (router: NextRouter, page: NavBarPage): void => {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [graphqlClient] = useState(
-    () =>
-      new ApolloClient({
-        link,
-        cache: new InMemoryCache(),
-        defaultOptions: {
-          query: {
-            fetchPolicy: 'no-cache',
-          },
-        },
-      })
-  );
+  const client = new ApolloClient({
+    link,
+    cache: new InMemoryCache(),
+    defaultOptions: {
+      query: {
+        fetchPolicy: 'no-cache',
+      },
+    },
+  });
 
   const [theme] = useState(() => lightTheme);
   const router = useRouter();
   const activePage = getActivePageFromUrl(router.pathname);
 
   return (
-    <ApolloProvider client={graphqlClient}>
+    <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <SideBarLayout

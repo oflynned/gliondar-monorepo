@@ -1,9 +1,56 @@
-import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Gathering, Image, User } from '@gliondar/shared/types';
 import { curatedGatherings } from '@gliondar/be/mock-data';
 
 @Resolver('Gathering')
 export class GatheringResolver {
+  @Query('getGatheringById')
+  async getGatheringById(@Args('id') id: string): Promise<Gathering | null> {
+    const gathering = curatedGatherings.find(
+      (gathering) => gathering.id === id
+    );
+
+    if (!gathering) {
+      return null;
+    }
+
+    return {
+      __typename: 'Gathering',
+      id: gathering.id,
+      title: gathering.title,
+      description: gathering.description,
+      createdAt: gathering.createdAt,
+      startsAt: gathering.startsAt,
+      recurrence: gathering.recurrence,
+      address: gathering.address,
+      bookmarked: gathering.bookmarked,
+      image: {
+        __typename: 'Image',
+        id: gathering.headerImage.id,
+        url: gathering.headerImage.url,
+      },
+    };
+  }
+
+  @Query('getGatherings')
+  async getGatherings(): Promise<Gathering[]> {
+    return curatedGatherings.map(
+      (gathering): Gathering => ({
+        __typename: 'Gathering',
+        id: gathering.id,
+        title: gathering.title,
+        description: gathering.description,
+        createdAt: gathering.createdAt,
+        address: gathering.address,
+        bookmarked: gathering.bookmarked,
+        image: {
+          id: gathering.headerImage.id,
+          url: gathering.headerImage.url,
+        },
+      })
+    );
+  }
+
   @ResolveField('createdBy')
   async createdBy(@Parent() parent: Gathering): Promise<User> {
     const gathering = curatedGatherings.find(

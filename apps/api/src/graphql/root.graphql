@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
     getTime: DateTime!
 }
@@ -5,8 +7,6 @@ type Query {
 type Mutation {
     setTime: DateTime!
 }
-
-scalar DateTime
 
 enum PreferredLanguage {
     ENGLISH

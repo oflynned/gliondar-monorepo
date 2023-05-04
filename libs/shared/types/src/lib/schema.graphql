@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
   getTime: DateTime!
   getFeed(page: Int): [UserGeneratedContent!]
@@ -15,8 +17,6 @@ type Mutation {
   createUser(email: String!, password: String!): User
   deleteUser: User
 }
-
-scalar DateTime
 
 enum PreferredLanguage {
   ENGLISH
@@ -77,6 +77,16 @@ type Gathering {
   createdBy: User
   attendees: [Attendee!]
   image: Image
+  recurrence: Recurrence
+  comments: [Comment!]
+}
+
+enum Recurrence {
+  NONE
+  DAILY
+  WEEKLY
+  FORTNIGHTLY
+  MONTHLY
 }
 
 union Address = IrishAddress | AmbiguousAddress

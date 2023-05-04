@@ -5,7 +5,8 @@
   "scripts": {
     "lint": "eslint ./{apps,libs}/**/*.{ts,tsx}",
     "lint:fix": "eslint ./apps/**/*.{ts,tsx} --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "types:preflight": "ts-node ./scripts/generate-types.ts && ts-node ./scripts/merge-schemas.ts && ts-node ./scripts/introspect-schema.ts "
   },
   "dependencies": {
     "@apollo/client": "3.7.14",

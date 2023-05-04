@@ -5,9 +5,9 @@ import {
   Comment,
   DescribedAvatar,
   Flex,
+  formatTimestampToDateTime,
   Hero,
   Map,
-  Stack,
   StickyBottomContainer,
 } from '@gliondar/fe/design-system';
 import { Box, IconButton, styled, Typography } from '@gliondar/fe/mui';
@@ -18,8 +18,10 @@ import {
   LocationOnOutlined,
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import { mockGatherings } from '@gliondar/be/mock-data';
-import { Gathering } from '@gliondar/shared/types';
+import { Stack } from '@mui/material';
+import { useQuery } from '@apollo/client';
+import { GET_GATHERING_BY_ID } from '../../../../libs/fe/graphql/src/lib/operations/get-gathering-by-id';
+import { Gathering, Recurrence } from '@gliondar/shared/types';
 
 const StyledOutlineContainer = styled(Flex)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
@@ -29,20 +31,44 @@ const StyledOutlineContainer = styled(Flex)(({ theme }) => ({
   alignItems: 'center',
 }));
 
-const DetailsSection = styled(Box)(({ theme }) => ({
+const DetailsSection = styled(Flex)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
+  flex: 1,
   padding: theme.spacing(3),
   gap: theme.spacing(3),
 }));
 
+const getRecurrence = (recurrence?: Recurrence): string => {
+  switch (recurrence) {
+    default:
+    case Recurrence.NONE:
+      return 'Does not repeat';
+    case Recurrence.DAILY:
+      return 'Takes place daily';
+    case Recurrence.WEEKLY:
+      return 'Takes place weekly';
+    case Recurrence.FORTNIGHTLY:
+      return 'Takes place fortnightly';
+    case Recurrence.MONTHLY:
+      return 'Takes place monthly';
+  }
+};
+
 const EventDetail = () => {
   const router = useRouter();
   const { eventId } = router.query;
+  const { data, loading, error } = useQuery<{
+    getGatheringById?: Gathering | null;
+  }>(GET_GATHERING_BY_ID, {
+    variables: { id: eventId },
+  });
 
-  const gathering: Gathering = mockGatherings.find(
-    (gathering) => gathering.id === eventId
-  );
+  if (loading) {
+    return <Typography>Loading...</Typography>;
+  }
+
+  const gathering = data.getGatheringById;
 
   if (!gathering) {
     return null;
@@ -50,7 +76,7 @@ const EventDetail = () => {
 
   return (
     <>
-      <Stack width={'100%'}>
+      <Stack width={'100%'} display={'flex'}>
         <Hero
           title={gathering.title}
           imageUrl={gathering.image.url}
@@ -63,12 +89,6 @@ const EventDetail = () => {
             imageUrl={gathering.createdBy.avatar.url}
             onClick={() => router.push(`/users/${gathering.createdBy.id}`)}
           />
-          {/*<Stack alignItems={'end'}>*/}
-          {/*  <Typography variant={'h6'}>*/}
-          {/*    {100 - gathering.attendees.length} places remaining*/}
-          {/*  </Typography>*/}
-          {/*  <Typography variant={'h5'}>Free entry</Typography>*/}
-          {/*</Stack>*/}
         </StyledOutlineContainer>
 
         <DetailsSection>
@@ -85,45 +105,53 @@ const EventDetail = () => {
               <Typography variant={'h4'}>Attendees</Typography>
               <Card>
                 <Flex gap={2} padding={2} flexWrap={'wrap'}>
-                  {gathering.attendees.map((attendee) => (
-                    <Avatar
-                      imageUrl={attendee.user.avatar.url}
-                      label={attendee.user.profile.name}
-                      key={attendee.id}
-                    />
-                  ))}
+                  {gathering.attendees ? (
+                    gathering.attendees.map((attendee) => (
+                      <Avatar
+                        imageUrl={attendee.user.avatar.url}
+                        label={attendee.user.profile.name}
+                        key={attendee.id}
+                      />
+                    ))
+                  ) : (
+                    <Typography>Be the first to attend this event</Typography>
+                  )}
                 </Flex>
               </Card>
 
-              <Typography
-                variant={'h4'}
-              >{`Comments (${gathering.attendees.length})`}</Typography>
+              <Typography variant={'h4'}>{'Comments'}</Typography>
               <Card>
                 <Stack gap={2} padding={2}>
-                  {gathering.attendees.splice(0, 10).map((attendee) => (
-                    <Comment
-                      key={attendee.id}
-                      poster={attendee.user}
-                      postedAt={gathering.createdAt}
-                      comment={'Responded with attending'}
-                    />
-                  ))}
+                  {gathering.comments ? (
+                    gathering.comments.map((comment) => (
+                      <Comment
+                        key={comment.id}
+                        poster={comment.postedBy}
+                        postedAt={comment.createdAt}
+                        comment={comment.text}
+                      />
+                    ))
+                  ) : (
+                    <Typography>Be the first to comment</Typography>
+                  )}
                 </Stack>
               </Card>
             </Stack>
-            <Flex justifyContent={'end'} maxWidth={512}>
+            <Flex justifyContent={'end'} maxWidth={384}>
               <Stack gap={2}>
                 <Card padding={2}>
                   <Flex>
                     <Stack gap={2}>
                       <Flex gap={1}>
                         <EventRepeatOutlined />
-                        <Typography>{'Weekly'}</Typography>
+                        <Typography>
+                          {getRecurrence(gathering.recurrence)}
+                        </Typography>
                       </Flex>
                       <Flex gap={1}>
                         <AccessTimeOutlined />
                         <Typography>
-                          {gathering.startsAt.toLocaleString()}
+                          {formatTimestampToDateTime(gathering.startsAt)}
                         </Typography>
                       </Flex>
                       <Flex gap={1}>
@@ -144,19 +172,6 @@ const EventDetail = () => {
                   >
                     <Map />
                   </Flex>
-                </Card>
-                <Card>
-                  <Stack padding={2} width={'100%'} gap={2}>
-                    <Stack gap={1}>
-                      <Typography variant={'h4'}>Event chat</Typography>
-                      <Typography>
-                        {`${gathering.attendees.length} other users are chatting right now`}
-                      </Typography>
-                    </Stack>
-                    <Box alignSelf={'flex-end'}>
-                      <Button label={'Join chat'} />
-                    </Box>
-                  </Stack>
                 </Card>
                 <Card>
                   <Stack padding={2} width={350} gap={2}>
@@ -186,7 +201,9 @@ const EventDetail = () => {
           <Flex justifyContent={'space-between'} width={'100%'}>
             <Flex alignItems={'flex-end'}>
               <Box>
-                <Typography>{gathering.startsAt.toLocaleString()}</Typography>
+                <Typography>
+                  {formatTimestampToDateTime(gathering.startsAt)}
+                </Typography>
                 <Typography variant={'h5'}>{gathering.title}</Typography>
               </Box>
             </Flex>

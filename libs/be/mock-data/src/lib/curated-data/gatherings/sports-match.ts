@@ -1,7 +1,7 @@
 import { Gathering, Image } from '../../types';
 import { getRandomItem } from '../../helper';
 import { curatedUsers } from '../../curated-data';
-import { AttendanceStatus } from '@gliondar/shared/types';
+import { AttendanceStatus, Recurrence } from '@gliondar/shared/types';
 import { faker } from '@faker-js/faker';
 
 export const sportsMatch = new Gathering(
@@ -28,5 +28,6 @@ export const sportsMatch = new Gathering(
   new Image(
     faker.datatype.uuid(),
     'https://e0.365dm.com/22/06/768x432/skysports-clare-wexford-gaa_5808571.jpg?20220618163731'
-  )
+  ),
+  Recurrence.NONE
 );

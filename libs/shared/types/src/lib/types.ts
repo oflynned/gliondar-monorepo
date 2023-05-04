@@ -14,6 +14,14 @@ export enum AttendanceStatus {
     NO_LONGER_ATTENDING = "NO_LONGER_ATTENDING"
 }
 
+export enum Recurrence {
+    NONE = "NONE",
+    DAILY = "DAILY",
+    WEEKLY = "WEEKLY",
+    FORTNIGHTLY = "FORTNIGHTLY",
+    MONTHLY = "MONTHLY"
+}
+
 export enum Fluency {
     NATIVE = "NATIVE",
     ADVANCED = "ADVANCED",
@@ -132,6 +140,8 @@ export interface Gathering {
     createdBy?: Nullable<User>;
     attendees?: Nullable<Attendee[]>;
     image?: Nullable<Image>;
+    recurrence?: Nullable<Recurrence>;
+    comments?: Nullable<Comment[]>;
 }
 
 export interface IrishAddress {

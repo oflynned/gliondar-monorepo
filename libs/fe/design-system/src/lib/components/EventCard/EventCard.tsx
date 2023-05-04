@@ -54,18 +54,18 @@ export const EventCard: FunctionComponent<Props> = ({
       <StyledCardContainer key={gathering.id}>
         <Flex>
           <RoundedImageContainer onClick={() => onClick?.(gathering)}>
-            <Image
-              style={{
-                borderRadius: 'inherit',
-                objectFit: 'cover',
-                objectPosition: 'center',
-              }}
-              src={gathering.imageUrl}
-              alt={'image'}
-              unoptimized
-              // placeholder={'blur'}
-              fill
-            />
+            {/*<Image*/}
+            {/*  style={{*/}
+            {/*    borderRadius: 'inherit',*/}
+            {/*    objectFit: 'cover',*/}
+            {/*    objectPosition: 'center',*/}
+            {/*  }}*/}
+            {/*  src={gathering.image?.url}*/}
+            {/*  alt={'image'}*/}
+            {/*  unoptimized*/}
+            {/*  // placeholder={'blur'}*/}
+            {/*  fill*/}
+            {/*/>*/}
           </RoundedImageContainer>
           <GatheringDetailsContainer>
             <Box>
@@ -73,7 +73,9 @@ export const EventCard: FunctionComponent<Props> = ({
               <Typography>{gathering.startsAt.toLocaleDateString()}</Typography>
             </Box>
             <Box>
-              <Typography>{`${gathering.attendees.length} attending`}</Typography>
+              <Typography>{`${
+                gathering.attendees?.length ?? 0
+              } attending`}</Typography>
             </Box>
           </GatheringDetailsContainer>
         </Flex>

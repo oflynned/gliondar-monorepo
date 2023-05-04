@@ -1,6 +1,6 @@
 import { Gathering, Image } from '../../types';
 import { getRandomItem } from '../../helper';
-import { AttendanceStatus } from '@gliondar/shared/types';
+import { AttendanceStatus, Recurrence } from '@gliondar/shared/types';
 import { curatedUsers } from '../curated-users';
 import { faker } from '@faker-js/faker';
 
@@ -30,5 +30,6 @@ export const popUpGaeltacht = new Gathering(
   new Image(
     faker.datatype.uuid(),
     'https://geneticliteracyproject.org/wp-content/uploads/2020/02/people-are-drinking-alcohol-at-a-party-but-it-could-lead-to-liver-cancer.jpg'
-  )
+  ),
+  Recurrence.MONTHLY
 );

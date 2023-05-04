@@ -1,0 +1,192 @@
+type Query {
+  getTime: DateTime!
+  getFeed(page: Int): [UserGeneratedContent!]
+  getGatherings(page: Int): [Gathering!]
+  getGatheringById(id: ID!): Gathering
+  getUser: User
+  getUserById(id: ID!): User
+  getLocalUsers: [User!]
+}
+
+type Mutation {
+  setTime: DateTime!
+  createGathering(title: String!, description: String!): Gathering
+  deleteGathering(id: ID!): Gathering
+  createUser(email: String!, password: String!): User
+  deleteUser: User
+}
+
+scalar DateTime
+
+enum PreferredLanguage {
+  ENGLISH
+  IRISH
+}
+
+enum ContentLanguage {
+  IRISH
+  ENGLISH
+  UNKNOWN
+}
+
+type AttendeeConnection {
+  count: Int!
+  edges: [AttendeeEdge!]!
+}
+
+type AttendeeEdge {
+  cursor: String!
+  node: Attendee!
+}
+
+type Attendee {
+  id: ID!
+  attendance: AttendanceStatus!
+  user: User
+  gathering: Gathering
+}
+
+enum AttendanceStatus {
+  ATTENDING
+  MAY_ATTEND
+  NO_LONGER_ATTENDING
+}
+
+type ChatMessage {
+  id: ID!
+  createdAt: DateTime!
+  text: String!
+  sentBy: User
+  sentTo: User
+  language: ContentLanguage!
+}
+
+union UserGeneratedContent = TextPost | GatheringPost
+
+type Gathering {
+  id: ID!
+  createdAt: DateTime!
+  lastUpdatedAt: DateTime
+  title: String!
+  address: String!
+  bookmarked: Boolean!
+  coordinates: CoordinateSet
+  description: [String!]
+  startsAt: DateTime
+  timezone: String
+  createdBy: User
+  attendees: [Attendee!]
+  image: Image
+}
+
+union Address = IrishAddress | AmbiguousAddress
+
+type IrishAddress {
+  eircode: String!
+  address: [String!]!
+}
+
+type AmbiguousAddress {
+  address: [String!]!
+  country: String!
+}
+
+type Image {
+  id: ID!
+  url: String!
+}
+
+type Interest {
+  id: ID!
+  title: String!
+}
+
+type CoordinateSet {
+  longitude: Float!
+  latitude: Float!
+}
+
+type Location {
+  city: City
+  coordinates: CoordinateSet
+}
+
+type City {
+  ga: String
+  en: String
+}
+
+type Profile {
+  id: ID!
+  name: String!
+  fluency: Fluency!
+  preferredLanguage: PreferredLanguage!
+  user: User
+}
+
+enum Fluency {
+  NATIVE
+  ADVANCED
+  INTERMEDIATE
+  BEGINNER
+}
+
+type Timezone {
+  zone: String!
+}
+
+type User {
+  id: ID!
+  createdAt: DateTime!
+  lastOnlineAt: DateTime!
+  lastUpdatedAt: DateTime
+  email: String!
+  timezone: Timezone
+  posts: [UserGeneratedContent!]
+  interests: [Interest]
+  attendance: [Attendee]
+  profile: Profile!
+  location: UserLocation
+  avatar: Image
+}
+
+type UserLocation {
+  coordinates: CoordinateSet
+}
+
+type Comment {
+  id: ID!
+  createdAt: DateTime!
+  lastUpdatedAt: DateTime
+  postedBy: User
+  text: String!
+  parent: UserGeneratedContent
+}
+
+type GatheringPost {
+  id: ID!
+  createdAt: DateTime!
+  lastUpdatedAt: DateTime
+  score: Int!
+  comments: [Comment]
+  location: Address
+  postedBy: User
+  gathering: Gathering
+}
+
+type TextPost {
+  id: ID!
+  createdAt: DateTime!
+  lastUpdatedAt: DateTime
+  postedBy: User
+  text: String!
+  score: Int!
+  comments: [Comment]
+  location: Address
+  language: ContentLanguage
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

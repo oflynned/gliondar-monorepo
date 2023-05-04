@@ -53,8 +53,6 @@ export const formatTimeElapsed = (timestamp?: Date | null): string | null => {
   const minsElapsed = Math.floor(now.diff(referenceTime).as('minutes'));
   const hoursElapsed = Math.floor(now.diff(referenceTime).as('hours'));
 
-  // console.log({ minsElapsed, hoursElapsed });
-
   if (minsElapsed < 1) {
     return 'Just now';
   }

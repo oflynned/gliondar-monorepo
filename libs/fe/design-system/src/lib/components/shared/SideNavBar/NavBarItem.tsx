@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Box, styled } from '@gliondar/fe/mui';
 import { NavBarPage, NavItem } from './SideNavBar';
 import { StyledIcon } from './NavBarIcon';
-import { Button } from '../../atoms';
+import { Button } from '../../../atoms';
 
 const StyledNavItem = styled(Box)<{ open?: boolean }>({
   display: 'flex',

@@ -1,7 +1,7 @@
 import { Box, BoxProps, styled, Tooltip, Typography } from '@gliondar/fe/mui';
 import { FunctionComponent } from 'react';
 import { ChatMessage as Message } from '@gliondar/shared/types';
-import { Flex } from '../../atoms';
+import { Flex } from '../../../atoms';
 
 type Props = BoxProps & {
   message: Message;

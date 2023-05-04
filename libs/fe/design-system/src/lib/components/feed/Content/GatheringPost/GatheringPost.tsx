@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 import { GatheringPost as Post } from '@gliondar/shared/types';
-import { GradientOverlay, Stack } from '../../../atoms';
+import { GradientOverlay, Stack } from '../../../../atoms';
 import { Typography, useTheme } from '@gliondar/fe/mui';
 import { useRouter } from 'next/router';
 import { BasePost } from '../BasePost';
-import { formatTimestampToDateTime } from '../../../formatters';
+import { formatTimestampToDateWithDay } from '../../../../formatters';
 
 type Props = {
   post: Post;
@@ -28,7 +28,7 @@ export const GatheringPost: FunctionComponent<Props> = ({ post }) => {
             {post.gathering?.title}
           </Typography>
           <Typography color={theme.palette.common.white}>
-            {formatTimestampToDateTime(post.gathering?.startsAt)}
+            {formatTimestampToDateWithDay(post.gathering?.startsAt)}
           </Typography>
         </Stack>
       </GradientOverlay>

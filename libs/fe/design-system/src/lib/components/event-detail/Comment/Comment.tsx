@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Stack, Avatar } from '../../atoms';
+import { Stack, Avatar } from '../../../atoms';
 import { Box, styled, Typography } from '@gliondar/fe/mui';
 import { User } from '@gliondar/shared/types';
 

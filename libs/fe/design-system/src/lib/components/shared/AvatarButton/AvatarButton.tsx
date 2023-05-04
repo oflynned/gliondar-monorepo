@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { IconButton } from '@gliondar/fe/mui';
-import { Avatar } from '../../atoms';
+import { Avatar } from '../../../atoms';
 
 type Props = {
   imageUrl: string;

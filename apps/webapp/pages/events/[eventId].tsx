@@ -1,16 +1,16 @@
 import {
-  Avatar,
   Button,
   Card,
   Comment,
   DescribedAvatar,
   Flex,
   formatTimestampToDateTime,
+  GatheringAttendees,
   Hero,
   Map,
   StickyBottomContainer,
 } from '@gliondar/fe/design-system';
-import { Box, IconButton, styled, Typography } from '@gliondar/fe/mui';
+import { Box, IconButton, styled, Typography, Stack } from '@gliondar/fe/mui';
 import {
   AccessTimeOutlined,
   BookmarkAddOutlined,
@@ -18,10 +18,9 @@ import {
   LocationOnOutlined,
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import { Stack } from '@mui/material';
 import { useQuery } from '@apollo/client';
-import { GET_GATHERING_BY_ID } from '../../../../libs/fe/graphql/src/lib/operations/get-gathering-by-id';
 import { Gathering, Recurrence } from '@gliondar/shared/types';
+import { GET_GATHERING_BY_ID } from '@gliondar/fe/graphql';
 
 const StyledOutlineContainer = styled(Flex)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
@@ -68,7 +67,7 @@ const EventDetail = () => {
     return <Typography>Loading...</Typography>;
   }
 
-  const gathering = data.getGatheringById;
+  const gathering = data?.getGatheringById;
 
   if (!gathering) {
     return null;
@@ -103,21 +102,7 @@ const EventDetail = () => {
                 </Stack>
               </Card>
               <Typography variant={'h4'}>Attendees</Typography>
-              <Card>
-                <Flex gap={2} padding={2} flexWrap={'wrap'}>
-                  {gathering.attendees ? (
-                    gathering.attendees.map((attendee) => (
-                      <Avatar
-                        imageUrl={attendee.user.avatar.url}
-                        label={attendee.user.profile.name}
-                        key={attendee.id}
-                      />
-                    ))
-                  ) : (
-                    <Typography>Be the first to attend this event</Typography>
-                  )}
-                </Flex>
-              </Card>
+              <GatheringAttendees attendees={gathering.attendees} />
 
               <Typography variant={'h4'}>{'Comments'}</Typography>
               <Card>

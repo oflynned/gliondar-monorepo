@@ -1,5 +1,5 @@
 import { FunctionComponent, PropsWithChildren, useState } from 'react';
-import { Avatar, Card, Flex, Stack } from '../../../atoms';
+import { Avatar, Card, Flex, Stack } from '../../../../atoms';
 import { IconButton, Typography } from '@gliondar/fe/mui';
 import { useRouter } from 'next/router';
 import { UserGeneratedContent } from '@gliondar/shared/types';

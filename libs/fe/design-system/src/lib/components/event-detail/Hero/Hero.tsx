@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Box, IconButton, styled, Typography } from '@gliondar/fe/mui';
 import { ArrowBack } from '@mui/icons-material';
-import { GradientOverlay } from '../../atoms';
+import { GradientOverlay } from '../../../atoms';
 
 const Container = styled(Box)(({ theme }) => ({
   display: 'flex',

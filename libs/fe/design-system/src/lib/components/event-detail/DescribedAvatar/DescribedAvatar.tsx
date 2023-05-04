@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { IconButton, Typography } from '@gliondar/fe/mui';
-import { Avatar, Flex, Stack } from '../../atoms';
+import { Avatar, Flex, Stack } from '../../../atoms';
 
 type Props = {
   title: string;

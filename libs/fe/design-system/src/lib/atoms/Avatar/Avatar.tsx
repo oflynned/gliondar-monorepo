@@ -15,14 +15,14 @@ export enum AvatarSize {
 }
 
 type Props = {
-  label: string;
+  label?: string;
   imageUrl?: string;
   size?: AvatarSize;
 };
 
 export const Avatar: FunctionComponent<Props> = ({
   imageUrl,
-  label,
+  label = 'avatar',
   size = AvatarSize.MEDIUM,
 }) => {
   if (imageUrl) {

@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react';
-import { Flex, Card } from '../../atoms';
+import { Flex, Card } from '../../../atoms';
 import { Box, IconButton, styled, Typography } from '@gliondar/fe/mui';
 import { Bookmark, BookmarkAddOutlined } from '@mui/icons-material';
 import { Gathering } from '@gliondar/shared/types';

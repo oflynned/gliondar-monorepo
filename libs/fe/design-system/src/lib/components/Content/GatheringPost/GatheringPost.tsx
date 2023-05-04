@@ -14,8 +14,6 @@ export const GatheringPost: FunctionComponent<Props> = ({ post }) => {
   const theme = useTheme();
   const router = useRouter();
 
-  const startsAt = post.gathering?.startsAt;
-
   return (
     <BasePost post={post}>
       <GradientOverlay
@@ -30,7 +28,7 @@ export const GatheringPost: FunctionComponent<Props> = ({ post }) => {
             {post.gathering?.title}
           </Typography>
           <Typography color={theme.palette.common.white}>
-            {formatTimestampToDateTime(startsAt)}
+            {formatTimestampToDateTime(post.gathering?.startsAt)}
           </Typography>
         </Stack>
       </GradientOverlay>

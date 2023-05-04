@@ -8,7 +8,4 @@ definitionsFactory.generate({
   typePaths: ['./apps/**/*.graphql'],
   path: join(process.cwd(), 'libs/shared/types/src/lib/types.ts'),
   outputAs: 'interface',
-  customScalarTypeMapping: {
-    DateTime: 'Date',
-  },
 });

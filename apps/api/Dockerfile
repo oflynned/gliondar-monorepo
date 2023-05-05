@@ -6,7 +6,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN npm i -g pnpm && pnpm install --frozen-lockfile
 
 # Copy application code and node_modules
-COPY node_modules/ ./
+# /root/.local/share/pnpm/store/v3
 COPY . ./
 
 RUN pnpm types:graphql:generate && \

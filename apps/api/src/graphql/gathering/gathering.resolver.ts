@@ -46,9 +46,17 @@ export class GatheringResolver {
         title: gathering.title,
         description: gathering.description,
         createdAt: gathering.createdAt,
+        startsAt: gathering.startsAt,
+        recurrence: gathering.recurrence,
         address: gathering.address,
         bookmarked: gathering.bookmarked,
+        attendance: gathering.attendance,
+        coordinates: {
+          latitude: gathering.coordinates.latitude,
+          longitude: gathering.coordinates.longitude,
+        },
         image: {
+          __typename: 'Image',
           id: gathering.headerImage.id,
           url: gathering.headerImage.url,
         },

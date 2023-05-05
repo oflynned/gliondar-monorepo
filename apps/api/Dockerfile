@@ -1,22 +1,25 @@
 FROM node:18-alpine as build
 WORKDIR /usr/src/app
 
-RUN corepack enable pnpm
+# Copy package files and install dependencies
+COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store/v3 \
+    npm i -g pnpm && \
+    pnpm install --frozen-lockfile && \
+    pnpm types:graphql:generate && \
+    pnpm types:graphql:merge && \
+    pnpm build:api && \
+    pnpm prune --prod
 
-COPY package.json pnpm-lock.yaml node_modules/ ./
-RUN pnpm install --frozen-lockfile
-
+# Copy application code and node_modules
 COPY apps/ libs/ scripts/ babel.config.json nx.json tsconfig.base.json ./
-
-RUN pnpm types:graphql:generate
-RUN pnpm types:graphql:merge
-RUN pnpm build:api
-RUN pnpm prune --prod
+COPY node_modules/ ./
 
 FROM node:18-alpine
 WORKDIR /dist
 
-COPY --from=build ./ ./
+# Copy built application and node_modules
+COPY --from=build /usr/src/app/ ./
 
 ENV NODE_ENV production
 

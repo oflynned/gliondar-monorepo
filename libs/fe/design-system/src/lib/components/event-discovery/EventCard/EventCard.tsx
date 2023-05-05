@@ -54,18 +54,21 @@ export const EventCard: FunctionComponent<Props> = ({
       <StyledCardContainer key={gathering.id}>
         <Flex>
           <RoundedImageContainer onClick={() => onClick?.(gathering)}>
-            <Image
-              style={{
-                borderRadius: 'inherit',
-                objectFit: 'cover',
-                objectPosition: 'center',
-              }}
-              src={gathering.image?.url}
-              alt={'image'}
-              unoptimized
-              // placeholder={'blur'}
-              fill
-            />
+            {/* TODO maybe have some sort of placeholder for gatherings without images */}
+            {gathering.image?.url ? (
+              <Image
+                style={{
+                  borderRadius: 'inherit',
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                }}
+                src={gathering.image.url}
+                alt={'image'}
+                unoptimized
+                // placeholder={'blur'}
+                fill
+              />
+            ) : null}
           </RoundedImageContainer>
           <GatheringDetailsContainer>
             <Box>

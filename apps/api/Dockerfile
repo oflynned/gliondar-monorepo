@@ -5,15 +5,16 @@ WORKDIR /usr/src/app
 COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store/v3 \
     npm i -g pnpm && \
-    pnpm install --frozen-lockfile && \
-    pnpm types:graphql:generate && \
-    pnpm types:graphql:merge && \
-    pnpm build:api && \
-    pnpm prune --prod
+    pnpm install --frozen-lockfile
 
 # Copy application code and node_modules
 COPY apps/ libs/ scripts/ babel.config.json nx.json tsconfig.base.json ./
 COPY node_modules/ ./
+
+RUN pnpm types:graphql:generate && \
+    pnpm types:graphql:merge && \
+    pnpm build:api && \
+    pnpm prune --prod
 
 FROM node:18-alpine
 WORKDIR /dist

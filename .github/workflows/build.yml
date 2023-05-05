@@ -21,7 +21,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-# TODO try to get this cache injected into docker
+      - name: Setup Fly
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      # TODO try to get this cache injected into docker
 #      - uses: pnpm/action-setup@v2
 #        name: Install pnpm
 #        id: pnpm-install

@@ -51,8 +51,16 @@ jobs:
 #        with:
 #          token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
 
-      - name: Build Docker image
+      - name: Authenticate with registry
+        run: flyctl auth docker
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Build image
         run: docker build -t registry.fly.io/gliondar-api:latest -f ./apps/api/Dockerfile .
+
+      - name: Push image
+        run: docker push registry.fly.io/gliondar-api --all-tags
 
 #      - name: Authenticate with registry
 #        run: doctl registry login --expiry-seconds 600
@@ -61,6 +69,6 @@ jobs:
 #        run: docker push registry.digitalocean.com/syzible/gliondar-api:latest
 #
       - name: Deploy to Fly
-        run: flyctl deploy --image gliondar-api:latest
+        run: flyctl deploy --image registry.fly.io/gliondar-api:latest
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

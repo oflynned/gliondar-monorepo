@@ -3,7 +3,7 @@ import { getRandomItem } from '../../helper';
 import { curatedUsers } from '../curated-users';
 import { Recurrence } from '@gliondar/shared/types';
 import { faker } from '@faker-js/faker';
-import { GatheringBuilder } from '../../types/gathering.builder';
+import { GatheringBuilder } from '@gliondar/be/mock-data';
 
 export const conversationCircle = new GatheringBuilder()
   .setId('gathering-1')

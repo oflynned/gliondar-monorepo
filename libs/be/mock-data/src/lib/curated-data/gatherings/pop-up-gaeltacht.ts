@@ -3,7 +3,7 @@ import { getRandomItem } from '../../helper';
 import { AttendanceStatus, Recurrence } from '@gliondar/shared/types';
 import { curatedUsers } from '../curated-users';
 import { faker } from '@faker-js/faker';
-import { GatheringBuilder } from '../../types/gathering.builder';
+import { GatheringBuilder } from '@gliondar/be/mock-data';
 
 export const popUpGaeltacht = new GatheringBuilder()
   .setId('gathering-0')

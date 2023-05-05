@@ -1,4 +1,4 @@
-import { User } from '@gliondar/be/mock-data';
+import { User } from './user';
 import { Attendee } from './attendee';
 import { Image } from './image';
 import { Gathering } from './gathering';

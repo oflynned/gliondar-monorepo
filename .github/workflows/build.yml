@@ -60,6 +60,6 @@ jobs:
 #      - name: Push to registry
 #        run: docker push registry.digitalocean.com/syzible/gliondar-api:latest
 #
-#      - run: flyctl deploy -i
-#        env:
-#          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - run: flyctl deploy --image registry.fly.io/gliodar-api:latest
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

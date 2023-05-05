@@ -5,7 +5,6 @@ import {
   Flex,
   Stack,
   TitledLayout,
-  Map,
 } from '@gliondar/fe/design-system';
 import { Box, Chip, Typography } from '@gliondar/fe/mui';
 import { useRouter } from 'next/router';
@@ -56,7 +55,7 @@ const Index = () => {
                 </Stack>
               </Card>
             </Stack>
-            <Stack gap={2} flex={1} maxWidth={768}>
+            <Stack gap={4} flex={1} maxWidth={768}>
               <Flex gap={1}>
                 <Button label={'This week'} variant={'outlined'} />
                 <Button label={'This weekend'} variant={'outlined'} />
@@ -105,10 +104,6 @@ const Index = () => {
           </Flex>
         </Flex>
       </TitledLayout>
-
-      <Flex height={'100vh'} flex={1} top={0} position={'sticky'}>
-        <Map />
-      </Flex>
     </>
   );
 };

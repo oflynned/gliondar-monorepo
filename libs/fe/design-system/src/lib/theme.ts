@@ -31,19 +31,22 @@ export const lightTheme = createTheme({
   },
   typography: {
     h1: {
-      fontFamily: ['Montserrat', 'sans-serif'].join(','),
+      // fontFamily: ['Montserrat', 'sans-serif'].join(','),
+      fontFamily: ['Lato', 'sans-serif'].join(','),
       fontSize: '3rem',
       fontWeight: 900,
       lineHeight: '3.5rem',
     },
     h2: {
-      fontFamily: ['Montserrat', 'sans-serif'].join(','),
+      // fontFamily: ['Montserrat', 'sans-serif'].join(','),
+      fontFamily: ['Lato', 'sans-serif'].join(','),
       fontSize: '2.25rem',
       fontWeight: 900,
       lineHeight: '2.75rem',
     },
     h3: {
-      fontFamily: ['Montserrat', 'sans-serif'].join(','),
+      // fontFamily: ['Montserrat', 'sans-serif'].join(','),
+      fontFamily: ['Lato', 'sans-serif'].join(','),
       fontSize: '1.5rem',
       fontWeight: 700,
       lineHeight: '2rem',

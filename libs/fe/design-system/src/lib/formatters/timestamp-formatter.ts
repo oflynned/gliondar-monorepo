@@ -13,7 +13,7 @@ export const formatTimestampToDateTime = (
   });
   const date = formatTimestampToDateWithDay(timestamp);
 
-  // 8:00pn on Mon, 15 May 2023
+  // 8:00pm on Mon, 15 May 2023
   return `${time} on ${date}`;
 };
 

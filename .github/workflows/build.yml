@@ -21,44 +21,45 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
+# TODO try to get this cache injected into docker
+#      - uses: pnpm/action-setup@v2
+#        name: Install pnpm
+#        id: pnpm-install
+#        with:
+#          version: 8
+#          run_install: false
+#
+#      - name: Get pnpm store directory
+#        id: pnpm-cache
+#        shell: bash
+#        run: |
+#          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+#
+#      - uses: actions/cache@v3
+#        name: Setup pnpm cache
+#        with:
+#          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+#          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-pnpm-store-
+#
+#      - name: Install dependencies
+#        run: pnpm install
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
+#      - name: Install doctl
+#        uses: digitalocean/action-doctl@v2
+#        with:
+#          token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t registry.digitalocean.com/syzible/gliondar-api:latest -f ./apps/api/Dockerfile .
+        run: docker build -t registry.fly.io/gliondar-api:latest -f ./apps/api/Dockerfile .
 
-      - name: Authenticate with registry
-        run: doctl registry login --expiry-seconds 600
-
-      - name: Push to registry
-        run: docker push registry.digitalocean.com/syzible/gliondar-api:latest
-
-#      - run: flyctl deploy --remote-only
+#      - name: Authenticate with registry
+#        run: doctl registry login --expiry-seconds 600
+#
+#      - name: Push to registry
+#        run: docker push registry.digitalocean.com/syzible/gliondar-api:latest
+#
+#      - run: flyctl deploy -i
 #        env:
 #          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

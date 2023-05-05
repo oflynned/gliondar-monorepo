@@ -9,6 +9,6 @@ const definitions = mergeTypeDefs(types);
 const printedTypeDefs = print(definitions);
 
 fs.writeFileSync(
-  join(process.cwd(), './libs/shared/types/src/lib/schema.graphql'),
+  join(process.cwd(), './apps/api/src/assets/schema.graphql'),
   printedTypeDefs
 );

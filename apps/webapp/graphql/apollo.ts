@@ -1,7 +1,7 @@
 import { ApolloLink, HttpLink } from '@apollo/client';
 import { withScalars } from 'apollo-link-scalars';
 import { buildClientSchema } from 'graphql/utilities';
-import { introspection } from '@gliondar/shared/types';
+import { introspection } from '@gliondar/fe/graphql';
 
 export const link = ApolloLink.from([
   withScalars({

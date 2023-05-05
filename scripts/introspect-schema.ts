@@ -19,7 +19,10 @@ import { writeFile } from 'fs/promises';
   const payload = await response.json();
 
   await writeFile(
-    join(__dirname, '../libs/shared/types/src/lib/introspection.json'),
+    join(
+      __dirname,
+      '../libs/fe/graphql/src/lib/introspection/introspection.json'
+    ),
     JSON.stringify(payload.data),
     { encoding: 'utf-8' }
   );

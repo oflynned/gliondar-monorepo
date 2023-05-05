@@ -1,28 +1,23 @@
 FROM node:18-alpine as build
+WORKDIR /usr/src/app
 
-RUN apk add --virtual gyp curl bash python3 make g++ && rm -rf /var/cache/apk/*
+RUN corepack enable pnpm
 
-WORKDIR /src
+COPY package.json pnpm-lock.yaml node_modules ./
+RUN pnpm install --frozen-lockfile
 
-COPY . .
+COPY apps libs scripts babel.config.json nx.json tsconfig.base.json ./
 
-RUN npm i -g pnpm
-RUN pnpm i
 RUN pnpm types:graphql:generate
 RUN pnpm types:graphql:merge
 RUN pnpm build:api
+RUN pnpm prune --prod
 
 FROM node:18-alpine
-
 WORKDIR /dist
 
-COPY --from=build /src/dist/ ./dist
-COPY --from=build /src/node_modules ./node_modules
-
-# passed as build arg to provide app version to app at runtime
-ARG TAG_VERSION
-ENV TAG_VERSION ${TAG_VERSION}
+COPY --from=build ./ ./
 
 ENV NODE_ENV production
 
-CMD ["node", "dist/api/main.js"]
+CMD ["node", "dist/apps/api/main.js"]

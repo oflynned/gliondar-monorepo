@@ -1,10 +1,12 @@
-import { DescribedAvatar, Flex } from '@gliondar/fe/design-system';
+import { DescribedAvatar } from '@gliondar/fe/design-system';
 import { styled } from '@gliondar/fe/mui';
 import { FunctionComponent } from 'react';
 import { Gathering } from '@gliondar/shared/types';
 import { useRouter } from 'next/router';
+import { Box } from '@mui/material';
 
-const StyledOutlineContainer = styled(Flex)(({ theme }) => ({
+const StyledOutlineContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
   borderBottom: `1px solid ${theme.palette.divider}`,
   background: theme.palette.background.default,
   padding: theme.spacing(3),

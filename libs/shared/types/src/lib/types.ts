@@ -11,7 +11,8 @@
 export enum AttendanceStatus {
     ATTENDING = "ATTENDING",
     MAY_ATTEND = "MAY_ATTEND",
-    NO_LONGER_ATTENDING = "NO_LONGER_ATTENDING"
+    NO_LONGER_ATTENDING = "NO_LONGER_ATTENDING",
+    UNKNOWN = "UNKNOWN"
 }
 
 export enum Recurrence {
@@ -141,6 +142,7 @@ export interface Gathering {
     attendees?: Nullable<Attendee[]>;
     image?: Nullable<Image>;
     recurrence?: Nullable<Recurrence>;
+    attendance?: Nullable<AttendanceStatus>;
     comments?: Nullable<Comment[]>;
 }
 

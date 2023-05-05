@@ -24,6 +24,7 @@ export class GatheringResolver {
       recurrence: gathering.recurrence,
       address: gathering.address,
       bookmarked: gathering.bookmarked,
+      attendance: gathering.attendance,
       coordinates: {
         latitude: gathering.coordinates.latitude,
         longitude: gathering.coordinates.longitude,

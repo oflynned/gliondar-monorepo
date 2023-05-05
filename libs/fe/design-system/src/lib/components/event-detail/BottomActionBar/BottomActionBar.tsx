@@ -5,15 +5,30 @@ import {
   StickyBottomContainer,
 } from '@gliondar/fe/design-system';
 import { Box, IconButton, Typography } from '@gliondar/fe/mui';
-import { BookmarkAddOutlined } from '@mui/icons-material';
-import { FunctionComponent } from 'react';
-import { Gathering } from '@gliondar/shared/types';
+import { BookmarkAdded, BookmarkAddOutlined } from '@mui/icons-material';
+import { FunctionComponent, useState } from 'react';
+import { AttendanceStatus, Gathering } from '@gliondar/shared/types';
 
 type Props = {
   gathering: Gathering;
+  onAttend?: (gathering: Gathering) => void;
+  onBookmark?: (gathering: Gathering) => void;
+  onShare?: (gathering: Gathering) => void;
 };
 
-export const BottomActionBar: FunctionComponent<Props> = ({ gathering }) => {
+export const BottomActionBar: FunctionComponent<Props> = ({
+  gathering,
+  onAttend,
+  onBookmark,
+  onShare,
+}) => {
+  console.log({ gathering });
+
+  const [isBookmarked, setIsBookmarked] = useState(gathering.bookmarked);
+  const [isAttending, setIsAttending] = useState(
+    gathering.attendance === AttendanceStatus.ATTENDING
+  );
+
   return (
     <StickyBottomContainer>
       <Flex justifyContent={'space-between'} width={'100%'}>
@@ -26,11 +41,31 @@ export const BottomActionBar: FunctionComponent<Props> = ({ gathering }) => {
           </Box>
         </Flex>
         <Flex gap={2}>
-          <IconButton sx={{ width: 'fit-content' }} color={'inherit'}>
-            <BookmarkAddOutlined />
+          <IconButton
+            sx={{ width: 'fit-content' }}
+            color={isBookmarked ? 'primary' : 'inherit'}
+            onClick={() => {
+              onBookmark?.(gathering);
+              setIsBookmarked((prevState) => !prevState);
+            }}
+          >
+            {isBookmarked ? <BookmarkAdded /> : <BookmarkAddOutlined />}
           </IconButton>
-          <Button label={'Attend'} color={'primary'} />
-          <Button label={'Share'} color={'secondary'} variant={'outlined'} />
+          <Button
+            variant={isAttending ? 'contained' : 'outlined'}
+            label={isAttending ? 'Attending' : 'Attend'}
+            color={'primary'}
+            onClick={() => {
+              onAttend?.(gathering);
+              setIsAttending((prevState) => !prevState);
+            }}
+          />
+          <Button
+            label={'Share'}
+            color={'secondary'}
+            variant={'outlined'}
+            onClick={() => onShare?.(gathering)}
+          />
         </Flex>
       </Flex>
     </StickyBottomContainer>

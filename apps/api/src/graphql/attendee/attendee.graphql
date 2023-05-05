@@ -19,4 +19,5 @@ enum AttendanceStatus {
     ATTENDING
     MAY_ATTEND
     NO_LONGER_ATTENDING
+    UNKNOWN
 }

@@ -17,6 +17,8 @@ export const GET_GATHERING_BY_ID = gql`
       startsAt
       recurrence
       address
+      bookmarked
+      attendance
       coordinates {
         latitude
         longitude

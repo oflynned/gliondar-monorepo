@@ -23,6 +23,7 @@ type Gathering {
   attendees: [Attendee!]
   image: Image
   recurrence: Recurrence
+  attendance: AttendanceStatus
   comments: [Comment!]
 }
 

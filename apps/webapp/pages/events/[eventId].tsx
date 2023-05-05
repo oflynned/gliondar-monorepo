@@ -76,16 +76,14 @@ const EventDetail = () => {
                 <Card height={256}>
                   <Flex
                     sx={{ cursor: 'pointer' }}
+                    // TODO get the maps link to open when clicking on the card, or allow it to be expanded
                     onClick={() => window.open('https://google.com/maps')}
                     borderRadius={1}
                     justifyContent={'center'}
                     alignItems={'center'}
                     width={'100%'}
                   >
-                    <Map
-                      latitude={gathering.coordinates.latitude}
-                      longitude={gathering.coordinates.longitude}
-                    />
+                    <Map coordinates={gathering.coordinates} />
                   </Flex>
                 </Card>
                 <GatheringSafety />

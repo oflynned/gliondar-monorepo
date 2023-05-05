@@ -1,23 +1,26 @@
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import {
   FunctionComponent,
   PropsWithChildren,
   useCallback,
   useState,
 } from 'react';
+import { useTheme } from '@mui/material';
 
 type Map = google.maps.Map;
 
 type Props = {
-  latitude?: number;
-  longitude?: number;
+  coordinates?: {
+    latitude: number;
+    longitude: number;
+  };
 };
 
 export const Map: FunctionComponent<PropsWithChildren<Props>> = ({
-  latitude,
-  longitude,
+  coordinates = { latitude: 53.343337, longitude: -6.260073 },
   children,
 }) => {
+  const theme = useTheme();
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     // TODO move this to some config service or config hook
@@ -55,12 +58,16 @@ export const Map: FunctionComponent<PropsWithChildren<Props>> = ({
         width: '100%',
         height: '100%',
         borderRadius: 'inherit',
+        border: `1px solid ${theme.palette.divider}`,
       }}
-      center={{ lat: latitude ?? 53.343337, lng: longitude ?? -6.260073 }}
+      center={{ lat: coordinates.latitude, lng: coordinates.longitude }}
       zoom={14}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
+      <Marker
+        position={{ lat: coordinates.latitude, lng: coordinates.longitude }}
+      />
       {children}
     </GoogleMap>
   );

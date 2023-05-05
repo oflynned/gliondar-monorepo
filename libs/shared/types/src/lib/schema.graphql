@@ -50,6 +50,7 @@ enum AttendanceStatus {
   ATTENDING
   MAY_ATTEND
   NO_LONGER_ATTENDING
+  UNKNOWN
 }
 
 type ChatMessage {
@@ -78,6 +79,7 @@ type Gathering {
   attendees: [Attendee!]
   image: Image
   recurrence: Recurrence
+  attendance: AttendanceStatus
   comments: [Comment!]
 }
 

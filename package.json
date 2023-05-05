@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "build:api": "nx run api:build",
     "lint": "eslint ./{apps,libs}/**/*.{ts,tsx}",
     "lint:fix": "eslint ./apps/**/*.{ts,tsx} --fix",
     "typecheck": "tsc --noEmit",
-    "types:preflight": "ts-node ./scripts/generate-types.ts && ts-node ./scripts/merge-schemas.ts && ts-node ./scripts/introspect-schema.ts "
+    "types:graphql:generate": "ts-node ./scripts/generate-types.ts",
+    "types:graphql:merge": "ts-node ./scripts/merge-schemas.ts",
+    "types:graphql:introspect": "ts-node ./scripts/introspect-schema.ts",
+    "types:preflight": "pnpm types:graphql:generate && pnpm types:graphql:merge && pnpm types:graphql:introspect"
   },
   "dependencies": {
     "@apollo/client": "3.7.14",

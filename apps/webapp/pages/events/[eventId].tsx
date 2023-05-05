@@ -10,12 +10,14 @@ import {
   GatheringQuickOverview,
   GatheringSafety,
   TopActionBar,
+  ShareModal,
 } from '@gliondar/fe/design-system';
 import { styled, Typography, Stack } from '@gliondar/fe/mui';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { Gathering } from '@gliondar/shared/types';
 import { GET_GATHERING_BY_ID } from '@gliondar/fe/graphql';
+import { useState } from 'react';
 
 const DetailsSection = styled(Flex)(({ theme }) => ({
   display: 'flex',
@@ -34,8 +36,14 @@ const EventDetail = () => {
     variables: { id: eventId },
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    return <Typography>Loading</Typography>;
+  }
+
+  if (error) {
+    return <Typography>Error</Typography>;
   }
 
   const gathering = data?.getGatheringById;
@@ -46,6 +54,11 @@ const EventDetail = () => {
 
   return (
     <>
+      <ShareModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        gathering={gathering}
+      />
       <Stack width={'100%'} display={'flex'}>
         <Hero
           title={gathering.title}
@@ -92,7 +105,12 @@ const EventDetail = () => {
           </Flex>
         </DetailsSection>
 
-        <BottomActionBar gathering={gathering} />
+        <BottomActionBar
+          gathering={gathering}
+          onShare={() => {
+            setIsModalOpen(true);
+          }}
+        />
       </Stack>
     </>
   );

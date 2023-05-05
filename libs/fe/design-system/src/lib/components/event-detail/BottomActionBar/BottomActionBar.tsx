@@ -5,7 +5,11 @@ import {
   StickyBottomContainer,
 } from '@gliondar/fe/design-system';
 import { Box, IconButton, Typography } from '@gliondar/fe/mui';
-import { BookmarkAdded, BookmarkAddOutlined } from '@mui/icons-material';
+import {
+  Bookmark,
+  BookmarkAdded,
+  BookmarkAddOutlined,
+} from '@mui/icons-material';
 import { FunctionComponent, useState } from 'react';
 import { AttendanceStatus, Gathering } from '@gliondar/shared/types';
 
@@ -49,7 +53,7 @@ export const BottomActionBar: FunctionComponent<Props> = ({
               setIsBookmarked((prevState) => !prevState);
             }}
           >
-            {isBookmarked ? <BookmarkAdded /> : <BookmarkAddOutlined />}
+            {isBookmarked ? <Bookmark /> : <BookmarkAddOutlined />}
           </IconButton>
           <Button
             variant={isAttending ? 'contained' : 'outlined'}

@@ -24,43 +24,42 @@ jobs:
       - name: Setup Fly
         uses: superfly/flyctl-actions/setup-flyctl@master
 
-      # TODO try to get this cache injected into docker
-#      - uses: pnpm/action-setup@v2
-#        name: Install pnpm
-#        id: pnpm-install
-#        with:
-#          version: 8
-#          run_install: false
-#
-#      - name: Get pnpm store directory
-#        id: pnpm-cache
-#        shell: bash
-#        run: |
-#          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-#
-#      - uses: actions/cache@v3
-#        name: Setup pnpm cache
-#        with:
-#          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-#          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-#          restore-keys: |
-#            ${{ runner.os }}-pnpm-store-
-#
-#      - name: Install dependencies
-#        run: pnpm install
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
 #      - name: Install doctl
 #        uses: digitalocean/action-doctl@v2
 #        with:
 #          token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
 
+      - name: Build image
+        run: docker build -t registry.fly.io/gliondar-api:latest -f ./apps/api/Dockerfile .
+
       - name: Authenticate with registry
         run: flyctl auth docker
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-      - name: Build image
-        run: docker build -t registry.fly.io/gliondar-api:latest -f ./apps/api/Dockerfile .
 
       - name: Push image
         run: docker push registry.fly.io/gliondar-api

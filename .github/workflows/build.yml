@@ -54,7 +54,7 @@ jobs:
 #          token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
 
       - name: Build image
-        run: docker build -t registry.fly.io/gliondar-api:latest -f ./apps/api/Dockerfile .
+        run: DOCKER_BUILDKIT=1 docker build -t registry.fly.io/gliondar-api:latest -f ./apps/api/Dockerfile .
 
       - name: Authenticate with registry
         run: flyctl auth docker

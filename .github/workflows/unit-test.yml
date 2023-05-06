@@ -45,5 +45,5 @@ jobs:
         run: pnpm install
 
       - name: Unit tests
-        run: npx nx affected:test --base=origin/main --head=HEAD
+        run: npx nx affected:test --base=main --head=HEAD
 

@@ -3,17 +3,15 @@ import {
   Card,
   EventCard,
   Flex,
+  InterestOverview,
+  NewEventPrompt,
   Stack,
   TitledLayout,
 } from '@gliondar/fe/design-system';
 import { Box, Chip, Typography } from '@gliondar/fe/mui';
 import { useRouter } from 'next/router';
-import {
-  getRandomInterests,
-  getRandomGatherings,
-} from '@gliondar/be/mock-data';
 import { useQuery } from '@apollo/client';
-import { GET_RELEVANT_GATHERINGS } from '../../../../libs/fe/graphql/src/lib/queries/get-relevant-gatherings';
+import { GET_RELEVANT_GATHERINGS } from '@gliondar/fe/graphql';
 import { Gathering } from '@gliondar/shared/types';
 
 const Index = () => {
@@ -41,38 +39,8 @@ const Index = () => {
         <Flex>
           <Flex flex={1} gap={3}>
             <Stack gap={2} maxWidth={330}>
-              <Card>
-                <Stack
-                  justifyContent={'space-between'}
-                  width={'100%'}
-                  padding={2}
-                  gap={1}
-                >
-                  <Typography variant={'h4'}>Your events</Typography>
-                  <Typography>You have not created any events yet.</Typography>
-                  <Box alignSelf={'flex-end'} marginTop={2}>
-                    <Button
-                      label={'New event'}
-                      color={'primary'}
-                      variant={'outlined'}
-                    />
-                  </Box>
-                </Stack>
-              </Card>
-              <Card>
-                <Stack justifyContent={'space-between'} padding={2}>
-                  <Typography variant={'h4'}>Your interests</Typography>
-                  <Flex marginTop={2} gap={1} flexWrap={'wrap'}>
-                    {getRandomInterests(25).map((interest) => (
-                      <Chip
-                        key={interest.id}
-                        clickable
-                        label={<Typography>{interest.title}</Typography>}
-                      />
-                    ))}
-                  </Flex>
-                </Stack>
-              </Card>
+              <NewEventPrompt />
+              <InterestOverview interests={[]} />
             </Stack>
             <Stack gap={4} flex={1} maxWidth={768}>
               <Flex gap={1}>

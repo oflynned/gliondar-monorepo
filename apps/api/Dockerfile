@@ -11,8 +11,8 @@ COPY . ./
 
 RUN pnpm types:graphql:generate && \
     pnpm types:graphql:merge && \
-    pnpm build:api && \
-    pnpm prune --prod
+    pnpm build:api
+#    pnpm prune --prod
 
 FROM node:18-alpine
 WORKDIR /dist

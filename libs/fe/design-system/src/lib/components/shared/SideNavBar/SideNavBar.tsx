@@ -4,7 +4,9 @@ import {
   ChatBubbleOutlineOutlined,
   Event,
   HomeOutlined,
+  HubOutlined,
   MenuOutlined,
+  NetworkCellOutlined,
   NotificationsOutlined,
   PersonOutlined,
   Settings,
@@ -32,6 +34,7 @@ const StyledItemGroup = styled(Box)(({ theme }) => ({
 
 export enum NavBarPage {
   FEED,
+  AROUND_ME,
   CONNECTIONS,
   EVENTS,
   NOTIFICATIONS,
@@ -47,6 +50,11 @@ export type NavItem = {
 
 const topItems: NavItem[] = [
   { id: NavBarPage.FEED, label: 'Feed', icon: <HomeOutlined /> },
+  {
+    id: NavBarPage.AROUND_ME,
+    label: 'Around me',
+    icon: <HubOutlined />,
+  },
   {
     id: NavBarPage.CONNECTIONS,
     label: 'Connections',

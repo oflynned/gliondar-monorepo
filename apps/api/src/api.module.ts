@@ -15,6 +15,10 @@ import { join } from 'path';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         return {
+          introspection: true,
+          playground: true,
+          csrfPrevention: false,
+          cache: 'bounded',
           typePaths: [
             config.get('NODE_ENV') === 'production'
               ? join(__dirname, './assets/schema.graphql')

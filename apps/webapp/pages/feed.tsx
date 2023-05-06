@@ -20,7 +20,11 @@ const Feed = () => {
   });
 
   if (loading) {
-    return 'Loading...';
+    return 'Loading';
+  }
+
+  if (error) {
+    return 'Error';
   }
 
   return (

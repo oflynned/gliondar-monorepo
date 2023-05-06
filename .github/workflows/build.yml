@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - chore/serve-mock-api-data
+      - master
 
 jobs:
   deploy:

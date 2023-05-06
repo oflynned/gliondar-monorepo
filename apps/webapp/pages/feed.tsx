@@ -5,22 +5,33 @@ import {
   Stack,
   TextPost,
   TitledLayout,
-} from '../design-system';
-import { getRandomPosts } from '@gliondar/shared/types';
-import { useState } from 'react';
-import { useTheme } from '@mui/material';
-
-const content = getRandomPosts(10);
+} from '@gliondar/fe/design-system';
+import { useTheme } from '@gliondar/fe/mui';
+import { useQuery } from '@apollo/client';
+import { UserGeneratedContent } from '@gliondar/shared/types';
+import { GET_FEED } from '@gliondar/fe/graphql';
 
 const Feed = () => {
-  const [posts] = useState(content);
   const theme = useTheme();
+  const { data, loading, error } = useQuery<{
+    getFeed: UserGeneratedContent[];
+  }>(GET_FEED, {
+    variables: { page: 0 },
+  });
+
+  if (loading) {
+    return 'Loading';
+  }
+
+  if (error) {
+    return 'Error';
+  }
 
   return (
     <>
       <TitledLayout pageTitle={'Feed'} gap={4} flex={1}>
         <Stack gap={2} maxWidth={768}>
-          {posts.map((post) => {
+          {data.getFeed.map((post) => {
             if (post.__typename === 'TextPost') {
               return <TextPost post={post} key={post.id} />;
             }

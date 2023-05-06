@@ -1,4 +1,4 @@
-import { TitledLayout } from '../design-system';
+import { TitledLayout } from '@gliondar/fe/design-system';
 
 const Settings = () => {
   return <TitledLayout pageTitle={'Settings'}></TitledLayout>;

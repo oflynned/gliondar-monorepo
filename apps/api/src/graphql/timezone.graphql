@@ -1,3 +1,0 @@
-type Timezone {
-    zone: String! # Europe/Brussels
-}

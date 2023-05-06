@@ -5,17 +5,35 @@ import {
   Flex,
   Stack,
   TitledLayout,
-  Map,
-} from '../../design-system';
-import { Box, Chip, Typography } from '@mui/material';
+} from '@gliondar/fe/design-system';
+import { Box, Chip, Typography } from '@gliondar/fe/mui';
 import { useRouter } from 'next/router';
 import {
   getRandomInterests,
   getRandomGatherings,
-} from '@gliondar/shared/types';
+} from '@gliondar/be/mock-data';
+import { useQuery } from '@apollo/client';
+import { GET_RELEVANT_GATHERINGS } from '../../../../libs/fe/graphql/src/lib/queries/get-relevant-gatherings';
+import { Gathering } from '@gliondar/shared/types';
 
 const Index = () => {
   const router = useRouter();
+  const { data, loading, error } = useQuery<{ getGatherings: Gathering[] }>(
+    GET_RELEVANT_GATHERINGS,
+    {
+      variables: { page: 0 },
+    }
+  );
+
+  if (loading) {
+    return <Typography>Loading</Typography>;
+  }
+
+  if (error) {
+    return <Typography>Error</Typography>;
+  }
+
+  const gatherings = data?.getGatherings;
 
   return (
     <>
@@ -56,7 +74,7 @@ const Index = () => {
                 </Stack>
               </Card>
             </Stack>
-            <Stack gap={2} flex={1} maxWidth={768}>
+            <Stack gap={4} flex={1} maxWidth={768}>
               <Flex gap={1}>
                 <Button label={'This week'} variant={'outlined'} />
                 <Button label={'This weekend'} variant={'outlined'} />
@@ -65,32 +83,8 @@ const Index = () => {
 
               <Stack gap={2}>
                 <Stack gap={2}>
-                  <Typography variant={'h4'}>Today</Typography>
-                  {getRandomGatherings(3).map((gathering) => (
-                    <EventCard
-                      key={gathering.id}
-                      gathering={gathering}
-                      onClick={(gathering) =>
-                        router.push(`/events/${gathering.id}`)
-                      }
-                    />
-                  ))}
-                </Stack>
-                <Stack gap={2}>
-                  <Typography variant={'h4'}>Tomorrow</Typography>
-                  {getRandomGatherings(3).map((gathering) => (
-                    <EventCard
-                      key={gathering.id}
-                      gathering={gathering}
-                      onClick={(gathering) =>
-                        router.push(`/events/${gathering.id}`)
-                      }
-                    />
-                  ))}
-                </Stack>
-                <Stack gap={2}>
-                  <Typography variant={'h4'}>Later</Typography>
-                  {getRandomGatherings(7).map((gathering) => (
+                  <Typography variant={'h4'}>Upcoming</Typography>
+                  {gatherings.map((gathering) => (
                     <EventCard
                       key={gathering.id}
                       gathering={gathering}
@@ -105,10 +99,6 @@ const Index = () => {
           </Flex>
         </Flex>
       </TitledLayout>
-
-      <Flex height={'100vh'} flex={1} top={0} position={'sticky'}>
-        <Map />
-      </Flex>
     </>
   );
 };

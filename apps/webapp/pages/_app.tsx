@@ -2,9 +2,16 @@ import '@fontsource/lato';
 import '@fontsource/montserrat';
 
 import { AppProps } from 'next/app';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { lightTheme, NavBarPage, SideBarLayout } from '../design-system';
-import { useRouter } from 'next/router';
+import { CssBaseline, ThemeProvider } from '@gliondar/fe/mui';
+import {
+  lightTheme,
+  NavBarPage,
+  SideBarLayout,
+} from '@gliondar/fe/design-system';
+import { NextRouter, useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { link } from '../graphql';
 
 const getActivePageFromUrl = (url: string): NavBarPage | null => {
   switch (url) {
@@ -26,16 +33,56 @@ const getActivePageFromUrl = (url: string): NavBarPage | null => {
   }
 };
 
+const navigate = (router: NextRouter, page: NavBarPage): void => {
+  switch (page) {
+    default:
+    case NavBarPage.FEED:
+      router.push('/feed');
+      break;
+    case NavBarPage.CONNECTIONS:
+      router.push('/connections');
+      break;
+    case NavBarPage.EVENTS:
+      router.push('/events');
+      break;
+    case NavBarPage.NOTIFICATIONS:
+      router.push('/notifications');
+      break;
+    case NavBarPage.SETTINGS:
+      router.push('/settings');
+      break;
+    case NavBarPage.PROFILE:
+      router.push('/profile');
+      break;
+  }
+};
+
 export default function App({ Component, pageProps }: AppProps) {
+  const client = new ApolloClient({
+    link,
+    cache: new InMemoryCache(),
+    defaultOptions: {
+      query: {
+        fetchPolicy: 'no-cache',
+      },
+    },
+  });
+
+  const [theme] = useState(() => lightTheme);
   const router = useRouter();
   const activePage = getActivePageFromUrl(router.pathname);
 
   return (
-    <ThemeProvider theme={lightTheme}>
-      <CssBaseline />
-      <SideBarLayout activePage={activePage}>
-        <Component {...pageProps} />
-      </SideBarLayout>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SideBarLayout
+          activePage={activePage}
+          onNavigate={(page) => navigate(router, page)}
+        >
+          <Component {...pageProps} />
+        </SideBarLayout>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }

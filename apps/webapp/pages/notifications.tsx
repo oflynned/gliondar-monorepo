@@ -1,4 +1,4 @@
-import { TitledLayout } from '../design-system';
+import { TitledLayout } from '@gliondar/fe/design-system';
 
 const Notifications = () => {
   return <TitledLayout pageTitle={'Notifications'}></TitledLayout>;

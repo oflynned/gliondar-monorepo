@@ -8,8 +8,8 @@
     "lint:fix": "eslint ./apps/**/*.{ts,tsx} --fix",
     "typecheck": "tsc --noEmit",
     "types:graphql:generate": "ts-node ./scripts/generate-types.ts",
-    "types:graphql:merge": "ts-node ./scripts/merge-schemas.ts",
     "types:graphql:introspect": "ts-node ./scripts/introspect-schema.ts",
+    "types:graphql:merge": "ts-node ./scripts/merge-schemas.ts",
     "types:preflight": "pnpm types:graphql:generate && pnpm types:graphql:merge && pnpm types:graphql:introspect"
   },
   "dependencies": {
@@ -29,13 +29,12 @@
     "@nestjs/core": "9.4.0",
     "@nestjs/graphql": "11.0.5",
     "@nestjs/platform-express": "9.4.0",
-    "@nrwl/next": "16.1.1",
     "@react-google-maps/api": "2.18.1",
     "apollo-link-scalars": "4.0.2",
     "axios": "1.4.0",
     "graphql": "16.6.0",
     "luxon": "3.3.0",
-    "next": "13.4.1",
+    "next": "13.3.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "reflect-metadata": "0.1.13",
@@ -61,6 +60,7 @@
     "@nrwl/js": "16.1.1",
     "@nrwl/linter": "16.1.1",
     "@nrwl/nest": "16.1.1",
+    "@nrwl/next": "16.1.1",
     "@nrwl/node": "16.1.1",
     "@nrwl/react": "16.1.1",
     "@nrwl/webpack": "16.1.1",
@@ -100,4 +100,3 @@
     "webpack": "5.82.0"
   }
 }
-

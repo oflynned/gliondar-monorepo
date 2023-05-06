@@ -9,7 +9,7 @@ import {
   SideBarLayout,
 } from '@gliondar/fe/design-system';
 import { NextRouter, useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { link } from '../graphql';
 
@@ -19,6 +19,8 @@ const getActivePageFromUrl = (url: string): NavBarPage | null => {
       return NavBarPage.FEED;
     case '/connections':
       return NavBarPage.CONNECTIONS;
+    case '/around-me':
+      return NavBarPage.AROUND_ME;
     case '/events':
     case '/events/[eventId]':
       return NavBarPage.EVENTS;
@@ -26,6 +28,7 @@ const getActivePageFromUrl = (url: string): NavBarPage | null => {
       return NavBarPage.SETTINGS;
     case '/notifications':
       return NavBarPage.NOTIFICATIONS;
+    case '/users':
     case '/users/[userId]':
       return NavBarPage.PROFILE;
     default:
@@ -38,6 +41,9 @@ const navigate = (router: NextRouter, page: NavBarPage): void => {
     default:
     case NavBarPage.FEED:
       router.push('/feed');
+      break;
+    case NavBarPage.AROUND_ME:
+      router.push('/around-me');
       break;
     case NavBarPage.CONNECTIONS:
       router.push('/connections');
@@ -52,7 +58,7 @@ const navigate = (router: NextRouter, page: NavBarPage): void => {
       router.push('/settings');
       break;
     case NavBarPage.PROFILE:
-      router.push('/profile');
+      router.push('/users');
       break;
   }
 };

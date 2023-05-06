@@ -3,12 +3,14 @@ import {
   Flex,
   Stack,
   ChatMessageContainer,
+  Contact,
 } from '@gliondar/fe/design-system';
 import { Box, Input, styled, Typography, useTheme } from '@gliondar/fe/mui';
 import { useState } from 'react';
-import { User } from '@gliondar/shared/types';
+import { ChatMessage, User } from '@gliondar/shared/types';
 import { faker } from '@faker-js/faker/locale/en_IE';
 import { getRandomPeople, mockChatMessages } from '@gliondar/be/mock-data';
+import { useLazyQuery } from '@apollo/client';
 
 const ChatContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -27,24 +29,11 @@ const SelectedConnectionContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
-const ConnectionContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(1),
-  padding: theme.spacing(1),
-  background: theme.palette.background.default,
-  '&:hover': {
-    cursor: 'pointer',
-    background: theme.palette.background.paper,
-  },
-}));
-
 const Connections = () => {
   const theme = useTheme();
-  const [messages] = useState(mockChatMessages);
-  const [connections] = useState(getRandomPeople(25));
-  const [selectedConnection, setSelectedConnection] = useState<User | null>(
-    null
-  );
+  const [messages] = useState<ChatMessage[]>([]);
+  const [contacts] = useState<User[]>([]);
+  const [selectedContact, setSelectedContact] = useState<User | null>(null);
 
   return (
     <>
@@ -57,49 +46,33 @@ const Connections = () => {
         >
           Connections
         </Typography>
-        {/*<Box padding={1} width={'100%'}>*/}
-        {/*  <TextField label={'Search'} variant={'outlined'} fullWidth />*/}
-        {/*</Box>*/}
-        {connections.map((connection) => (
-          <ConnectionContainer
-            key={connection.id}
-            onClick={() => setSelectedConnection(connection)}
-          >
-            <Avatar
-              imageUrl={connection.avatar.url}
-              label={connection.profile.name}
+        {contacts.length > 0 ? (
+          contacts.map((user) => (
+            <Contact
+              user={user}
+              onSelectContact={(user) => {
+                setSelectedContact(user);
+              }}
             />
-
-            <Stack justifyContent={'center'} width={'100%'}>
-              <Typography fontWeight={700}>
-                {connection.profile.name}
-              </Typography>
-              <Flex justifyContent={'space-between'}>
-                <Typography
-                  overflow={'hidden'}
-                  whiteSpace={'nowrap'}
-                  textOverflow={'ellipsis'}
-                  width={192}
-                >
-                  {faker.random.words(5)}
-                </Typography>
-              </Flex>
-            </Stack>
-          </ConnectionContainer>
-        ))}
+          ))
+        ) : (
+          <Box padding={2}>
+            <Typography>No contacts yet</Typography>
+          </Box>
+        )}
       </ChatContainer>
       <Box flex={1}>
-        {selectedConnection ? (
+        {selectedContact ? (
           <Stack height={'100vh'} overflow={'scroll'}>
             <SelectedConnectionContainer>
               <Flex gap={1}>
                 <Avatar
-                  imageUrl={selectedConnection.avatar.url}
-                  label={selectedConnection.profile.name}
+                  imageUrl={selectedContact.avatar.url}
+                  label={selectedContact.profile.name}
                 />
                 <Stack justifyContent={'center'}>
                   <Typography fontWeight={700}>
-                    {selectedConnection.profile.name}
+                    {selectedContact.profile.name}
                   </Typography>
                   <Typography>{faker.address.city()}</Typography>
                 </Stack>

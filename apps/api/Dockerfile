@@ -6,13 +6,11 @@ COPY package.json pnpm-lock.yaml ./
 RUN npm i -g pnpm && pnpm install --frozen-lockfile
 
 # Copy application code and node_modules
-# /root/.local/share/pnpm/store/v3
 COPY . ./
 
 RUN pnpm types:graphql:generate && \
     pnpm types:graphql:merge && \
     pnpm build:api
-#    pnpm prune --prod
 
 FROM node:18-alpine
 WORKDIR /dist

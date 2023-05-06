@@ -1,4 +1,4 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Query, Resolver } from '@nestjs/graphql';
 import { UserGeneratedContent } from '@gliondar/shared/types';
 import { Gathering, getMockFeed, TextPost } from '@gliondar/be/mock-data';
 

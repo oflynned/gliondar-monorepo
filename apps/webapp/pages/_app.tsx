@@ -9,9 +9,9 @@ import {
   SideBarLayout,
 } from '@gliondar/fe/design-system';
 import { NextRouter, useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { link } from '../graphql';
+import { link } from '@gliondar/fe/graphql';
 
 const getActivePageFromUrl = (url: string): NavBarPage | null => {
   switch (url) {

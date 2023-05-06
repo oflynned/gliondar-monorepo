@@ -1,6 +1,5 @@
 import {
   Button,
-  Card,
   EventCard,
   Flex,
   InterestOverview,
@@ -8,11 +7,11 @@ import {
   Stack,
   TitledLayout,
 } from '@gliondar/fe/design-system';
-import { Box, Chip, Typography } from '@gliondar/fe/mui';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_RELEVANT_GATHERINGS } from '@gliondar/fe/graphql';
 import { Gathering } from '@gliondar/shared/types';
+import { Typography } from '@mui/material';
 
 const Index = () => {
   const router = useRouter();

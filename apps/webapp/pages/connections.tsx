@@ -1,21 +1,27 @@
 import {
-  Avatar,
   Flex,
   Stack,
   ChatMessageContainer,
   Contact,
+  ClickableAvatar,
 } from '@gliondar/fe/design-system';
 import { Box, Input, styled, Typography, useTheme } from '@gliondar/fe/mui';
-import { useState } from 'react';
-import { ChatMessage, User } from '@gliondar/shared/types';
-import { faker } from '@faker-js/faker/locale/en_IE';
-import { getRandomPeople, mockChatMessages } from '@gliondar/be/mock-data';
-import { useLazyQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
+import { Conversation, User } from '@gliondar/shared/types';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import {
+  GET_CONVERSATIONS,
+  GET_CONVERSATION_BY_ID,
+} from '@gliondar/fe/graphql';
+import { ChatOutlined } from '@mui/icons-material';
+import { router } from 'next/client';
+import { useRouter } from 'next/router';
 
 const ChatContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   height: '100vh',
   overflowY: 'scroll',
+  overflowX: 'hidden',
   flexDirection: 'column',
   background: theme.palette.background.default,
   borderRight: `1px solid ${theme.palette.divider}`,
@@ -26,30 +32,51 @@ const SelectedConnectionContainer = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   background: theme.palette.background.default,
   borderBottom: `1px solid ${theme.palette.divider}`,
-  padding: theme.spacing(2),
+  padding: theme.spacing(1),
 }));
 
 const Connections = () => {
+  const router = useRouter();
   const theme = useTheme();
-  const [messages] = useState<ChatMessage[]>([]);
-  const [contacts] = useState<User[]>([]);
+
+  const { data, loading, error } = useQuery<{
+    getConversations: Conversation[];
+  }>(GET_CONVERSATIONS);
+  const [getConversationById, conversationData] = useLazyQuery<{
+    getConversationById: Conversation;
+  }>(GET_CONVERSATION_BY_ID);
+
   const [selectedContact, setSelectedContact] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (selectedContact) {
+      getConversationById({ variables: { id: selectedContact.id } });
+    }
+  }, [selectedContact]);
+
+  if (loading) {
+    return 'Loading';
+  }
+
+  if (error) {
+    return 'Error';
+  }
+
+  const conversations = data?.getConversations;
+  const conversation = conversationData?.data?.getConversationById;
+
+  console.log(conversations);
 
   return (
     <>
       <ChatContainer width={350}>
-        <Typography
-          variant={'h3'}
-          paddingTop={2}
-          paddingBottom={1}
-          paddingX={2}
-        >
-          Connections
-        </Typography>
-        {contacts.length > 0 ? (
-          contacts.map((user) => (
+        {conversations.length > 0 ? (
+          conversations.map((conversation) => (
             <Contact
-              user={user}
+              key={conversation.id}
+              lastMessage={conversation.messages.edges[0]?.node}
+              unreadCount={conversation.unreadCount}
+              user={conversation.partner}
               onSelectContact={(user) => {
                 setSelectedContact(user);
               }}
@@ -66,28 +93,31 @@ const Connections = () => {
           <Stack height={'100vh'} overflow={'scroll'}>
             <SelectedConnectionContainer>
               <Flex gap={1}>
-                <Avatar
-                  imageUrl={selectedContact.avatar.url}
-                  label={selectedContact.profile.name}
+                <ClickableAvatar
+                  user={selectedContact}
+                  onAvatarClick={(user) => router.push(`/users/${user.id}`)}
                 />
                 <Stack justifyContent={'center'}>
                   <Typography fontWeight={700}>
                     {selectedContact.profile.name}
                   </Typography>
-                  <Typography>{faker.address.city()}</Typography>
+                  <Typography variant={'body2'}>{'Dublin'}</Typography>
                 </Stack>
               </Flex>
             </SelectedConnectionContainer>
             <Stack
               flex={1}
-              overflow={'scroll'}
+              overflow={'scroll hidden'}
               sx={{ background: theme.palette.background.paper }}
               gap={theme.spacing(1)}
               justifyContent={'end'}
             >
-              <ChatMessageContainer messages={messages} />
+              {conversation ? (
+                <ChatMessageContainer messages={conversation.messages} />
+              ) : null}
             </Stack>
             <Flex
+              overflow={'hidden'}
               justifyContent={'end'}
               borderTop={`1px solid ${theme.palette.divider}`}
               sx={{ backgroundColor: 'white' }}
@@ -96,7 +126,25 @@ const Connections = () => {
               <Input sx={{ borderRadius: 0 }} fullWidth />
             </Flex>
           </Stack>
-        ) : null}
+        ) : (
+          <Flex justifyContent={'center'} alignItems={'center'} height={'100%'}>
+            <Stack gap={1}>
+              <Flex
+                alignSelf={'center'}
+                padding={1}
+                sx={{
+                  background: theme.palette.divider,
+                  borderRadius: '50%',
+                  width: 'fit-content',
+                  height: 'fit-content',
+                }}
+              >
+                <ChatOutlined color={'inherit'} />
+              </Flex>
+              <Typography>Select a conversation to chat</Typography>
+            </Stack>
+          </Flex>
+        )}
       </Box>
     </>
   );

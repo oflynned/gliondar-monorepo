@@ -16,31 +16,18 @@ export const Comment: FunctionComponent<Props> = ({ comment }) => {
     return null;
   }
 
+  const poster = comment.postedBy;
+
   // TODO handle blocked users, toxic content, users without an avatar
-  if (!comment.postedBy) {
-    return (
-      <Container>
-        <Stack>
-          <Typography variant={'h5'}>{'Deleted user'}</Typography>
-          <Typography>
-            {formatTimestampToDateTime(comment.createdAt)}
-          </Typography>
-          <Typography>{comment.text}</Typography>
-        </Stack>
-      </Container>
-    );
+  if (!poster) {
+    return null;
   }
 
   return (
     <Container>
-      <Avatar
-        imageUrl={comment.postedBy?.avatar?.url}
-        label={comment.postedBy?.profile?.name}
-      />
+      <Avatar user={poster} />
       <Stack>
-        <Typography variant={'h5'}>
-          {comment.postedBy?.profile?.name}
-        </Typography>
+        <Typography variant={'h5'}>{poster?.profile?.name}</Typography>
         <Typography>{formatTimestampToDateTime(comment.createdAt)}</Typography>
         <Typography>{comment.text}</Typography>
       </Stack>

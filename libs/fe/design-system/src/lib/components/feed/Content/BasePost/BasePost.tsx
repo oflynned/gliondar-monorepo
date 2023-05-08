@@ -42,10 +42,7 @@ export const BasePost: FunctionComponent<PropsWithChildren<Props>> = ({
           <IconButton
             onClick={() => router.push(`/users/${post.postedBy?.id}`)}
           >
-            <Avatar
-              imageUrl={post.postedBy?.avatar?.url}
-              label={post.postedBy.profile.name}
-            />
+            <Avatar user={post.postedBy} />
           </IconButton>
           <Stack justifyContent={'center'}>
             <Flex gap={1} alignItems={'center'}>

@@ -1,10 +1,13 @@
 import { FunctionComponent } from 'react';
-import { ChatMessage as Message } from '@gliondar/shared/types';
+import {
+  ChatMessage as Message,
+  MessageConnection,
+} from '@gliondar/shared/types';
 import { ChatMessage } from '../ChatMessage';
 import { Box } from '@gliondar/fe/mui';
 
 type Props = {
-  messages: Message[];
+  messages: MessageConnection;
 };
 
 export const ChatMessageContainer: FunctionComponent<Props> = ({
@@ -19,13 +22,12 @@ export const ChatMessageContainer: FunctionComponent<Props> = ({
       padding={2}
       width={'100%'}
     >
-      {messages.map((message, index) => {
+      {messages.edges.map((message, index) => {
         return (
           <ChatMessage
-            key={message.id}
-            sentByMe={index % 3 === 0}
-            message={message}
-            display={'flex'}
+            key={message.node.id}
+            sentByMe={false}
+            message={message.node}
           />
         );
       })}

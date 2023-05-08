@@ -14,13 +14,11 @@ export const GatheringAttendees: FunctionComponent<Props> = ({
         {!attendees?.length ? (
           <Typography>Be the first to attend this event</Typography>
         ) : (
-          attendees.map((attendee) => (
-            <Avatar
-              imageUrl={attendee.user?.avatar?.url}
-              label={attendee.user?.profile.name}
-              key={attendee.id}
-            />
-          ))
+          attendees.map((attendee) =>
+            attendee.user ? (
+              <Avatar key={attendee.id} user={attendee.user} />
+            ) : null
+          )
         )}
       </Flex>
     </Card>

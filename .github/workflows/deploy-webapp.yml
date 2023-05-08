@@ -1,0 +1,36 @@
+#name: Deploy Webapp
+#
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        node-version: [ 18.x ]
+#
+#    steps:
+#      - name: Checkout repo
+#        uses: actions/checkout@v3
+#
+#      - name: Setup Fly
+#        uses: superfly/flyctl-actions/setup-flyctl@master
+#
+#      - name: Authenticate with registry
+#        run: flyctl auth docker
+#        env:
+#          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+#
+#      - name: Build image
+#        run: docker build -t registry.fly.io/gliondar-webapp:latest -f ./apps/webapp/Dockerfile .
+#
+#      - name: Push image
+#        run: docker push registry.fly.io/gliondar-webapp:latest
+#
+#      - name: Deploy to Fly
+#        run: flyctl deploy --image registry.fly.io/gliondar-webapp:latest
+#        env:
+#          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

@@ -9,6 +9,7 @@ export const USER_FRAGMENT = gql`
     profile {
       id
       name
+      initials
     }
     avatar {
       ...ImageFragment

@@ -8,6 +8,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum PreferredLanguage {
+    ENGLISH = "ENGLISH",
+    IRISH = "IRISH"
+}
+
+export enum ContentLanguage {
+    IRISH = "IRISH",
+    ENGLISH = "ENGLISH",
+    UNKNOWN = "UNKNOWN"
+}
+
 export enum AttendanceStatus {
     ATTENDING = "ATTENDING",
     MAY_ATTEND = "MAY_ATTEND",
@@ -30,15 +41,33 @@ export enum Fluency {
     BEGINNER = "BEGINNER"
 }
 
-export enum PreferredLanguage {
-    ENGLISH = "ENGLISH",
-    IRISH = "IRISH"
+export enum MessageStatus {
+    SENT = "SENT",
+    DELIVERED = "DELIVERED",
+    VIEWED = "VIEWED"
 }
 
-export enum ContentLanguage {
-    IRISH = "IRISH",
-    ENGLISH = "ENGLISH",
-    UNKNOWN = "UNKNOWN"
+export interface IQuery {
+    __typename?: 'IQuery';
+    getTime(): DateTime | Promise<DateTime>;
+    getFeed(page?: Nullable<number>): Nullable<UserGeneratedContent[]> | Promise<Nullable<UserGeneratedContent[]>>;
+    getGatherings(page?: Nullable<number>): Nullable<Gathering[]> | Promise<Nullable<Gathering[]>>;
+    getGatheringById(id: string): Nullable<Gathering> | Promise<Nullable<Gathering>>;
+    getUser(): Nullable<User> | Promise<Nullable<User>>;
+    getUserById(id: string): Nullable<User> | Promise<Nullable<User>>;
+    getLocalUsers(): Nullable<User[]> | Promise<Nullable<User[]>>;
+    getConversations(): Nullable<Conversation[]> | Promise<Nullable<Conversation[]>>;
+    getConversation(id: string): Nullable<Conversation> | Promise<Nullable<Conversation>>;
+    getConversationById(id: string): Nullable<Conversation> | Promise<Nullable<Conversation>>;
+}
+
+export interface IMutation {
+    __typename?: 'IMutation';
+    setTime(): DateTime | Promise<DateTime>;
+    createGathering(title: string, description: string): Nullable<Gathering> | Promise<Nullable<Gathering>>;
+    deleteGathering(id: string): Nullable<Gathering> | Promise<Nullable<Gathering>>;
+    createUser(email: string, password: string): Nullable<User> | Promise<Nullable<User>>;
+    deleteUser(): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export interface AttendeeConnection {
@@ -69,61 +98,6 @@ export interface ChatMessage {
     sentBy?: Nullable<User>;
     sentTo?: Nullable<User>;
     language: ContentLanguage;
-}
-
-export interface Comment {
-    __typename?: 'Comment';
-    id: string;
-    createdAt: DateTime;
-    lastUpdatedAt?: Nullable<DateTime>;
-    postedBy?: Nullable<User>;
-    text: string;
-    parent?: Nullable<UserGeneratedContent>;
-}
-
-export interface IQuery {
-    __typename?: 'IQuery';
-    getFeed(page?: Nullable<number>): Nullable<UserGeneratedContent[]> | Promise<Nullable<UserGeneratedContent[]>>;
-    getGatherings(page?: Nullable<number>): Nullable<Gathering[]> | Promise<Nullable<Gathering[]>>;
-    getGatheringById(id: string): Nullable<Gathering> | Promise<Nullable<Gathering>>;
-    getTime(): DateTime | Promise<DateTime>;
-    getUser(): Nullable<User> | Promise<Nullable<User>>;
-    getUserById(id: string): Nullable<User> | Promise<Nullable<User>>;
-    getLocalUsers(): Nullable<User[]> | Promise<Nullable<User[]>>;
-}
-
-export interface GatheringPost {
-    __typename?: 'GatheringPost';
-    id: string;
-    createdAt: DateTime;
-    lastUpdatedAt?: Nullable<DateTime>;
-    score: number;
-    comments?: Nullable<Nullable<Comment>[]>;
-    location?: Nullable<Address>;
-    postedBy?: Nullable<User>;
-    gathering?: Nullable<Gathering>;
-}
-
-export interface TextPost {
-    __typename?: 'TextPost';
-    id: string;
-    createdAt: DateTime;
-    lastUpdatedAt?: Nullable<DateTime>;
-    postedBy?: Nullable<User>;
-    text: string;
-    score: number;
-    comments?: Nullable<Nullable<Comment>[]>;
-    location?: Nullable<Address>;
-    language?: Nullable<ContentLanguage>;
-}
-
-export interface IMutation {
-    __typename?: 'IMutation';
-    createGathering(title: string, description: string): Nullable<Gathering> | Promise<Nullable<Gathering>>;
-    deleteGathering(id: string): Nullable<Gathering> | Promise<Nullable<Gathering>>;
-    setTime(): DateTime | Promise<DateTime>;
-    createUser(email: string, password: string): Nullable<User> | Promise<Nullable<User>>;
-    deleteUser(): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export interface Gathering {
@@ -195,6 +169,7 @@ export interface Profile {
     fluency: Fluency;
     preferredLanguage: PreferredLanguage;
     user?: Nullable<User>;
+    initials: string;
 }
 
 export interface Timezone {
@@ -216,11 +191,96 @@ export interface User {
     profile: Profile;
     location?: Nullable<UserLocation>;
     avatar?: Nullable<Image>;
+    online?: Nullable<boolean>;
 }
 
 export interface UserLocation {
     __typename?: 'UserLocation';
     coordinates?: Nullable<CoordinateSet>;
+}
+
+export interface Comment {
+    __typename?: 'Comment';
+    id: string;
+    createdAt: DateTime;
+    lastUpdatedAt?: Nullable<DateTime>;
+    postedBy?: Nullable<User>;
+    text: string;
+    parent?: Nullable<UserGeneratedContent>;
+}
+
+export interface GatheringPost {
+    __typename?: 'GatheringPost';
+    id: string;
+    createdAt: DateTime;
+    lastUpdatedAt?: Nullable<DateTime>;
+    score: number;
+    comments?: Nullable<Nullable<Comment>[]>;
+    location?: Nullable<Address>;
+    postedBy?: Nullable<User>;
+    gathering?: Nullable<Gathering>;
+}
+
+export interface TextPost {
+    __typename?: 'TextPost';
+    id: string;
+    createdAt: DateTime;
+    lastUpdatedAt?: Nullable<DateTime>;
+    postedBy?: Nullable<User>;
+    text: string;
+    score: number;
+    comments?: Nullable<Nullable<Comment>[]>;
+    location?: Nullable<Address>;
+    language?: Nullable<ContentLanguage>;
+}
+
+export interface Conversation {
+    __typename?: 'Conversation';
+    id: string;
+    messages?: Nullable<MessageConnection>;
+    partner?: Nullable<User>;
+    unreadCount?: Nullable<number>;
+}
+
+export interface MessageConnection {
+    __typename?: 'MessageConnection';
+    count: number;
+    edges: MessageEdge[];
+}
+
+export interface MessageEdge {
+    __typename?: 'MessageEdge';
+    cursor: string;
+    node: Message;
+}
+
+export interface Message {
+    __typename?: 'Message';
+    id: string;
+    createdAt: DateTime;
+    text: string;
+    sentBy?: Nullable<User>;
+    sentTo?: Nullable<User>;
+    language: ContentLanguage;
+    status: MessageStatus;
+}
+
+export interface UserConnection {
+    __typename?: 'UserConnection';
+    count: number;
+    edges?: Nullable<UserEdge[]>;
+}
+
+export interface UserEdge {
+    __typename?: 'UserEdge';
+    cursor: string;
+    node: User;
+}
+
+export interface ISubscription {
+    __typename?: 'ISubscription';
+    onTime(): DateTime | Promise<DateTime>;
+    onNewMessage(): Nullable<Conversation> | Promise<Nullable<Conversation>>;
 }
 
 export type DateTime = any;

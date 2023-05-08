@@ -12,6 +12,7 @@ export class UserResolver {
       __typename: 'Profile',
       id: user.profile.id,
       name: user.profile.name,
+      initials: user.profile.initials,
       fluency: user.profile.fluency,
       preferredLanguage: user.profile.preferredLanguage,
     };

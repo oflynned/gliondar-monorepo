@@ -1,0 +1,25 @@
+type MessageConnection {
+  count: Int!
+  edges: [MessageEdge!]!
+}
+
+type MessageEdge {
+  cursor: String!
+  node: Message!
+}
+
+enum MessageStatus {
+  SENT
+  DELIVERED
+  VIEWED
+}
+
+type Message {
+  id: ID!
+  createdAt: DateTime!
+  text: String!
+  status: MessageStatus!
+  sentBy: User
+  sentTo: User
+  language: ContentLanguage!
+}

@@ -9,6 +9,16 @@ extend type Mutation {
   deleteUser: User
 }
 
+type UserConnection {
+  count: Int!
+  edges: [UserEdge!]
+}
+
+type UserEdge {
+  cursor: String!
+  node: User!
+}
+
 type User {
   id: ID!
   createdAt: DateTime!
@@ -22,6 +32,7 @@ type User {
   profile: Profile!
   location: UserLocation
   avatar: Image
+  online: Boolean
 }
 
 type UserLocation {

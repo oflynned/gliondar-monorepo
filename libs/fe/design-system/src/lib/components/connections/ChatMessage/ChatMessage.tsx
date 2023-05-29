@@ -1,7 +1,8 @@
 import { Box, BoxProps, styled, Tooltip, Typography } from '@gliondar/fe/mui';
 import { FunctionComponent } from 'react';
-import { ChatMessage as Message } from '@gliondar/shared/types';
+import { Message } from '@gliondar/shared/types';
 import { Flex } from '../../../atoms';
+import { formatTimestampToDateTime } from '../../../formatters';
 
 type Props = BoxProps & {
   message: Message;
@@ -19,7 +20,6 @@ const Container = styled(Box)(({ theme }) => ({
   transition: 'all 0.3s ease',
   '&:hover': {
     background: theme.palette.primary.main,
-    cursor: 'pointer',
   },
 }));
 
@@ -30,7 +30,12 @@ export const ChatMessage: FunctionComponent<Props> = ({
   return (
     <Flex gap={1} justifyContent={sentByMe ? 'flex-end' : 'flex-start'}>
       <Tooltip
-        title={message.createdAt.toLocaleString()}
+        title={
+          <Typography>
+            {formatTimestampToDateTime(message.createdAt)}
+          </Typography>
+        }
+        arrow
         placement={sentByMe ? 'left' : 'right'}
       >
         <Container>

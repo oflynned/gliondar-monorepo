@@ -1,0 +1,15 @@
+type Conversation {
+  id: ID!
+  unreadCount: Int
+  partner: User
+  messages(limit: Int, offset: Int): MessageConnection
+}
+
+extend type Query {
+  getConversations: [Conversation!]
+  getConversationById(id: ID!): Conversation
+}
+
+extend type Subscription {
+  onNewMessage: Conversation
+}

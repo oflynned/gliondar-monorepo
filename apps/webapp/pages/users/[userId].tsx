@@ -2,7 +2,7 @@ import { TitledLayout } from '@gliondar/fe/design-system';
 import { useRouter } from 'next/router';
 import { curatedUsers } from '@gliondar/be/mock-data';
 
-const Profile = () => {
+const ProfileDetail = () => {
   const router = useRouter();
   const { userId } = router.query;
   const user = curatedUsers.find((user) => user.id === userId);
@@ -18,4 +18,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileDetail;

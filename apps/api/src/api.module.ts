@@ -6,6 +6,7 @@ import { GatheringModule } from './graphql/gathering/gathering.module';
 import { UserModule } from './graphql/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
+import { ConversationModule } from './graphql/conversation/conversation.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { join } from 'path';
     FeedModule,
     GatheringModule,
     UserModule,
+    ConversationModule,
   ],
 })
 export class ApiModule {}

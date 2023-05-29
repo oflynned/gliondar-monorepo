@@ -1,8 +1,8 @@
 import { Image, GatheringBuilder } from '../../types';
 import { getRandomItem } from '../../helper';
-import { curatedUsers } from '../../curated-data';
 import { AttendanceStatus, Recurrence } from '@gliondar/shared/types';
 import { faker } from '@faker-js/faker';
+import { curatedUsers } from '../curated-users';
 
 export const sportsMatch = new GatheringBuilder()
   .setId('gathering-2')

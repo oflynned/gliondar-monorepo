@@ -79,6 +79,13 @@ export const lightTheme = createTheme({
       lineHeight: '1.5rem',
       letterSpacing: '0.25px',
     },
+    body2: {
+      fontFamily: ['Lato', 'sans-serif'].join(','),
+      fontSize: '0.875rem',
+      fontWeight: 400,
+      lineHeight: '1rem',
+      letterSpacing: '0.25px',
+    },
   },
   shape: {
     borderRadius: 8,

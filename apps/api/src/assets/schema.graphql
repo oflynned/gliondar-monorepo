@@ -8,6 +8,9 @@ type Query {
   getUser: User
   getUserById(id: ID!): User
   getLocalUsers: [User!]
+  getConversations: [Conversation!]
+  getConversation(id: ID!): Conversation
+  getConversationById(id: ID!): Conversation
 }
 
 type Mutation {
@@ -134,6 +137,7 @@ type Profile {
   fluency: Fluency!
   preferredLanguage: PreferredLanguage!
   user: User
+  initials: String!
 }
 
 enum Fluency {
@@ -160,6 +164,7 @@ type User {
   profile: Profile!
   location: UserLocation
   avatar: Image
+  online: Boolean
 }
 
 type UserLocation {
@@ -201,4 +206,53 @@ type TextPost {
 schema {
   query: Query
   mutation: Mutation
+  subscription: Subscription
+}
+
+type Conversation {
+  id: ID!
+  messages(limit: Int, offset: Int): MessageConnection
+  partner: User
+  unreadCount: Int
+}
+
+type MessageConnection {
+  count: Int!
+  edges: [MessageEdge!]!
+}
+
+type MessageEdge {
+  cursor: String!
+  node: Message!
+}
+
+type Message {
+  id: ID!
+  createdAt: DateTime!
+  text: String!
+  sentBy: User
+  sentTo: User
+  language: ContentLanguage!
+  status: MessageStatus!
+}
+
+type UserConnection {
+  count: Int!
+  edges: [UserEdge!]
+}
+
+type UserEdge {
+  cursor: String!
+  node: User!
+}
+
+enum MessageStatus {
+  SENT
+  DELIVERED
+  VIEWED
+}
+
+type Subscription {
+  onTime: DateTime!
+  onNewMessage: Conversation
 }

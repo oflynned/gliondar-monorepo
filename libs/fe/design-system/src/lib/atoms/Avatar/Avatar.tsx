@@ -1,10 +1,22 @@
 import { FunctionComponent } from 'react';
 import { styled } from '@gliondar/fe/mui';
 import Image from 'next/image';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { User } from '@gliondar/shared/types';
 
 const RoundedAvatar = styled(Image)(({ theme }) => ({
   borderRadius: '50%',
+  border: `1px solid ${theme.palette.divider}`,
+}));
+
+const Container = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  width: AvatarSize.MEDIUM,
+  height: AvatarSize.MEDIUM,
+  borderRadius: '50%',
+  background: theme.palette.primary.light,
+  justifyContent: 'center',
+  alignItems: 'center',
   border: `1px solid ${theme.palette.divider}`,
 }));
 
@@ -15,29 +27,32 @@ export enum AvatarSize {
 }
 
 type Props = {
-  label?: string;
-  imageUrl?: string;
+  user: User;
   size?: AvatarSize;
 };
 
 export const Avatar: FunctionComponent<Props> = ({
-  imageUrl,
-  label = 'avatar',
+  user,
   size = AvatarSize.MEDIUM,
 }) => {
-  if (imageUrl) {
+  if (user.avatar) {
     return (
       <RoundedAvatar
         width={size}
         height={size}
-        src={imageUrl}
-        alt={label}
+        src={user.avatar.url}
+        alt={user.profile.name}
         // placeholder={'blur'}
         unoptimized
       />
     );
   }
 
-  // TODO wrap this with a colour and make into a rounded circle
-  return <Typography>{label}</Typography>;
+  return (
+    <Container>
+      <Typography fontWeight={700} color={'white'}>
+        {user?.profile?.initials ?? 'ME'}
+      </Typography>
+    </Container>
+  );
 };

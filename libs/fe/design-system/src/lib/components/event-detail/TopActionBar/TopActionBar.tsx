@@ -27,8 +27,7 @@ export const TopActionBar: FunctionComponent<Props> = ({ createdBy }) => {
     <StyledOutlineContainer>
       <DescribedAvatar
         title={'Hosted by'}
-        subtitle={createdBy.profile.name}
-        imageUrl={createdBy.avatar?.url}
+        user={createdBy}
         onClick={() => router.push(`/users/${createdBy.id}`)}
       />
     </StyledOutlineContainer>

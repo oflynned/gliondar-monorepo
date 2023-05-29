@@ -5,13 +5,17 @@ import {
   MessageEdge,
   MessageStatus,
 } from '@gliondar/shared/types';
-import { curatedConversations, nativeSpeaker } from '@gliondar/be/mock-data';
+import { ChatService } from '@gliondar/be/domain';
 
 @Resolver('Conversation')
 export class ConversationResolver {
+  constructor(private readonly chatService: ChatService) {}
+
   @Query('getConversations')
   async getConversations(): Promise<Conversation[]> {
-    return curatedConversations.map((conversation): Conversation => {
+    const conversations = await this.chatService.getConversations();
+
+    return conversations.map((conversation): Conversation => {
       return {
         __typename: 'Conversation',
         id: conversation.id,
@@ -44,18 +48,26 @@ export class ConversationResolver {
 
   @Query('getConversationById')
   async getConversationById(
-    @Args('id') id: string
+    @Args('id') userId: string
   ): Promise<Conversation | null> {
+    const conversation = await this.chatService.getConversationByPartnerUserId(
+      userId
+    );
+
+    if (!conversation) {
+      return null;
+    }
+
     return {
       __typename: 'Conversation',
-      id: 'conversation-0',
+      ...conversation,
       unreadCount: 1,
       partner: {
-        ...nativeSpeaker,
-        profile: nativeSpeaker.profile,
+        ...conversation.partner,
+        profile: conversation.partner.profile,
       },
       messages: {
-        count: 0,
+        count: 1,
         edges: [
           {
             cursor: 'message-0',
@@ -67,8 +79,8 @@ export class ConversationResolver {
               createdAt: new Date(),
               text: 'Haha go maith',
               sentBy: {
-                ...nativeSpeaker,
-                profile: nativeSpeaker.profile,
+                ...conversation.partner,
+                profile: conversation.partner.profile,
               },
             },
           },

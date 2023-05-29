@@ -46,26 +46,25 @@ const Connections = () => {
     getConversationById: Conversation;
   }>(GET_CONVERSATION_BY_ID);
 
-  const [selectedContact, setSelectedContact] = useState<User | null>(null);
+  const [selectedConversation, setSelectedConversation] =
+    useState<Conversation | null>(null);
 
   useEffect(() => {
-    if (selectedContact) {
-      getConversationById({ variables: { id: selectedContact.id } });
+    if (selectedConversation) {
+      getConversationById({ variables: { id: selectedConversation.id } });
     }
-  }, [selectedContact]);
+  }, [selectedConversation?.id]);
 
-  if (loading) {
+  if (loading || conversationData.loading) {
     return 'Loading';
   }
 
-  if (error) {
+  if (error || conversationData.error) {
     return 'Error';
   }
 
   const conversations = data?.getConversations;
   const conversation = conversationData?.data?.getConversationById;
-
-  console.log(conversations);
 
   return (
     <>
@@ -77,8 +76,8 @@ const Connections = () => {
               lastMessage={conversation.messages.edges[0]?.node}
               unreadCount={conversation.unreadCount}
               user={conversation.partner}
-              onSelectContact={(user) => {
-                setSelectedContact(user);
+              onSelectContact={() => {
+                setSelectedConversation(conversation);
               }}
             />
           ))
@@ -89,17 +88,17 @@ const Connections = () => {
         )}
       </ChatContainer>
       <Box flex={1}>
-        {selectedContact ? (
+        {selectedConversation ? (
           <Stack height={'100vh'} overflow={'scroll'}>
             <SelectedConnectionContainer>
               <Flex gap={1}>
                 <ClickableAvatar
-                  user={selectedContact}
+                  user={selectedConversation.partner}
                   onAvatarClick={(user) => router.push(`/users/${user.id}`)}
                 />
                 <Stack justifyContent={'center'}>
                   <Typography fontWeight={700}>
-                    {selectedContact.profile.name}
+                    {selectedConversation.partner.profile.name}
                   </Typography>
                   <Typography variant={'body2'}>{'Dublin'}</Typography>
                 </Stack>
@@ -112,8 +111,10 @@ const Connections = () => {
               gap={theme.spacing(1)}
               justifyContent={'end'}
             >
-              {conversation ? (
-                <ChatMessageContainer messages={conversation.messages} />
+              {selectedConversation ? (
+                <ChatMessageContainer
+                  messages={selectedConversation.messages}
+                />
               ) : null}
             </Stack>
             <Flex

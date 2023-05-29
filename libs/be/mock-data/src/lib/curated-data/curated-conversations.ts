@@ -23,7 +23,7 @@ export const curatedConversations: Conversation[] = [
     createdAt: new Date(),
     messages: [
       new MessageBuilder()
-        .setId('message-0')
+        .setId('message-1')
         .setSentBy(nativeSpeaker)
         .setText('Conas atá tú?')
         .setCreatedAt(new Date())

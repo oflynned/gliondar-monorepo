@@ -23,11 +23,11 @@ type Props = {
 
 const getMessagePreview = (message?: Message): string => {
   if (!message) {
-    return 'New connection';
+    return 'New connection!';
   }
 
   // TODO include some property for "sentByYou" or so to simplify rendering checks
-  return `${message.text}`;
+  return message.text;
 };
 
 export const Contact: FunctionComponent<Props> = ({
@@ -36,8 +36,6 @@ export const Contact: FunctionComponent<Props> = ({
   lastMessage,
   onSelectContact,
 }) => {
-  console.log({ lastMessage });
-
   return (
     <ConnectionContainer onClick={() => onSelectContact?.(user)}>
       <Avatar user={user} />

@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { IMAGE_FRAGMENT, USER_FRAGMENT } from '../fragments';
+import { USER_FRAGMENT } from '../fragments';
 
 export const GET_CONVERSATION_BY_ID = gql`
   ${USER_FRAGMENT}

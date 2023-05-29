@@ -17,6 +17,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@gliondar/be/domain": ["libs/be/domain/src/index.ts"],
       "@gliondar/be/mock-data": ["libs/be/mock-data/src/index.ts"],
       "@gliondar/fe/design-system": ["libs/fe/design-system/src/index.ts"],
       "@gliondar/fe/graphql": ["libs/fe/graphql/src/index.ts"],

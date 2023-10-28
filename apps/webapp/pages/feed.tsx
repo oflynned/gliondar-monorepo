@@ -45,15 +45,15 @@ const Feed = () => {
         </Stack>
       </TitledLayout>
 
-      {/*<Flex*/}
-      {/*  height={'100vh'}*/}
-      {/*  flex={1}*/}
-      {/*  top={0}*/}
-      {/*  position={'sticky'}*/}
-      {/*  borderLeft={`1px solid ${theme.palette.divider}`}*/}
-      {/*>*/}
-      {/*  <Map />*/}
-      {/*</Flex>*/}
+      <Flex
+        height={'100vh'}
+        flex={1}
+        top={0}
+        position={'sticky'}
+        borderLeft={`1px solid ${theme.palette.divider}`}
+      >
+        <Map />
+      </Flex>
     </>
   );
 };

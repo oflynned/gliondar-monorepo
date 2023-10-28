@@ -5,7 +5,7 @@ import {
   Contact,
   ClickableAvatar,
 } from '@gliondar/fe/design-system';
-import { Box, Input, styled, Typography, useTheme } from '@gliondar/fe/mui';
+import { Box, Input, styled, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Conversation, User } from '@gliondar/shared/types';
 import { useLazyQuery, useQuery } from '@apollo/client';

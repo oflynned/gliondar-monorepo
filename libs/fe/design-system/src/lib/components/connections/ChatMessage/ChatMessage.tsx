@@ -1,4 +1,4 @@
-import { Box, BoxProps, styled, Tooltip, Typography } from '@gliondar/fe/mui';
+import { Box, BoxProps, styled, Tooltip, Typography } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { Message } from '@gliondar/shared/types';
 import { Flex } from '../../../atoms';

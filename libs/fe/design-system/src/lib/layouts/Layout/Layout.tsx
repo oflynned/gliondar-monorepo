@@ -1,5 +1,5 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import { BoxProps, styled } from '@gliondar/fe/mui';
+import { BoxProps, styled } from '@mui/material';
 import { Stack } from '../../atoms';
 
 const Container = styled(Stack)(({ theme }) => ({ padding: theme.spacing(3) }));

@@ -2,7 +2,7 @@ import '@fontsource/lato';
 import '@fontsource/montserrat';
 
 import { AppProps } from 'next/app';
-import { CssBaseline, ThemeProvider } from '@gliondar/fe/mui';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import {
   lightTheme,
   NavBarPage,

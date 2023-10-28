@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Button, Card, Stack } from '../../../atoms';
-import { Box, Typography } from '@gliondar/fe/mui';
+import { Box, Typography } from '@mui/material';
 
 export const NewEventPrompt: FunctionComponent = () => {
   return (

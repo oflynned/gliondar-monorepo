@@ -1,9 +1,9 @@
 import { FunctionComponent, PropsWithChildren, useState } from 'react';
-import { Box, BoxProps, styled } from '@gliondar/fe/mui';
+import { Box, BoxProps, styled } from '@mui/material';
 import Image from 'next/image';
 
 type Props = BoxProps & {
-  imageUrl?: string;
+  imageUrl: string;
   hoverZoomEffect?: boolean;
 };
 
@@ -42,7 +42,9 @@ export const GradientOverlay: FunctionComponent<PropsWithChildren<Props>> = ({
           objectPosition: 'center',
           overflow: 'hidden',
           transition: 'all 0.3s ease-in-out',
-          transform: hoverZoomEffect ? `scale(${isHover ? 1.05 : 1})` : null,
+          transform: hoverZoomEffect
+            ? `scale(${isHover ? 1.05 : 1})`
+            : undefined,
         }}
         src={imageUrl}
         alt={'image'}

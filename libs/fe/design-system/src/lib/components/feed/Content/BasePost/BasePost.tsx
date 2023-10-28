@@ -1,6 +1,12 @@
 import { FunctionComponent, PropsWithChildren, useState } from 'react';
-import { Avatar, Card, Flex, Stack } from '../../../../atoms';
-import { IconButton, Typography } from '@gliondar/fe/mui';
+import { Avatar, Card, Flex } from '../../../../atoms';
+import {
+  Box,
+  CardActionArea,
+  IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { useRouter } from 'next/router';
 import { UserGeneratedContent } from '@gliondar/shared/types';
 import {
@@ -8,9 +14,7 @@ import {
   ArrowUpwardRounded,
   ChatBubbleOutlineOutlined,
   MoreVertOutlined,
-  ShareOutlined,
 } from '@mui/icons-material';
-import { faker } from '@faker-js/faker';
 import { formatTimeElapsed } from '@gliondar/fe/design-system';
 
 enum ScoreDirection {
@@ -19,12 +23,14 @@ enum ScoreDirection {
 }
 
 type Props = {
+  onClick?: () => void;
   post: UserGeneratedContent;
 };
 
 export const BasePost: FunctionComponent<PropsWithChildren<Props>> = ({
   post,
   children,
+  onClick,
 }) => {
   const router = useRouter();
   const [score, setScore] = useState(post.score);
@@ -35,79 +41,96 @@ export const BasePost: FunctionComponent<PropsWithChildren<Props>> = ({
   }
 
   return (
-    <Card canHover>
-      <Stack padding={2} gap={1} width={'100%'}>
-        <Flex gap={1}>
-          {/* TODO why is id nullish? */}
-          <IconButton
-            onClick={() => router.push(`/users/${post.postedBy?.id}`)}
+    <Card>
+      <CardActionArea
+        onClick={(event) => {
+          event.stopPropagation();
+          onClick?.();
+        }}
+      >
+        <Stack padding={2} gap={1} width={'100%'}>
+          <Stack
+            width={'100%'}
+            direction={'row'}
+            justifyContent={'space-between'}
           >
-            <Avatar user={post.postedBy} />
-          </IconButton>
-          <Stack justifyContent={'center'}>
-            <Flex gap={1} alignItems={'center'}>
-              <Typography variant={'h5'}>
-                {post.postedBy.profile.name}
-              </Typography>
-            </Flex>
-            {/*<Typography>{post.postedAt.toLocaleDateString()}</Typography>*/}
-            <Typography>{formatTimeElapsed(post.createdAt)}</Typography>
+            {/* TODO why is id nullish? */}
+            <Stack gap={1} direction={'row'}>
+              <IconButton
+                onClick={() => router.push(`/users/${post.postedBy?.id}`)}
+              >
+                <Avatar user={post.postedBy} />
+              </IconButton>
+              <Stack justifyContent={'center'}>
+                <Flex gap={1} alignItems={'center'}>
+                  <Typography variant={'h5'}>
+                    {post.postedBy.profile.name}
+                  </Typography>
+                </Flex>
+                {/*<Typography>{post.postedAt.toLocaleDateString()}</Typography>*/}
+                <Typography>{formatTimeElapsed(post.createdAt)}</Typography>
+              </Stack>
+            </Stack>
+            <Box>
+              <IconButton color={'inherit'}>
+                <MoreVertOutlined />
+              </IconButton>
+            </Box>
           </Stack>
-        </Flex>
-        {children}
-        <Flex marginTop={1} gap={2} justifyContent={'space-between'}>
-          <Flex alignItems={'center'}>
-            <IconButton
-              color={scored === ScoreDirection.DOWNVOTE ? 'primary' : 'inherit'}
-              onClick={() => {
-                if (scored === ScoreDirection.DOWNVOTE) {
-                  setScored(null);
-                  setScore(post.score);
-                } else {
-                  setScored(ScoreDirection.DOWNVOTE);
-                  setScore(post.score - 1);
+          {children}
+          <Flex marginTop={1} gap={2} justifyContent={'space-between'}>
+            <Flex alignItems={'center'}>
+              <IconButton
+                color={
+                  scored === ScoreDirection.DOWNVOTE ? 'primary' : 'inherit'
                 }
-              }}
-            >
-              {scored === ScoreDirection.DOWNVOTE ? (
-                <ArrowDownwardRounded />
-              ) : (
-                <ArrowDownwardRounded />
-              )}
-            </IconButton>
-            <Typography>{score}</Typography>
-            <IconButton
-              color={scored === ScoreDirection.UPVOTE ? 'primary' : 'inherit'}
-              onClick={() => {
-                if (scored === ScoreDirection.UPVOTE) {
-                  setScored(null);
-                  setScore(post.score);
-                } else {
-                  setScored(ScoreDirection.UPVOTE);
-                  setScore(post.score + 1);
-                }
-              }}
-            >
-              {scored === ScoreDirection.UPVOTE ? (
-                <ArrowUpwardRounded color={'primary'} />
-              ) : (
-                <ArrowUpwardRounded />
-              )}
-            </IconButton>
+                onClick={() => {
+                  if (scored === ScoreDirection.DOWNVOTE) {
+                    setScored(null);
+                    setScore(post.score);
+                  } else {
+                    setScored(ScoreDirection.DOWNVOTE);
+                    setScore(post.score - 1);
+                  }
+                }}
+              >
+                {scored === ScoreDirection.DOWNVOTE ? (
+                  <ArrowDownwardRounded />
+                ) : (
+                  <ArrowDownwardRounded />
+                )}
+              </IconButton>
+              <Typography>{score}</Typography>
+              <IconButton
+                color={scored === ScoreDirection.UPVOTE ? 'primary' : 'inherit'}
+                onClick={() => {
+                  if (scored === ScoreDirection.UPVOTE) {
+                    setScored(null);
+                    setScore(post.score);
+                  } else {
+                    setScored(ScoreDirection.UPVOTE);
+                    setScore(post.score + 1);
+                  }
+                }}
+              >
+                {scored === ScoreDirection.UPVOTE ? (
+                  <ArrowUpwardRounded color={'primary'} />
+                ) : (
+                  <ArrowUpwardRounded />
+                )}
+              </IconButton>
+            </Flex>
+            <Flex>
+              <IconButton color={'inherit'}>
+                <ChatBubbleOutlineOutlined />
+              </IconButton>
+              {/*  <IconButton color={'inherit'}>*/}
+              {/*    <ShareOutlined />*/}
+              {/*  </IconButton>*/}
+            </Flex>
           </Flex>
-          <Flex>
-            <IconButton color={'inherit'}>
-              <ChatBubbleOutlineOutlined />
-            </IconButton>
-            <IconButton color={'inherit'}>
-              <ShareOutlined />
-            </IconButton>
-            <IconButton color={'inherit'}>
-              <MoreVertOutlined />
-            </IconButton>
-          </Flex>
-        </Flex>
-      </Stack>
+        </Stack>
+      </CardActionArea>
     </Card>
   );
 };

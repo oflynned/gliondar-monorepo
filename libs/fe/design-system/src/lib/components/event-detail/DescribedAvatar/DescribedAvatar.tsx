@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { IconButton, Typography } from '@gliondar/fe/mui';
+import { IconButton, Typography } from '@mui/material';
 import { Avatar, Flex, Stack } from '../../../atoms';
 import { User } from '@gliondar/shared/types';
 

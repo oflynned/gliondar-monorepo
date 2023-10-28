@@ -1,5 +1,5 @@
 import { DescribedAvatar } from '@gliondar/fe/design-system';
-import { styled } from '@gliondar/fe/mui';
+import { styled } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { Gathering } from '@gliondar/shared/types';
 import { useRouter } from 'next/router';

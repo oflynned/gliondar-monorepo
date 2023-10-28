@@ -1,4 +1,4 @@
-import { createTheme } from '@gliondar/fe/mui';
+import { createTheme } from '@mui/material';
 import { red, turquoise } from './colours';
 
 export const lightTheme = createTheme({

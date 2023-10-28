@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Box, IconButton, styled, Typography } from '@gliondar/fe/mui';
+import { Box, IconButton, styled, Typography } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
 import { GradientOverlay } from '../../../atoms';
 
@@ -23,6 +23,10 @@ export const Hero: FunctionComponent<Props> = ({
   imageUrl,
   onBackPress,
 }) => {
+  if (!imageUrl) {
+    return null;
+  }
+
   return (
     <GradientOverlay imageUrl={imageUrl} height={350}>
       <Container>

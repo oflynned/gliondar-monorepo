@@ -4,7 +4,7 @@ import {
   MessageConnection,
 } from '@gliondar/shared/types';
 import { ChatMessage } from '../ChatMessage';
-import { Box } from '@gliondar/fe/mui';
+import { Box } from '@mui/material';
 
 type Props = {
   messages: MessageConnection;

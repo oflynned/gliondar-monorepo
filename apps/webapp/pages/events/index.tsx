@@ -8,7 +8,7 @@ import {
   Stack,
   TitledLayout,
 } from '@gliondar/fe/design-system';
-import { Box, Chip, Typography } from '@gliondar/fe/mui';
+import { Box, Chip, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_RELEVANT_GATHERINGS } from '@gliondar/fe/graphql';

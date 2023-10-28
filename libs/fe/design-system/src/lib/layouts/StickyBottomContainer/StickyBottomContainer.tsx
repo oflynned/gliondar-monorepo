@@ -1,4 +1,4 @@
-import { Box, styled } from '@gliondar/fe/mui';
+import { Box, styled } from '@mui/material';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
 const StyledStickyBottomContainer = styled(Box)(({ theme }) => ({

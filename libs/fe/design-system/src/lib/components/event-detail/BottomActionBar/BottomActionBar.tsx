@@ -4,7 +4,7 @@ import {
   formatTimestampToDateTime,
   StickyBottomContainer,
 } from '@gliondar/fe/design-system';
-import { Box, IconButton, Typography } from '@gliondar/fe/mui';
+import { Box, IconButton, Typography } from '@mui/material';
 import { Bookmark, BookmarkAddOutlined } from '@mui/icons-material';
 import { FunctionComponent, useState } from 'react';
 import { AttendanceStatus, Gathering } from '@gliondar/shared/types';

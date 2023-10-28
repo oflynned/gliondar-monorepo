@@ -1,15 +1,15 @@
 import { FunctionComponent } from 'react';
 import { Avatar, Flex, Stack } from '@gliondar/fe/design-system';
-import { Box, styled, Typography } from '@gliondar/fe/mui';
-import { Conversation, Message, User } from '@gliondar/shared/types';
+import { Box, styled, Typography } from '@mui/material';
+import { Message, User } from '@gliondar/shared/types';
 
 const ConnectionContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(1),
   padding: theme.spacing(1),
   background: theme.palette.background.default,
+  cursor: 'pointer',
   '&:hover': {
-    cursor: 'pointer',
     background: theme.palette.background.paper,
   },
 }));
@@ -21,13 +21,16 @@ type Props = {
   onSelectContact?: (user: User) => void;
 };
 
-const getMessagePreview = (message?: Message): string => {
-  if (!message) {
+const getMessagePreview = (mostRecentMessage?: Message): string => {
+  if (!mostRecentMessage) {
     return 'New connection!';
   }
 
-  // TODO include some property for "sentByYou" or so to simplify rendering checks
-  return message.text;
+  // if (user.id === mostRecentMessage.sentBy?.id) {
+  //   return `You: ${mostRecentMessage.text}`;
+  // }
+
+  return mostRecentMessage.text;
 };
 
 export const Contact: FunctionComponent<Props> = ({

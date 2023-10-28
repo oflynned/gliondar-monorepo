@@ -3,7 +3,7 @@ import {
   Button as MuiButton,
   ButtonProps,
   Typography,
-} from '@gliondar/fe/mui';
+} from '@mui/material';
 import { FunctionComponent } from 'react';
 import { Flex } from '../Flex';
 

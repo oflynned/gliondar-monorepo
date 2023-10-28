@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { GatheringPost as Post } from '@gliondar/shared/types';
 import { GradientOverlay, Stack } from '../../../../atoms';
-import { Typography, useTheme } from '@gliondar/fe/mui';
+import { Typography, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import { BasePost } from '../BasePost';
 import { formatTimestampToDateWithDay } from '../../../../formatters';
@@ -14,13 +14,18 @@ export const GatheringPost: FunctionComponent<Props> = ({ post }) => {
   const theme = useTheme();
   const router = useRouter();
 
+  const imageUrl = post.gathering?.image?.url;
+
+  if (!imageUrl) {
+    return null;
+  }
+
   return (
-    <BasePost post={post}>
+    <BasePost post={post} onClick={() => router.push(`/events/${post.id}`)}>
       <GradientOverlay
         height={192}
-        imageUrl={post.gathering?.image?.url}
+        imageUrl={imageUrl}
         borderRadius={1}
-        onClick={() => router.push(`/events/${post.id}`)}
         hoverZoomEffect
       >
         <Stack height={192} justifyContent={'end'} padding={2}>

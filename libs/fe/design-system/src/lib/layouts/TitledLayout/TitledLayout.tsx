@@ -1,8 +1,8 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import { BoxProps, Typography } from '@gliondar/fe/mui';
+import { BoxProps, Typography } from '@mui/material';
 import { Layout } from '../Layout';
 
-type Props = BoxProps & { pageTitle: string };
+type Props = BoxProps & { pageTitle?: string };
 
 export const TitledLayout: FunctionComponent<PropsWithChildren<Props>> = ({
   children,
@@ -11,7 +11,7 @@ export const TitledLayout: FunctionComponent<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <Layout {...props}>
-      <Typography variant={'h2'}>{pageTitle}</Typography>
+      {pageTitle ? <Typography variant={'h2'}>{pageTitle}</Typography> : null}
       {children}
     </Layout>
   );

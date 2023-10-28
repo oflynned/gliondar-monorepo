@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Box, styled } from '@gliondar/fe/mui';
+import { Box, styled } from '@mui/material';
 import { NavBarPage, NavItem } from './SideNavBar';
 import { StyledIcon } from './NavBarIcon';
 import { Button } from '../../../atoms';

@@ -6,7 +6,7 @@ import {
   TextPost,
   TitledLayout,
 } from '@gliondar/fe/design-system';
-import { useTheme } from '@gliondar/fe/mui';
+import { useTheme } from '@mui/material';
 import { useQuery } from '@apollo/client';
 import { UserGeneratedContent } from '@gliondar/shared/types';
 import { GET_FEED } from '@gliondar/fe/graphql';
@@ -29,7 +29,7 @@ const Feed = () => {
 
   return (
     <>
-      <TitledLayout pageTitle={'Feed'} gap={4} flex={1}>
+      <TitledLayout gap={4} flex={1}>
         <Stack gap={2} maxWidth={768}>
           {data.getFeed.map((post) => {
             if (post.__typename === 'TextPost') {
@@ -45,15 +45,15 @@ const Feed = () => {
         </Stack>
       </TitledLayout>
 
-      <Flex
-        height={'100vh'}
-        flex={1}
-        top={0}
-        position={'sticky'}
-        borderLeft={`1px solid ${theme.palette.divider}`}
-      >
-        <Map />
-      </Flex>
+      {/*<Flex*/}
+      {/*  height={'100vh'}*/}
+      {/*  flex={1}*/}
+      {/*  top={0}*/}
+      {/*  position={'sticky'}*/}
+      {/*  borderLeft={`1px solid ${theme.palette.divider}`}*/}
+      {/*>*/}
+      {/*  <Map />*/}
+      {/*</Flex>*/}
     </>
   );
 };

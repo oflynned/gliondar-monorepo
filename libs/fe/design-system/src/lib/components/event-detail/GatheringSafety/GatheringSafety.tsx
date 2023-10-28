@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Box, Stack, Typography } from '@gliondar/fe/mui';
+import { Box, Stack, Typography } from '@mui/material';
 import { Button, Card, Flex } from '@gliondar/fe/design-system';
 
 type Props = {

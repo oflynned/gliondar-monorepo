@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { TextPost as Post } from '@gliondar/shared/types';
-import { Box, Typography } from '@gliondar/fe/mui';
+import { Box, Typography } from '@mui/material';
 import { BasePost } from '../BasePost';
 
 type Props = {

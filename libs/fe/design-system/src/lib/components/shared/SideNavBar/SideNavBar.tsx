@@ -1,4 +1,4 @@
-import { Box, styled } from '@gliondar/fe/mui';
+import { Box, styled } from '@mui/material';
 import React, { FunctionComponent, ReactElement, useState } from 'react';
 import {
   ChatBubbleOutlineOutlined,

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Box, IconButton, Modal } from '@mui/material';
 import { Card } from '@gliondar/fe/design-system';
-import { Stack, Typography } from '@gliondar/fe/mui';
+import { Stack, Typography } from '@mui/material';
 import { CloseOutlined } from '@mui/icons-material';
 import { Gathering } from '@gliondar/shared/types';
 

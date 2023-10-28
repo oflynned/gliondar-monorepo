@@ -1,5 +1,5 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import { Box, BoxProps, styled } from '@gliondar/fe/mui';
+import { Box, BoxProps, styled } from '@mui/material';
 
 const StyledCard = styled(Box, {
   shouldForwardProp(prop: string): boolean {

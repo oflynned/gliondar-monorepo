@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Stack, Avatar } from '../../../atoms';
-import { Box, styled, Typography } from '@gliondar/fe/mui';
+import { Box, styled, Typography } from '@mui/material';
 import { Comment as CommentType } from '@gliondar/shared/types';
 import { formatTimestampToDateTime } from '../../../formatters';
 

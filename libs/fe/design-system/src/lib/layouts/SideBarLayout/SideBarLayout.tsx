@@ -1,6 +1,6 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { NavBarPage, SideNavBar } from '../../components';
-import { styled } from '@gliondar/fe/mui';
+import { styled } from '@mui/material';
 import { Flex } from '../../atoms';
 
 const StyledContentContainer = styled(Flex)(({ theme }) => ({

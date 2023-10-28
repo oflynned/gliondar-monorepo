@@ -12,7 +12,7 @@ import {
   TopActionBar,
   ShareModal,
 } from '@gliondar/fe/design-system';
-import { styled, Typography, Stack } from '@gliondar/fe/mui';
+import { styled, Typography, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { Gathering } from '@gliondar/shared/types';

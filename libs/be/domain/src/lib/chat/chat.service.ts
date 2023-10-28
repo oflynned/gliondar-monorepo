@@ -7,6 +7,8 @@ export class ChatService {
     return curatedConversations;
   }
 
+  // TODO this makes no sense to do this way, but it's fine for now
+  //      since we assume we are the only person logged in
   async getConversationByPartnerUserId(
     userId: string
   ): Promise<Conversation | null> {

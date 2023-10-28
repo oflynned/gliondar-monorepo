@@ -1,5 +1,5 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import { Box, BoxProps, styled } from '@gliondar/fe/mui';
+import { Box, BoxProps, styled } from '@mui/material';
 
 const Container = styled(Box)({ display: 'flex' });
 

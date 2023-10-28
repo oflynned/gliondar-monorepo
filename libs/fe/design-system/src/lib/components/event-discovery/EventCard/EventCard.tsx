@@ -1,18 +1,16 @@
 import { FunctionComponent, useState } from 'react';
 import { Flex, Card } from '../../../atoms';
-import { Box, IconButton, styled, Typography } from '@gliondar/fe/mui';
+import { Box, IconButton, styled, Typography } from '@mui/material';
 import { Bookmark, BookmarkAddOutlined } from '@mui/icons-material';
 import { Gathering } from '@gliondar/shared/types';
 import Image from 'next/image';
 
-const StyledCardContainer = styled(Box)(({ theme }) => ({
+const ContentContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   display: 'flex',
   justifyContent: 'space-between',
   width: '100%',
-  '&:hover': {
-    cursor: 'pointer',
-  },
+  cursor: 'pointer',
 }));
 
 const GatheringDetailsContainer = styled(Box)(({ theme }) => ({
@@ -49,9 +47,11 @@ export const EventCard: FunctionComponent<Props> = ({
 }) => {
   const [bookmarked, setBookmarked] = useState(gathering.bookmarked);
 
+  const attendeeCount = `${gathering.attendees?.length ?? 0} attending`;
+
   return (
     <Card canHover>
-      <StyledCardContainer key={gathering.id}>
+      <ContentContainer key={gathering.id}>
         <Flex>
           <RoundedImageContainer onClick={() => onClick?.(gathering)}>
             {/* TODO maybe have some sort of placeholder for gatherings without images */}
@@ -76,9 +76,7 @@ export const EventCard: FunctionComponent<Props> = ({
               <Typography>{gathering.startsAt.toLocaleDateString()}</Typography>
             </Box>
             <Box>
-              <Typography>{`${
-                gathering.attendees?.length ?? 0
-              } attending`}</Typography>
+              <Typography>{attendeeCount}</Typography>
             </Box>
           </GatheringDetailsContainer>
         </Flex>
@@ -93,7 +91,7 @@ export const EventCard: FunctionComponent<Props> = ({
             {bookmarked ? <Bookmark /> : <BookmarkAddOutlined />}
           </IconButton>
         </StyledCardActionContainer>
-      </StyledCardContainer>
+      </ContentContainer>
     </Card>
   );
 };

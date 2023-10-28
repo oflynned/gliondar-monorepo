@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Card, Flex } from '../../../atoms';
-import { Stack, Typography } from '@gliondar/fe/mui';
+import { Stack, Typography } from '@mui/material';
 import {
   AccessTimeOutlined,
   EventRepeatOutlined,

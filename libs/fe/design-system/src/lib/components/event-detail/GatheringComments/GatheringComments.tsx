@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Gathering } from '@gliondar/shared/types';
-import { Stack, Typography } from '@gliondar/fe/mui';
+import { Stack, Typography } from '@mui/material';
 import { Card, Comment } from '@gliondar/fe/design-system';
 
 type Props = Pick<Gathering, 'comments'>;

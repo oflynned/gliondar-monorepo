@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { styled } from '@gliondar/fe/mui';
+import { styled } from '@mui/material';
 import Image from 'next/image';
 import { Box, Typography } from '@mui/material';
 import { User } from '@gliondar/shared/types';

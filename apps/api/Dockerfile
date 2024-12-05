@@ -1,4 +1,4 @@
-FROM node:18-alpine as build
+FROM node:20-alpine as build
 WORKDIR /usr/src/app
 
 # Copy package files and install dependencies
@@ -14,7 +14,7 @@ RUN pnpm types:graphql:generate && \
     pnpm build:api
 #    pnpm prune --prod
 
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR /dist
 
 # Copy built application and node_modules
